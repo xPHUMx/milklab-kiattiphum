@@ -8,6 +8,11 @@ import os
 import sys
 
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
+
 def check_python_version():
     """Check Python is 3.11 or higher."""
     if sys.version_info >= (3, 11):
