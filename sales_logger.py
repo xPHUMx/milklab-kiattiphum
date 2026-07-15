@@ -63,6 +63,44 @@ def append_to_sheet(menu: str, qty: int, price: float) -> dict:
     except Exception as exc:
         raise RuntimeError(f"Could not open spreadsheet '{sheet_name}': {exc}")
 
+    try:
+        # Check if the worksheet is empty (or has no headers)
+        first_row = wks.row_values(1)
+        if not first_row:
+            headers = ["Timestamp", "เมนู", "จำนวน", "ราคาต่อหน่วย", "ยอดรวม"]
+            wks.append_row(headers)
+            
+            # Format headers: Slate Blue background, white bold text, centered
+            wks.format("A1:E1", {
+                "backgroundColor": {"red": 0.15, "green": 0.23, "blue": 0.36},
+                "horizontalAlignment": "CENTER",
+                "textFormat": {
+                    "foregroundColor": {"red": 1.0, "green": 1.0, "blue": 1.0},
+                    "fontSize": 11,
+                    "bold": True
+                }
+            })
+            
+            # Format columns data alignment and number formatting
+            wks.format("A2:A1000", {"horizontalAlignment": "CENTER"})
+            wks.format("B2:B1000", {"horizontalAlignment": "LEFT"})
+            wks.format("C2:C1000", {"horizontalAlignment": "CENTER"})
+            wks.format("D2:D1000", {
+                "horizontalAlignment": "RIGHT",
+                "numberFormat": {"type": "NUMBER", "pattern": "#,##0.00"}
+            })
+            wks.format("E2:E1000", {
+                "horizontalAlignment": "RIGHT",
+                "textFormat": {"bold": True},
+                "numberFormat": {"type": "NUMBER", "pattern": "#,##0.00"}
+            })
+            
+            # Freeze row 1 so it stays at the top when scrolling
+            wks.freeze(rows=1)
+    except Exception as exc:
+        # Prevent formatting errors from failing the append if they occur
+        pass
+
     # Format timestamp to ISO 8601 with timezone (e.g. 2026-06-25T20:13:45+07)
     timestamp = datetime.now().astimezone().strftime("%Y-%m-%dT%H:%M:%S%z")
     if timestamp.endswith("00") and (timestamp[-5] in ["+", "-"]):
