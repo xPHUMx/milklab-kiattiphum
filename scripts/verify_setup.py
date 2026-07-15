@@ -52,6 +52,12 @@ def check_gemini_reachable() -> tuple[bool, str]:
 
 def main() -> int:
     """Run all checks, print summary, return exit code."""
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except ImportError:
+        pass
+
     checks = [
         ("Python version", check_python_version()),
         ("GOOGLE_API_KEY", check_env_var("GOOGLE_API_KEY", "ดู Quickstart ขั้นที่ 4")),
