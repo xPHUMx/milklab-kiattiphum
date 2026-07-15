@@ -67,7 +67,7 @@ def append_to_sheet(menu: str, qty: int, price: float) -> dict:
         # Check if the worksheet is empty (or has no headers)
         first_row = wks.row_values(1)
         if not first_row:
-            headers = ["Timestamp", "เมนู", "จำนวน", "ราคาต่อหน่วย", "ยอดรวม"]
+            headers = ["Timestamp", "เมนู", "จำนวน", "ราคาต่อหน่วย (บาท)", "ยอดรวม (บาท)"]
             wks.append_row(headers)
             
             # Format headers: Slate Blue background, white bold text, centered
@@ -87,12 +87,12 @@ def append_to_sheet(menu: str, qty: int, price: float) -> dict:
             wks.format("C2:C1000", {"horizontalAlignment": "CENTER"})
             wks.format("D2:D1000", {
                 "horizontalAlignment": "RIGHT",
-                "numberFormat": {"type": "NUMBER", "pattern": "#,##0.00"}
+                "numberFormat": {"type": "NUMBER", "pattern": '#,##0.00" บาท"'}
             })
             wks.format("E2:E1000", {
                 "horizontalAlignment": "RIGHT",
                 "textFormat": {"bold": True},
-                "numberFormat": {"type": "NUMBER", "pattern": "#,##0.00"}
+                "numberFormat": {"type": "NUMBER", "pattern": '#,##0.00" บาท"'}
             })
             
             # Freeze row 1 so it stays at the top when scrolling
