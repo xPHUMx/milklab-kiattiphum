@@ -147,7 +147,7 @@ def run_query_sales(date: str) -> str:
     except Exception as exc:
         return f"Error: Authentication failed: {exc}"
 
-    sheet_name = os.environ.get("SPREADSHEET_NAME", "milklab-sales")
+    sheet_name = os.environ.get("SPREADSHEET_NAME", "")
     try:
         if sheet_name.startswith("https://"):
             sh = client.open_by_url(sheet_name)
