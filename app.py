@@ -1,5 +1,5 @@
 """MilkLab° Gelato - High-Fashion DTC Poster & Flavor Carousel Experience.
-Reference Style: HANCI Floating Pill Top Bar / Full Moon Party / Karaoke Night
+Reference Style: HANCI Floating Pill Top Bar / Full Moon Party / Minimal Liquid Glass Buttons
 
 Run locally: streamlit run app.py
 Deploy: push to GitHub then deploys to Streamlit Cloud / HuggingFace
@@ -109,7 +109,7 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
     return f"เกิดข้อผิดพลาดในการสร้างคำตอบ: {last_error}"
 
 
-# Gelato Catalog with Exact Reference Poster Aesthetics (Full Moon Party / Karaoke Night Style)
+# Gelato Catalog with Exact Reference Poster Aesthetics & Fresh Ripe Mango Photo
 GELATO_POSTERS = [
     {
         "id": "mango",
@@ -126,7 +126,7 @@ GELATO_POSTERS = [
         "text_color": "#D80000",        # Bold Red Typography
         "sub_text_color": "#D80000",
         "tub_bg": "#FFCC00",
-        "photo_url": "https://images.unsplash.com/photo-1591073113125-e46713c829ed?q=80&w=800&auto=format&fit=crop",
+        "photo_url": "https://images.unsplash.com/photo-1546548970-71785318a17b?q=80&w=800&auto=format&fit=crop", # Fresh ripe sliced mango photo
         "left_preview": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?q=80&w=300&auto=format&fit=crop",
         "right_preview": "https://images.unsplash.com/photo-1511381939415-e44015466834?q=80&w=300&auto=format&fit=crop",
         "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🥭 Fresh Mango"],
@@ -148,7 +148,7 @@ GELATO_POSTERS = [
         "sub_text_color": "#C1121F",
         "tub_bg": "#FFA4B6",
         "photo_url": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?q=80&w=800&auto=format&fit=crop",
-        "left_preview": "https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=300&auto=format&fit=crop",
+        "left_preview": "https://images.unsplash.com/photo-1546548970-71785318a17b?q=80&w=300&auto=format&fit=crop",
         "right_preview": "https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=300&auto=format&fit=crop",
         "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🥜 Nut-Free"],
         "query": "ขอข้อมูลเจลาโต้สตรอว์เบอร์รีซอร์เบต์ รสชาติ สารแพ้อาหาร และราคา"
@@ -212,7 +212,7 @@ GELATO_POSTERS = [
         "tub_bg": "#4D7C0F",
         "photo_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=800&auto=format&fit=crop",
         "left_preview": "https://images.unsplash.com/photo-1511381939415-e44015466834?q=80&w=300&auto=format&fit=crop",
-        "right_preview": "https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=300&auto=format&fit=crop",
+        "right_preview": "https://images.unsplash.com/photo-1546548970-71785318a17b?q=80&w=300&auto=format&fit=crop",
         "tags": ["🍵 Uji Ceremonial", "🥜 Nut-Free", "👑 Premium Grade"],
         "query": "เจลาโต้ชาเขียวมัทฉะราคาเท่าไหร่ ใช้วัตถุดิบจากไหน"
     }
@@ -298,7 +298,7 @@ def main():
 
     curr = GELATO_POSTERS[st.session_state.poster_idx]
 
-    # High-Fashion Header & Poster CSS Architecture (Exact HANCI Floating Pill Navbar Reference!)
+    # High-Fashion Header & Minimal Liquid Glass Button CSS Architecture
     css_code = f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Anton&family=Kanit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -312,6 +312,44 @@ def main():
         background-color: {curr["bg_color"]} !important;
         transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }}
+
+    /* 💎 MINIMAL LIQUID GLASS BUTTONS STYLING */
+    div.stButton > button {{
+        background: rgba(255, 255, 255, 0.45) !important;
+        backdrop-filter: blur(20px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
+        border-radius: 30px !important;
+        color: #0F172A !important;
+        font-family: 'Kanit', sans-serif !important;
+        font-weight: 700 !important;
+        font-size: 0.92rem !important;
+        padding: 10px 24px !important;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04) !important;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }}
+    
+    div.stButton > button:hover {{
+        transform: translateY(-4px) scale(1.03) !important;
+        background: rgba(255, 255, 255, 0.85) !important;
+        border-color: #FFFFFF !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12) !important;
+        color: #E11D48 !important;
+    }}
+    
+    div.stButton > button[kind="primary"] {{
+        background: rgba(255, 255, 255, 0.75) !important;
+        border: 2px solid rgba(255, 255, 255, 0.95) !important;
+        color: #E11D48 !important;
+        font-weight: 800 !important;
+        box-shadow: 0 10px 30px rgba(225, 29, 72, 0.18) !important;
+    }}
+    
+    div.stButton > button[kind="primary"]:hover {{
+        background: rgba(255, 255, 255, 0.95) !important;
+        box-shadow: 0 16px 40px rgba(225, 29, 72, 0.35) !important;
+        transform: translateY(-5px) scale(1.04) !important;
+    }}
     
     /* 🌟 EXACT HANCI FLOATING PILL TOP NAVBAR REFERENCE ARCHITECTURE */
     .hanci-topbar-wrapper {{
@@ -323,7 +361,9 @@ def main():
     }}
     
     .hanci-topbar-pill {{
-        background: #FFFFFF;
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px);
         border-radius: 50px;
         padding: 12px 36px;
         display: flex;
@@ -332,7 +372,7 @@ def main():
         width: 95%;
         max-width: 1100px;
         box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
-        border: 1px solid rgba(0, 0, 0, 0.05);
+        border: 1.5px solid rgba(255, 255, 255, 0.9);
     }}
     
     .topbar-left-menu, .topbar-right-menu {{
@@ -547,8 +587,10 @@ def main():
         width: 72px !important;
         height: 72px !important;
         border-radius: 50% !important;
-        background: #FFFFFF !important;
-        border: 3px solid {curr["text_color"]} !important;
+        background: rgba(255, 255, 255, 0.85) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border: 3px solid #FFFFFF !important;
         box-shadow: 0 12px 36px rgba(0,0,0,0.25) !important;
         font-size: 2.2rem !important;
         display: flex !important;
@@ -574,7 +616,7 @@ def main():
         st.error(f"Error loading index: {exc}")
         st.stop()
 
-    # 🌟 EXACT HANCI FLOATING PILL TOP BAR (DIRECT REFERENCE MATCH)
+    # 🌟 EXACT HANCI FLOATING PILL TOP BAR
     hanci_topbar_html = """<div class="hanci-topbar-wrapper">
 <div class="hanci-topbar-pill">
 <div class="topbar-left-menu">
