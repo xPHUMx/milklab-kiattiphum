@@ -86,7 +86,7 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
     client = genai.Client(api_key=api_key)
     context_str = "\n".join(f"- {c}" for c in context_chunks)
 
-    prompt = f"""คุณเป็น AI ผู้ช่วยบริการลูกค้าของร้าน MilkLab° (ตอบเป็นภาษาไทยอย่างสุภาพและกระชับ)
+    prompt = f"""คุณเป็น AI ผู้ช่วยบริการลูกค้าของร้านไอศกรีมเจลาโต้ MilkLab° Gelato (ตอบเป็นภาษาไทยอย่างสุภาพและกระชับ เป็นกันเอง)
 โปรดตอบคำถามโดยอ้างอิงจากข้อมูลบริบท (Context) ที่กำหนดให้ต่อไปนี้เท่านั้น
 หากในข้อมูลบริบทไม่มีข้อมูลที่จะตอบคำถามได้ ให้ตอบว่า "ขออภัยครับ ไม่พบข้อมูลดังกล่าวในระบบ"
 
@@ -107,9 +107,9 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
 
 
 def main():
-    st.set_page_config(page_title="MilkLab° RAG", page_icon="🥛")
-    st.title("MilkLab° RAG Chatbot")
-    st.caption("ถามอะไรเกี่ยวกับ MilkLab ได้ ตอบจาก menu_kb.md")
+    st.set_page_config(page_title="MilkLab° Gelato RAG", page_icon="🍨")
+    st.title("🍨 MilkLab° Gelato RAG Chatbot")
+    st.caption("สอบถามข้อมูลเมนูไอศกรีมเจลาโต้ สารก่อภูมิแพ้ หรือการสั่งซื้อ MilkLab° Gelato")
 
     try:
         model, index, chunks = load_index()
@@ -127,7 +127,7 @@ def main():
         with st.chat_message(msg["role"]):
             st.write(msg["content"])
 
-    if prompt := st.chat_input("ถามอะไรเกี่ยวกับ MilkLab"):
+    if prompt := st.chat_input("สอบถามเมนูไอศกรีมเจลาโต้..."):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.write(prompt)
