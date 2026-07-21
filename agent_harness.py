@@ -190,16 +190,19 @@ def dispatch_tool(tool_call: dict) -> dict:
         qty = int(args.get("qty", 0))
         price = float(args.get("price", 0.0))
         
-        row = append_to_sheet(menu, qty, price)
-        total = row["total"]
-        
         try:
-            provider = send_notification(f"บันทึก {menu} x{qty} = {total} บาท")
-            tool_output = f"OK: row appended at {row['timestamp']}"
-            user_output = f"บันทึกแล้วยอด {total} บาท"
+            row = append_to_sheet(menu, qty, price)
+            total = row["total"]
+            try:
+                provider = send_notification(f"บันทึก {menu} x{qty} = {total} บาท")
+                tool_output = f"OK: row appended at {row['timestamp']}"
+                user_output = f"บันทึกแล้วยอด {total} บาท"
+            except Exception as exc:
+                tool_output = f"OK: row appended at {row['timestamp']} (แจ้งเตือนล้มเหลว: {exc})"
+                user_output = f"บันทึกแล้วยอด {total} บาท (แจ้งเตือนล้มเหลว)"
         except Exception as exc:
-            tool_output = f"OK: row appended at {row['timestamp']} (แจ้งเตือนล้มเหลว: {exc})"
-            user_output = f"บันทึกแล้วยอด {total} บาท (แจ้งเตือนล้มเหลว)"
+            tool_output = f"Error: {exc}"
+            user_output = f"บันทึกยอดขายล้มเหลว: {exc}"
         
         return {
             "tool_output": tool_output,
@@ -247,6 +250,17 @@ def main() -> int:
     result = dispatch_tool(tool_call)
     print(f"[TOOL] {tool_call['tool']} {result['tool_output']}")
     print(f"[USER] ← {result['user_output']}")
+
+    # Write trace to agent_trace.log
+    try:
+        log_time = datetime.now().strftime("%Y-%m-%d %H:%M")
+        llm_resp_str = json.dumps({"tool": tool_call['tool'], "args": tool_call['args']}, ensure_ascii=False)
+        with open("agent_trace.log", "a", encoding="utf-8") as f:
+            f.write(f"{log_time} | user_input | {args.cmd}\n")
+            f.write(f"{log_time} | llm_response | {llm_resp_str}\n")
+            f.write(f"{log_time} | tool_result | {result['tool_output']}\n")
+    except Exception as exc:
+        print(f"[WARN] Failed to write to agent_trace.log: {exc}", file=sys.stderr)
 
     return 0
 

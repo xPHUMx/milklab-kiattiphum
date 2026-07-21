@@ -34,6 +34,11 @@ def append_to_sheet(menu: str, qty: int, price: float) -> dict:
     Returns dict {timestamp, menu, qty, price, total} ที่ append แล้ว
     Raises RuntimeError ถ้า credentials ไม่มี หรือ Sheet ไม่ accessible
     """
+    if qty <= 0:
+        raise ValueError("quantity must be positive")
+    if price <= 0:
+        raise ValueError("price must be positive")
+
     creds_json = os.environ.get("GOOGLE_SHEETS_CREDENTIALS")
     if not creds_json:
         raise RuntimeError("GOOGLE_SHEETS_CREDENTIALS is not set in environment.")
