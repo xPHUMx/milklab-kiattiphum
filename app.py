@@ -6,6 +6,7 @@ Deploy: push to GitHub then Actions deploys to HuggingFace Space
 
 import os
 import sys
+import time
 import numpy as np
 import faiss
 import streamlit as st
@@ -96,7 +97,7 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
 คำถามจากลูกค้า: {query}
 """
 
-    models_to_try = ["gemini-2.5-flash", "gemini-1.5-flash", "gemini-2.0-flash"]
+    models_to_try = ["gemini-1.5-flash", "gemini-2.5-flash", "gemini-1.5-pro"]
     last_error = None
 
     for m in models_to_try:
@@ -108,6 +109,7 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
             return response.text.strip()
         except Exception as exc:
             last_error = exc
+            time.sleep(1)
             continue
 
     return f"เกิดข้อผิดพลาดในการสร้างคำตอบ: {last_error}"
