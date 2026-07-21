@@ -332,70 +332,84 @@ def main():
         transform: translateY(-5px) scale(1.05) !important;
     }}
     
-    /* 🌟 TOP MINIMAL NAVBAR (EXACT REFERENCE MACBOOK IMAGE ARCHITECTURE) */
-    .top-nav-wrapper {{
+    /* 🌟 EXACT HANCI FLOATING PILL TOP NAVBAR REFERENCE ARCHITECTURE */
+    .hanci-topbar-wrapper {{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 10px 0 20px 0;
+    }}
+    
+    .hanci-topbar-pill {{
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 50px;
+        padding: 12px 36px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 100%;
-        padding: 18px 40px;
-        margin-bottom: 20px;
+        width: 95%;
+        max-width: 1100px;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
+        border: 1.5px solid rgba(255, 255, 255, 0.9);
     }}
     
-    .nav-brand-logo {{
+    .topbar-left-menu, .topbar-right-menu {{
         display: flex;
         align-items: center;
-        gap: 10px;
-        font-family: 'Fredoka', 'Kanit', sans-serif;
-        font-size: 1.6rem;
-        font-weight: 800;
-        color: {curr["text_color"]};
-        letter-spacing: -0.5px;
+        gap: 24px;
     }}
     
-    .nav-brand-icon {{
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        background: {curr["text_color"]};
+    .topbar-link {{
+        font-family: 'Kanit', sans-serif;
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: #1E293B;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }}
+    
+    .topbar-link:hover {{
+        color: #E11D48;
+    }}
+    
+    .topbar-center-logo {{
+        font-family: 'Anton', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 900;
+        letter-spacing: 2px;
+        color: #0F172A;
+    }}
+    
+    .topbar-icons {{
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 1.1rem;
+        color: #1E293B;
+    }}
+    
+    .topbar-icon-cart {{
+        position: relative;
+        cursor: pointer;
+    }}
+    
+    .cart-count-badge {{
+        position: absolute;
+        top: -6px;
+        right: -8px;
+        background: #E11D48;
         color: #FFFFFF;
+        font-size: 0.65rem;
+        font-weight: 800;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.1rem;
-    }}
-    
-    .nav-menu-links {{
-        display: flex;
-        align-items: center;
-        gap: 36px;
-    }}
-    
-    .nav-menu-item {{
-        font-family: 'Kanit', sans-serif;
-        font-size: 0.88rem;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        color: {curr["text_color"]};
-        text-decoration: none;
-        text-transform: uppercase;
-        opacity: 0.85;
-        transition: opacity 0.2s ease;
-    }}
-    
-    .nav-menu-item:hover {{
-        opacity: 1;
-    }}
-    
-    .nav-order-btn {{
-        border: 2px solid {curr["text_color"]};
-        border-radius: 30px;
-        padding: 6px 20px;
-        font-size: 0.82rem;
-        font-weight: 800;
-        color: {curr["text_color"]};
-        text-transform: uppercase;
-        letter-spacing: 1px;
     }}
 
     /* 🍨 HERO BERRY BURST CENTERPIECE SHOWCASE */
@@ -529,18 +543,28 @@ def main():
         st.error(f"Error loading index: {exc}")
         st.stop()
 
-    # 1. TOP MINIMAL NAVBAR
-    nav_html = f"""<div class="top-nav-wrapper">
-<div class="nav-brand-logo"><div class="nav-brand-icon">🍨</div> MilkLab° Gelato</div>
-<div class="nav-menu-links">
-<a href="#product" class="nav-menu-item">PRODUCT</a>
-<a href="#store" class="nav-menu-item">STORE</a>
-<a href="#dairy" class="nav-menu-item">DAIRY</a>
-<a href="#contact" class="nav-menu-item">CONTACT</a>
+    # 1. EXACT HANCI FLOATING PILL TOP BAR (MATCHING REFERENCE IMAGE 100%)
+    hanci_topbar_html = """<div class="hanci-topbar-wrapper">
+<div class="hanci-topbar-pill">
+<div class="topbar-left-menu">
+<a href="#shop" class="topbar-link">Shop</a>
+<a href="#about" class="topbar-link">About us</a>
+<a href="#flavours" class="topbar-link">Flavours ▾</a>
+<a href="#learn" class="topbar-link">Learn</a>
 </div>
-<div class="nav-order-btn">ORDER NOW</div>
+<div class="topbar-center-logo">MILKLAB</div>
+<div class="topbar-right-menu">
+<a href="#story" class="topbar-link">Our Story</a>
+<a href="#contact" class="topbar-link">Contact</a>
+<div class="topbar-icons">
+<span class="topbar-icon" title="Search">🔍</span>
+<span class="topbar-icon" title="Wishlist">♡</span>
+<span class="topbar-icon-cart" title="Cart">🛍️ <span class="cart-count-badge">0</span></span>
+</div>
+</div>
+</div>
 </div>"""
-    st.markdown(nav_html, unsafe_allow_html=True)
+    st.markdown(hanci_topbar_html, unsafe_allow_html=True)
 
     # 2. FLAVOR SELECTOR PILL BUTTONS
     st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
