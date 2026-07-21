@@ -8,6 +8,7 @@ Deploy: push to GitHub then deploys to Streamlit Cloud / HuggingFace
 import os
 import sys
 import time
+import textwrap
 import numpy as np
 import faiss
 import streamlit as st
@@ -297,8 +298,8 @@ def main():
 
     curr = GELATO_POSTERS[st.session_state.poster_idx]
 
-    # High-Fashion Poster CSS Architecture (Exact Reference Image 1 & 2 Style!)
-    st.markdown(f"""
+    # High-Fashion Poster CSS Architecture
+    css_code = f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Anton&family=Kanit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
     
@@ -426,7 +427,7 @@ def main():
         z-index: 2;
     }}
     
-    /* SIDE CAROUSEL CUTOUT PREVIEWS (IMAGE 1 & 2 STYLE) */
+    /* SIDE CAROUSEL CUTOUT PREVIEWS */
     .side-cutout-left {{
         position: absolute;
         left: -40px;
@@ -485,7 +486,8 @@ def main():
         box-shadow: 0 18px 45px rgba(0,0,0,0.35) !important;
     }}
     </style>
-    """, unsafe_allow_html=True)
+    """
+    st.markdown(textwrap.dedent(css_code), unsafe_allow_html=True)
 
     # Load FAISS Index
     try:
@@ -506,38 +508,31 @@ def main():
                 st.session_state.poster_idx = idx
                 st.rerun()
 
-    # EXACT REFERENCE POSTER CONTAINER (Matching Image 1 & Image 2!)
-    st.markdown(f"""
-    <div class="poster-canvas">
-        <div class="side-cutout-left">
-            <img src="{curr['left_preview']}" style="width:100%; height:100%; object-fit:cover;" />
-        </div>
-        <div class="side-cutout-right">
-            <img src="{curr['right_preview']}" style="width:100%; height:100%; object-fit:cover;" />
-        </div>
-        
-        <div>
-            <div class="poster-top-tag">{curr["top_tag"]}</div>
-            <div class="poster-sub-header">{curr["sub_header"]}</div>
-            <div class="poster-giant-text">{curr["title_part1"]}</div>
-        </div>
-        
-        <div class="poster-center-box">
-            <img src="{curr['photo_url']}" class="poster-photo-rect" alt="Fruit Photo" />
-            <div class="poster-tub-center">
-                <div class="tub-lid"></div>
-                <div style="font-size: 0.75rem; font-weight: 800; color: #FFFFFF; letter-spacing: 1px;">MILKLAB°</div>
-                <div class="tub-label-brand">{curr["tub_title"]}</div>
-                <div style="font-size: 0.65rem; color: #FFFFFF; margin-top: 4px;">NET WT 120G</div>
-            </div>
-        </div>
-        
-        <div>
-            <div class="poster-giant-text">{curr["title_part2"]}</div>
-            <div class="poster-footer-text">{curr["footer_tag"]} &nbsp;•&nbsp; PRICE: {curr["price"]} THB</div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    # EXACT REFERENCE POSTER CONTAINER (Cleaned of leading spaces!)
+    poster_html = f"""<div class="poster-canvas">
+<div class="side-cutout-left"><img src="{curr['left_preview']}" style="width:100%; height:100%; object-fit:cover;" /></div>
+<div class="side-cutout-right"><img src="{curr['right_preview']}" style="width:100%; height:100%; object-fit:cover;" /></div>
+<div>
+<div class="poster-top-tag">{curr["top_tag"]}</div>
+<div class="poster-sub-header">{curr["sub_header"]}</div>
+<div class="poster-giant-text">{curr["title_part1"]}</div>
+</div>
+<div class="poster-center-box">
+<img src="{curr['photo_url']}" class="poster-photo-rect" alt="Fruit Photo" />
+<div class="poster-tub-center">
+<div class="tub-lid"></div>
+<div style="font-size: 0.75rem; font-weight: 800; color: #FFFFFF; letter-spacing: 1px;">MILKLAB°</div>
+<div class="tub-label-brand">{curr["tub_title"]}</div>
+<div style="font-size: 0.65rem; color: #FFFFFF; margin-top: 4px;">NET WT 120G</div>
+</div>
+</div>
+<div>
+<div class="poster-giant-text">{curr["title_part2"]}</div>
+<div class="poster-footer-text">{curr["footer_tag"]} &nbsp;•&nbsp; PRICE: {curr["price"]} THB</div>
+</div>
+</div>"""
+
+    st.markdown(poster_html, unsafe_allow_html=True)
 
     # Action Bar for Poster
     c1, c2, c3 = st.columns([1, 2, 1])
@@ -556,17 +551,15 @@ def main():
         with target_col:
             tags_html = "".join(f'<span style="background:rgba(255,255,255,0.7); color:{item["text_color"]}; padding:4px 10px; border-radius:10px; font-size:0.78rem; font-weight:700; margin-right:4px;">{t}</span>' for t in item["tags"])
             
-            card_html = f"""
-            <div style="background: {item['bg_color']}; border-radius: 24px; padding: 24px; text-align: center; box-shadow: 0 12px 30px rgba(0,0,0,0.08); margin-bottom: 15px; border: 2px solid rgba(255,255,255,0.8);">
-                <div style="height: 120px; border-radius: 12px; overflow: hidden; margin-bottom: 14px;">
-                    <img src="{item['photo_url']}" style="width: 100%; height: 100%; object-fit: cover;" />
-                </div>
-                <div style="font-family: 'Anton', sans-serif; font-size: 1.8rem; color: {item['text_color']}; line-height: 1;">{item['title_part1']} {item['title_part2']}</div>
-                <div style="font-weight: 700; color: {item['text_color']}; font-size: 0.9rem; margin-top: 4px; margin-bottom: 10px;">{item['th_name']}</div>
-                <div style="margin-bottom: 12px;">{tags_html}</div>
-                <div style="font-size: 1.4rem; font-weight: 900; color: {item['text_color']};">{item['price']} THB <span style="font-size: 0.85rem; font-weight: 500;">/ {item['size']}</span></div>
-            </div>
-            """
+            card_html = f"""<div style="background: {item['bg_color']}; border-radius: 24px; padding: 24px; text-align: center; box-shadow: 0 12px 30px rgba(0,0,0,0.08); margin-bottom: 15px; border: 2px solid rgba(255,255,255,0.8);">
+<div style="height: 120px; border-radius: 12px; overflow: hidden; margin-bottom: 14px;">
+<img src="{item['photo_url']}" style="width: 100%; height: 100%; object-fit: cover;" />
+</div>
+<div style="font-family: 'Anton', sans-serif; font-size: 1.8rem; color: {item['text_color']}; line-height: 1;">{item['title_part1']} {item['title_part2']}</div>
+<div style="font-weight: 700; color: {item['text_color']}; font-size: 0.9rem; margin-top: 4px; margin-bottom: 10px;">{item['th_name']}</div>
+<div style="margin-bottom: 12px;">{tags_html}</div>
+<div style="font-size: 1.4rem; font-weight: 900; color: {item['text_color']};">{item['price']} THB <span style="font-size: 0.85rem; font-weight: 500;">/ {item['size']}</span></div>
+</div>"""
             st.markdown(card_html, unsafe_allow_html=True)
             
             if st.button(f"✨ ดูโปสเตอร์รสนี้ ({item['th_name']})", key=f"btn_card_select_{item['id']}", use_container_width=True):
@@ -624,11 +617,9 @@ def main():
 
     st.markdown("---")
 
-    st.markdown("""
-    <div style="text-align: center; color: #475569; font-size: 0.85rem; padding: 20px 0; font-weight: 700;">
-        MILKLAB × GELATO • HIGH-FASHION POSTER SHOWCASE • GEMINI RAG AI 🍨
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("""<div style="text-align: center; color: #475569; font-size: 0.85rem; padding: 20px 0; font-weight: 700;">
+MILKLAB × GELATO • HIGH-FASHION POSTER SHOWCASE • GEMINI RAG AI 🍨
+</div>""", unsafe_allow_html=True)
 
 
 if __name__ == "__main__":
