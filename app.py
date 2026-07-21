@@ -96,14 +96,21 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
 คำถามจากลูกค้า: {query}
 """
 
-    try:
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt,
-        )
-        return response.text.strip()
-    except Exception as exc:
-        return f"เกิดข้อผิดพลาดในการสร้างคำตอบ: {exc}"
+    models_to_try = ["gemini-2.5-flash", "gemini-1.5-flash", "gemini-2.0-flash"]
+    last_error = None
+
+    for m in models_to_try:
+        try:
+            response = client.models.generate_content(
+                model=m,
+                contents=prompt,
+            )
+            return response.text.strip()
+        except Exception as exc:
+            last_error = exc
+            continue
+
+    return f"เกิดข้อผิดพลาดในการสร้างคำตอบ: {last_error}"
 
 
 def main():
