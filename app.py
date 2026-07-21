@@ -1,5 +1,5 @@
 """MilkLab° Gelato - High-Fashion DTC Poster & Flavor Carousel Experience.
-Reference Style: HANCI Floating Pill Top Bar / Full Moon Party / Minimal Liquid Glass Buttons
+Reference Style: HANCI Floating Pill Top Bar / Full Moon Party / Giant Header Typography
 
 Run locally: streamlit run app.py
 Deploy: push to GitHub then deploys to Streamlit Cloud / HuggingFace
@@ -357,7 +357,7 @@ def main():
         justify-content: center;
         align-items: center;
         width: 100%;
-        padding: 10px 0 20px 0;
+        padding: 10px 0 15px 0;
     }}
     
     .hanci-topbar-pill {{
@@ -429,6 +429,41 @@ def main():
         display: flex;
         align-items: center;
         justify-content: center;
+    }}
+    
+    /* 🌟 GIANT DTC TOP HEADER (REFERENCE IMAGE 3 ARCHITECTURE) */
+    .dtc-header-container {{
+        width: 100%;
+        text-align: center;
+        padding: 15px 10px 10px 10px;
+        user-select: none;
+    }}
+    
+    .dtc-header-title {{
+        font-family: 'Anton', sans-serif;
+        font-size: 7.5rem;
+        font-weight: 900;
+        line-height: 0.85;
+        letter-spacing: 2px;
+        color: #FFFFFF;
+        text-transform: uppercase;
+        text-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    }}
+    
+    .dtc-header-subrow {{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 1150px;
+        margin: 10px auto 20px auto;
+        font-family: 'Anton', 'Kanit', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        color: #FFFFFF;
+        text-transform: uppercase;
+        opacity: 0.95;
     }}
     
     /* Exact Reference Poster Canvas */
@@ -616,7 +651,7 @@ def main():
         st.error(f"Error loading index: {exc}")
         st.stop()
 
-    # 🌟 EXACT HANCI FLOATING PILL TOP BAR
+    # 🌟 1. EXACT HANCI FLOATING PILL TOP BAR
     hanci_topbar_html = """<div class="hanci-topbar-wrapper">
 <div class="hanci-topbar-pill">
 <div class="topbar-left-menu">
@@ -639,8 +674,18 @@ def main():
 </div>"""
     st.markdown(hanci_topbar_html, unsafe_allow_html=True)
 
-    # Interactive Flavor Switcher Navigation (DTC Style)
-    st.markdown("### 🍨 เลือกชมโปสเตอร์รสชาติไอศกรีม (Click to Change Poster Theme):")
+    # 🌟 2. GIANT REFERENCE HEADER (MILKLAB x GELATO)
+    header_html = """<div class="dtc-header-container">
+<div class="dtc-header-title">MILKLAB <span style="font-size: 5.8rem; vertical-align: middle; margin: 0 4px;">×</span> GELATO</div>
+<div class="dtc-header-subrow">
+<span>A MAGICAL DUO</span>
+<span>OF FRESH MILK</span>
+<span>AND ARTISAN GELATO</span>
+</div>
+</div>"""
+    st.markdown(header_html, unsafe_allow_html=True)
+
+    # 3. Interactive Flavor Switcher Navigation (Clean Pill Buttons)
     nav_cols = st.columns(len(GELATO_POSTERS))
 
     for idx, p in enumerate(GELATO_POSTERS):
@@ -651,7 +696,7 @@ def main():
                 st.session_state.poster_idx = idx
                 st.rerun()
 
-    # EXACT REFERENCE POSTER CONTAINER
+    # 4. EXACT REFERENCE POSTER CONTAINER
     poster_html = f"""<div class="poster-canvas">
 <div class="side-cutout-left"><img src="{curr['left_preview']}" style="width:100%; height:100%; object-fit:cover;" /></div>
 <div class="side-cutout-right"><img src="{curr['right_preview']}" style="width:100%; height:100%; object-fit:cover;" /></div>
