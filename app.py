@@ -1,4 +1,5 @@
-"""MilkLab° Gelato - Perfectly Aligned Modern Glass Cards Architecture.
+"""MilkLab° Gelato - High-Fashion DTC Animated Experience.
+Reference Style: Boba Ice Cream / Full Moon Party / Karaoke Night
 
 Run locally: streamlit run app.py
 Deploy: push to GitHub then deploys to Streamlit Cloud / HuggingFace
@@ -107,81 +108,96 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
     return f"เกิดข้อผิดพลาดในการสร้างคำตอบ: {last_error}"
 
 
-# Gelato Catalog Data
-GELATO_CATALOG = [
+# Gelato Catalog with Dynamic Themes & High-Fashion DTC Aesthetics
+GELATO_FLAVORS = [
+    {
+        "id": "strawberry",
+        "name": "KARAOKE NIGHT",
+        "sub_name": "STRAWBERRY SHORTCAKE SORBET",
+        "th_name": "เจลาโต้สตรอว์เบอร์รีซอร์เบต์",
+        "price": 85,
+        "size": "120g",
+        "bg_color": "#FFC5D3",
+        "card_bg": "#FF8DA1",
+        "accent_color": "#D81B60",
+        "text_color": "#880E4F",
+        "tag_bg": "rgba(216, 27, 96, 0.15)",
+        "icon": "🍓",
+        "calories": "110 kcal",
+        "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🥜 Nut-Free"],
+        "desc": "สตรอว์เบอร์รีสด 100% ให้รสสัมผัสเปรี้ยวหวานฉ่ำ เติมความสดชื่นยามค่ำคืนสไตล์ Karaoke Night ปลอดนม ปลอดไขมันเนย",
+        "query": "ขอข้อมูลเจลาโต้สตรอว์เบอร์รีซอร์เบต์ รสชาติ สารแพ้อาหาร และราคา"
+    },
     {
         "id": "hokkaido",
-        "category": "Milk Series",
-        "name": "เจลาโต้นมสดฮอกไกโด",
-        "en_name": "Hokkaido Pure Milk Gelato",
-        "icon": "🍦",
+        "name": "HOKKAIDO DREAM",
+        "sub_name": "PURE HOKKAIDO FRESH MILK",
+        "th_name": "เจลาโต้นมสดฮอกไกโด",
         "price": 80,
         "size": "120g",
+        "bg_color": "#FFEAD2",
+        "card_bg": "#F5C7A9",
+        "accent_color": "#D97706",
+        "text_color": "#78350F",
+        "tag_bg": "rgba(217, 119, 6, 0.15)",
+        "icon": "🍦",
         "calories": "195 kcal",
-        "rating": "4.9 ⭐ (128)",
-        "desc": "นมสดฮอกไกโดนำเข้า 100% สกัดเข้มข้น รสสัมผัสนุ่มละมุน กลิ่นหอมกลมกล่อมเอกลักษณ์เฉพาะ MilkLab°",
         "tags": ["🥛 100% Hokkaido Milk", "🥜 Nut-Free", "🌾 Gluten-Free"],
-        "is_hero": True,
+        "desc": "นมสดฮอกไกโดแท้ 100% นำเข้าจากญี่ปุ่น รสชาตินุ่มละมุน เข้มข้น หอมกลมกล่อมเอกลักษณ์อันดับ #1 ของ MilkLab°",
         "query": "ขอรายละเอียดเจลาโต้นมสดฮอกไกโด สารแพ้อาหาร และราคา"
     },
     {
         "id": "chocolate",
-        "category": "Milk Series",
-        "name": "เจลาโต้ดาร์กช็อกโกแลต",
-        "en_name": "Valrhona Dark Chocolate 70%",
-        "icon": "🍫",
+        "name": "MIDNIGHT COCOA",
+        "sub_name": "DARK CHOCOLATE 70%",
+        "th_name": "เจลาโต้ดาร์กช็อกโกแลต",
         "price": 85,
         "size": "120g",
+        "bg_color": "#D8C4B6",
+        "card_bg": "#4F3B32",
+        "accent_color": "#B45309",
+        "text_color": "#3E2723",
+        "tag_bg": "rgba(79, 59, 50, 0.2)",
+        "icon": "🍫",
         "calories": "210 kcal",
-        "rating": "4.95 ⭐ (94)",
-        "desc": "ดาร์กช็อกโกแลตพรีเมียมเข้มข้น 70% ให้รสสัมผัสขมนิดๆ หวานกำลังดี ไร้สารสังเคราะห์",
         "tags": ["🍫 Dark Cocoa 70%", "🥜 Nut-Free", "🌾 Gluten-Free"],
-        "is_hero": False,
+        "desc": "ดาร์กช็อกโกแลตเข้มข้น 70% ให้รสสัมผัสขมนิดๆ หวานกำลังดี เข้มข้นลึกซึ้ง ไร้สารสังเคราะห์",
         "query": "ขอรายละเอียดเจลาโต้ดาร์กช็อกโกแลต มีส่วนผสมอะไรบ้าง"
     },
     {
-        "id": "strawberry",
-        "category": "Sorbet (Vegan)",
-        "name": "เจลาโต้สตรอว์เบอร์รีซอร์เบต์",
-        "en_name": "Fresh Strawberry Sorbet",
-        "icon": "🍓",
-        "price": 85,
-        "size": "120g",
-        "calories": "110 kcal",
-        "rating": "4.88 ⭐ (112)",
-        "desc": "สตรอว์เบอร์รีสด 100% รสชาติเปรี้ยวหวานสดชื่น ปลอดส่วนผสมของนม ปลอดไขมันเนย (Dairy-Free)",
-        "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🥜 Nut-Free"],
-        "is_hero": False,
-        "query": "คนทานมังสวิรัติหรือวีแกนกินเจลาโต้สตรอว์เบอร์รีซอร์เบต์ได้ไหม"
-    },
-    {
         "id": "matcha",
-        "category": "Milk Series",
-        "name": "เจลาโต้ชาเขียวมัทฉะ",
-        "en_name": "Uji Ceremonial Matcha Gelato",
-        "icon": "🍵",
+        "name": "KYOTO CEREMONY",
+        "sub_name": "UJI MATCHA GREEN TEA",
+        "th_name": "เจลาโต้ชาเขียวมัทฉะ",
         "price": 90,
         "size": "120g",
+        "bg_color": "#D1E7DD",
+        "card_bg": "#4D7C0F",
+        "accent_color": "#3F6212",
+        "text_color": "#1E3A8A",
+        "tag_bg": "rgba(63, 98, 18, 0.15)",
+        "icon": "🍵",
         "calories": "180 kcal",
-        "rating": "4.92 ⭐ (86)",
-        "desc": "ผงมัทฉะเกรดพิธีการสกัดจากเมืองอุจิ เกียวโต ให้ความหอมเข้มข้น มิติรสชาติลึกซึ้งแท้สไตล์ญี่ปุ่น",
-        "tags": ["🍵 Uji Ceremonial", "🥜 Nut-Free", "👑 Premium Grade"],
-        "is_hero": False,
+        "tags": ["🍵 Uji Ceremonial Grade", "🥜 Nut-Free", "👑 Premium"],
+        "desc": "ผงมัทฉะเกรดพิธีการจากเมืองอุจิ เกียวโต ให้ความหอมเข้มข้น มิติรสชาติลึกซึ้งแท้สไตล์ญี่ปุ่น",
         "query": "เจลาโต้ชาเขียวมัทฉะราคาเท่าไหร่ ใช้วัตถุดิบจากไหน"
     },
     {
         "id": "mango",
-        "category": "Sorbet (Vegan)",
-        "name": "เจลาโต้มะม่วงมหาชนกซอร์เบต์",
-        "en_name": "Mahachanok Mango Sorbet",
-        "icon": "🥭",
+        "name": "FULL MOON PARTY",
+        "sub_name": "MAHACHANOK MANGO SORBET",
+        "th_name": "เจลาโต้มะม่วงมหาชนกซอร์เบต์",
         "price": 80,
         "size": "120g",
+        "bg_color": "#FFE97D",
+        "card_bg": "#F59E0B",
+        "accent_color": "#B45309",
+        "text_color": "#78350F",
+        "tag_bg": "rgba(180, 83, 9, 0.15)",
+        "icon": "🥭",
         "calories": "125 kcal",
-        "rating": "4.85 ⭐ (74)",
-        "desc": "เนื้อมะม่วงมหาชนกสดหวานฉ่ำคัดพิเศษ ปลอดนม 100% ให้ความสดชื่นคลายร้อนอย่างลงตัว",
         "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🥭 Fresh Mango"],
-        "is_hero": False,
+        "desc": "เนื้อมะม่วงมหาชนกสดหวานฉ่ำ 100% ให้ความสดชื่นระเบิดรสชาติหวานอมเปรี้ยวคลายร้อนสไตล์ Full Moon Party",
         "query": "ขอข้อมูลเจลาโต้มะม่วงมหาชนกซอร์เบต์ ราคาและส่วนผสม"
     }
 ]
@@ -207,13 +223,13 @@ def open_ai_dialog(model, index, chunks, initial_query: str = ""):
     
     quick_selected = None
     with q_col1:
-        if st.button("⏰ เวลาเปิด-ปิดร้าน", key="dlg_m1", use_container_width=True):
+        if st.button("⏰ เวลาเปิด-ปิดร้าน", key="dlg_f1", use_container_width=True):
             quick_selected = "ร้านเปิดกี่โมงและปิดกี่โมง"
     with q_col2:
-        if st.button("🚚 ค่าจัดส่ง & รัศมี", key="dlg_m2", use_container_width=True):
+        if st.button("🚚 ค่าจัดส่ง & รัศมี", key="dlg_f2", use_container_width=True):
             quick_selected = "ค่าจัดส่งเท่าไหร่และส่งไกลแค่ไหนมีแพ็คเจลเย็นไหม"
     with q_col3:
-        if st.button("🌱 เมนูสำหรับ Vegan", key="dlg_m3", use_container_width=True):
+        if st.button("🌱 เมนูสำหรับ Vegan", key="dlg_f3", use_container_width=True):
             quick_selected = "มีเจลาโต้รสไหนบ้างที่คนทานมังสวิรัติหรือวีแกนกินได้"
 
     prompt_to_process = quick_selected or initial_query
@@ -254,273 +270,190 @@ def open_ai_dialog(model, index, chunks, initial_query: str = ""):
 
 
 def main():
-    # Streamlit Page Setup
     st.set_page_config(
-        page_title="MilkLab° Gelato | Modern Glass Studio",
+        page_title="MILKLAB × GELATO | High-Fashion Experience",
         page_icon="🍨",
         layout="wide",
         initial_sidebar_state="collapsed"
     )
 
-    # Ultra-Modern Liquid Glass & Perfectly Aligned Card Grid CSS Architecture
-    st.markdown("""
+    # Initialize Selected Flavor Session State
+    if "selected_flavor_idx" not in st.session_state:
+        st.session_state.selected_flavor_idx = 0
+
+    current_flavor = GELATO_FLAVORS[st.session_state.selected_flavor_idx]
+
+    # Dynamic High-Fashion CSS with Theme Colors & Keyframe Animations
+    st.markdown(f"""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Kanit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
     
-    html, body, [class*="css"] {
-        font-family: 'Plus Jakarta Sans', 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
+    html, body, [class*="css"] {{
+        font-family: 'Kanit', 'Plus Jakarta Sans', sans-serif;
+    }}
     
-    /* Background Canvas */
-    .stApp {
-        background: radial-gradient(at 0% 0%, #FFF5F7 0px, transparent 50%),
-                    radial-gradient(at 100% 0%, #F0F4FF 0px, transparent 50%),
-                    radial-gradient(at 100% 100%, #F5F3FF 0px, transparent 50%),
-                    radial-gradient(at 0% 100%, #FFFBEB 0px, transparent 50%);
-        background-color: #FAFAFD;
-        background-attachment: fixed;
-    }
+    /* Dynamic Animated Background Transition */
+    .stApp {{
+        background-color: {current_flavor["bg_color"]} !important;
+        transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }}
     
-    /* Sleek Top Header Bar */
-    .modern-nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(255, 255, 255, 0.65);
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.9);
-        padding: 18px 36px;
-        border-radius: 24px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-        margin-bottom: 28px;
-    }
+    /* Scroll Behavior */
+    html {{
+        scroll-behavior: smooth;
+    }}
     
-    .nav-logo {
-        font-size: 1.55rem;
-        font-weight: 800;
-        letter-spacing: -0.6px;
-        color: #0F172A;
-    }
+    /* High Impact Banner Header */
+    .hero-banner-container {{
+        text-align: center;
+        padding: 40px 20px 20px 20px;
+        position: relative;
+    }}
     
-    .nav-pill {
-        font-size: 0.75rem;
-        background: rgba(225, 29, 72, 0.08);
-        color: #E11D48;
-        padding: 5px 14px;
-        border-radius: 20px;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        border: 1px solid rgba(225, 29, 72, 0.15);
-    }
-    
-    .nav-status {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 0.85rem;
-        color: #475569;
-        font-weight: 500;
-    }
-    
-    .status-dot {
-        width: 9px;
-        height: 9px;
-        background-color: #10B981;
-        border-radius: 50%;
-        box-shadow: 0 0 10px #10B981;
-    }
-
-    /* Hero Spotlight Card (Split Layout) */
-    .hero-spotlight {
-        background: linear-gradient(135deg, rgba(255,255,255,0.75) 0%, rgba(255,241,242,0.65) 100%);
-        backdrop-filter: blur(24px) saturate(190%);
-        -webkit-backdrop-filter: blur(24px);
-        border: 1.5px solid rgba(255, 255, 255, 0.95);
-        border-radius: 28px;
-        padding: 36px 44px;
-        box-shadow: 0 20px 40px rgba(225, 29, 72, 0.05);
-        margin-bottom: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    
-    .hero-tag {
-        font-size: 0.78rem;
-        font-weight: 700;
+    .hero-big-title {{
+        font-family: 'Anton', 'Kanit', sans-serif;
+        font-size: 5.5rem;
+        font-weight: 900;
+        letter-spacing: 2px;
+        color: #FFFFFF;
+        text-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        line-height: 0.95;
         text-transform: uppercase;
-        letter-spacing: 1px;
-        color: #E11D48;
-        margin-bottom: 8px;
-    }
+        animation: fadeInDown 0.8s ease-out;
+    }}
     
-    .hero-title {
-        font-size: 2.2rem;
-        font-weight: 800;
-        color: #0F172A;
-        letter-spacing: -0.8px;
-        margin-bottom: 10px;
-    }
-    
-    .hero-desc {
-        font-size: 1rem;
-        color: #475569;
-        line-height: 1.6;
-        max-width: 600px;
-        margin-bottom: 18px;
-    }
-    
-    .hero-badge-group {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
-    
-    .hero-badge {
-        background: #FFFFFF;
-        border: 1px solid #FFE4E8;
-        color: #E11D48;
-        padding: 6px 14px;
-        border-radius: 12px;
-        font-size: 0.82rem;
-        font-weight: 600;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-    }
-
-    /* PERFECTLY EQUALIZED & ALIGNED CARD ARCHITECTURE */
-    .modern-card-container {
-        height: 380px;
-        background: rgba(255, 255, 255, 0.65);
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1.5px solid rgba(255, 255, 255, 0.95);
-        border-radius: 24px;
-        padding: 24px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin-bottom: 12px;
-    }
-    
-    .modern-card-container:hover {
-        transform: translateY(-8px);
-        background: rgba(255, 255, 255, 0.85);
-        border-color: #FFE4E8;
-        box-shadow: 0 20px 45px rgba(225, 29, 72, 0.1);
-    }
-    
-    .card-top-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 14px;
-    }
-    
-    .card-icon-frame {
-        width: 64px;
-        height: 64px;
-        background: rgba(255, 255, 255, 0.9);
-        border: 1px solid rgba(255, 255, 255, 1);
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2.5rem;
-        box-shadow: 0 6px 16px rgba(0,0,0,0.03);
-    }
-    
-    .card-price-container {
-        text-align: right;
-    }
-    
-    .card-price-num {
-        font-size: 1.4rem;
-        font-weight: 800;
-        color: #E11D48;
-    }
-    
-    .card-price-sub {
-        font-size: 0.76rem;
-        color: #64748B;
-        font-weight: 500;
-    }
-    
-    .card-title {
-        font-size: 1.2rem;
+    .hero-sub-text {{
+        font-family: 'Kanit', sans-serif;
+        font-size: 1.25rem;
         font-weight: 700;
-        color: #0F172A;
-        margin-bottom: 2px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+        color: {current_flavor["accent_color"]};
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-top: 15px;
+    }}
     
-    .card-subtitle {
-        font-size: 0.8rem;
-        color: #64748B;
-        margin-bottom: 10px;
-        font-weight: 500;
-    }
+    /* Floating Animated Ice Cream Tub Container */
+    .tub-display-frame {{
+        background: rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        border-radius: 36px;
+        padding: 40px;
+        text-align: center;
+        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.12);
+        animation: floatTub 4s ease-in-out infinite;
+        margin: 20px 0;
+    }}
     
-    .card-desc {
-        font-size: 0.88rem;
+    .tub-icon-large {{
+        font-size: 7.5rem;
+        filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));
+        transition: transform 0.5s ease;
+    }}
+    
+    .tub-icon-large:hover {{
+        transform: scale(1.15) rotate(5deg);
+    }}
+    
+    .flavor-title-display {{
+        font-family: 'Anton', 'Kanit', sans-serif;
+        font-size: 3.2rem;
+        font-weight: 900;
+        color: {current_flavor["accent_color"]};
+        line-height: 1.1;
+        letter-spacing: 1px;
+        margin-top: 15px;
+    }}
+    
+    .flavor-desc-display {{
+        font-size: 1.1rem;
         color: #334155;
-        line-height: 1.55;
-        height: 55px;
-        overflow: hidden;
-        margin-bottom: 12px;
-    }
+        max-width: 650px;
+        margin: 15px auto;
+        line-height: 1.6;
+        font-weight: 500;
+    }}
     
-    .card-tags-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-    }
+    .price-pill-large {{
+        display: inline-block;
+        background: #FFFFFF;
+        color: {current_flavor["accent_color"]};
+        font-size: 1.8rem;
+        font-weight: 800;
+        padding: 10px 28px;
+        border-radius: 30px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        border: 2px solid {current_flavor["accent_color"]};
+    }}
     
-    .card-tag-pill {
-        background: rgba(255, 255, 255, 0.9);
-        border: 1px solid #F1F5F9;
-        color: #475569;
-        padding: 4px 10px;
-        border-radius: 8px;
-        font-size: 0.74rem;
-        font-weight: 600;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-    }
+    /* High Fashion Flavor Showcase Cards Grid */
+    .dtc-card-frame {{
+        background: #FFFFFF;
+        border-radius: 28px;
+        padding: 28px;
+        text-align: center;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        border: 3px solid transparent;
+        height: 100%;
+    }}
+    
+    .dtc-card-frame:hover {{
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 25px 45px rgba(0,0,0,0.12);
+        border-color: {current_flavor["accent_color"]};
+    }}
+    
+    .dtc-card-title {{
+        font-family: 'Anton', 'Kanit', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 900;
+        letter-spacing: 1px;
+        color: #0F172A;
+        margin-top: 10px;
+        text-transform: uppercase;
+    }}
+
+    /* Keyframes for Floating Animation & Scroll */
+    @keyframes floatTub {{
+        0%, 100% {{ transform: translateY(0px) rotate(0deg); }}
+        50% {{ transform: translateY(-14px) rotate(2deg); }}
+    }}
+    
+    @keyframes fadeInDown {{
+        from {{ opacity: 0; transform: translateY(-30px); }}
+        to {{ opacity: 1; transform: translateY(0); }}
+    }}
 
     /* 📌 FIXED FLOATING CIRCULAR CHATBOT POPUP (BOTTOM-RIGHT) */
-    div[data-testid="stPopover"] {
+    div[data-testid="stPopover"] {{
         position: fixed !important;
         bottom: 30px !important;
         right: 30px !important;
         z-index: 999999 !important;
-    }
+    }}
     
-    div[data-testid="stPopover"] > button {
-        width: 68px !important;
-        height: 68px !important;
+    div[data-testid="stPopover"] > button {{
+        width: 72px !important;
+        height: 72px !important;
         border-radius: 50% !important;
-        background: linear-gradient(135deg, #FFFFFF 0%, #FFE4E8 100%) !important;
-        backdrop-filter: blur(16px) !important;
-        -webkit-backdrop-filter: blur(16px) !important;
-        border: 2px solid #FFFFFF !important;
-        box-shadow: 0 12px 36px rgba(225, 29, 72, 0.28), 0 0 24px rgba(255, 255, 255, 0.9) !important;
-        font-size: 2rem !important;
+        background: #FFFFFF !important;
+        border: 3px solid {current_flavor["accent_color"]} !important;
+        box-shadow: 0 12px 36px rgba(0,0,0,0.2) !important;
+        font-size: 2.2rem !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-        color: #E11D48 !important;
+        color: {current_flavor["accent_color"]} !important;
         padding: 0 !important;
-    }
+    }}
     
-    div[data-testid="stPopover"] > button:hover {
-        transform: scale(1.14) rotate(8deg) !important;
-        box-shadow: 0 18px 45px rgba(225, 29, 72, 0.45) !important;
-    }
+    div[data-testid="stPopover"] > button:hover {{
+        transform: scale(1.15) rotate(10deg) !important;
+        box-shadow: 0 18px 45px rgba(0,0,0,0.3) !important;
+    }}
     </style>
     """, unsafe_allow_html=True)
 
@@ -528,91 +461,74 @@ def main():
     try:
         model, index, chunks = load_index()
     except Exception as exc:
-        st.error(f"Error loading index: {exc}")
+        st.error(f"Error loading FAISS Index: {exc}")
         st.stop()
 
-    # Sleek Header Bar
-    st.markdown("""
-    <div class="modern-nav">
-        <div class="nav-logo">
-            🍨 MilkLab° <span style="font-weight: 400; color: #64748B;">Gelato</span>
-            <span class="nav-pill">SYMMETRIC GRID UI</span>
-        </div>
-        <div class="nav-status">
-            <span class="status-dot"></span>
-            <span>Store Open (16:00 - 23:00) &nbsp;|&nbsp; 🚚 Express 5km Delivery</span>
-        </div>
+    # 1. High Impact Hero Banner
+    st.markdown(f"""
+    <div class="hero-banner-container">
+        <div class="hero-big-title">MILKLAB × GELATO</div>
+        <div class="hero-sub-text">A MAGICAL DUO OF ARTISAN HOMEMADE ICE CREAM</div>
     </div>
     """, unsafe_allow_html=True)
 
-    # Hero Spotlight Card
-    st.markdown("""
-    <div class="hero-spotlight">
-        <div>
-            <div class="hero-tag">🔥 FLAVOR OF THE MONTH</div>
-            <div class="hero-title">เจลาโต้นมสดฮอกไกโด 🍦</div>
-            <div class="hero-desc">
-                สัมผัสความหอมนุ่ม ละมุนลิ้น รสชาติสไตล์อาร์ติซานด้วยนมสดฮอกไกโดนำเข้า 100% สกัดเข้มข้น ไร้สารสังเคราะห์และปลอดถั่วทุกเมนู
-            </div>
-            <div class="hero-badge-group">
-                <span class="hero-badge">⭐ 4.9 (128 รีวิว)</span>
-                <span class="hero-badge">🥛 นมสดฮอกไกโด 100%</span>
-                <span class="hero-badge">🥜 Nut-Free Guaranteed</span>
-            </div>
-        </div>
+    # 2. Interactive Flavor Selector Buttons (Color Theme Changing!)
+    st.markdown("### 🎨 เลือกเปลี่ยนสีธีมและรสชาติไอศกรีม (Interactive Flavor Changer):")
+    sel_cols = st.columns(len(GELATO_FLAVORS))
+
+    for idx, flavor in enumerate(GELATO_FLAVORS):
+        with sel_cols[idx]:
+            is_active = (idx == st.session_state.selected_flavor_idx)
+            btn_label = f"{flavor['icon']} {flavor['name']}"
+            if is_active:
+                btn_label = f"✨ {flavor['icon']} {flavor['name']}"
+                
+            if st.button(btn_label, key=f"flavor_sel_{flavor['id']}", use_container_width=True, type="primary" if is_active else "secondary"):
+                st.session_state.selected_flavor_idx = idx
+                st.rerun()
+
+    # 3. Dynamic Animated Tub Spotlight Display
+    st.markdown(f"""
+    <div class="tub-display-frame">
+        <div class="tub-icon-large">{current_flavor["icon"]}</div>
+        <div class="flavor-title-display">{current_flavor["name"]}</div>
+        <div style="font-size: 1.15rem; font-weight: 700; color: #475569; letter-spacing: 2px;">{current_flavor["sub_name"]}</div>
+        <div class="flavor-desc-display">{current_flavor["desc"]}</div>
+        <div class="price-pill-large">{current_flavor["price"]} THB <span style="font-size: 1.1rem; font-weight: 500;">/ {current_flavor["size"]} ({current_flavor["calories"]})</span></div>
     </div>
     """, unsafe_allow_html=True)
 
-    # Section Header & Category Filter
-    st.markdown("## 🍨 Product Catalog Grid")
-    st.caption("การ์ดเมนูจัดเรียงสวยงาม ความสูงสมดุลเท่ากันทุกช่อง คลิกปุ่มล่างการ์ดหรือคลิกปุ่มป็อบอัพทรงกลมมุมขวาล่างเพื่อคุยกับ AI")
+    # Action Buttons under Spotlight
+    act_col1, act_col2, act_col3 = st.columns([1, 2, 1])
+    with act_col2:
+        if st.button(f"✨ ถามน้อง AI เกี่ยวกับ {current_flavor['th_name']}", key="btn_hero_ask", type="primary", use_container_width=True):
+            open_ai_dialog(model, index, chunks, initial_query=current_flavor["query"])
 
-    selected_category = st.radio(
-        "หมวดหมู่สินค้า:",
-        ["ทั้งหมด (All Flavors)", "Milk Series (สูตรนมสด)", "Sorbet (Vegan / ปลอดนม)"],
-        horizontal=True
-    )
+    st.markdown("---")
+    st.markdown("## 🍨 EXPLORE ALL FLAVORS (ทุกรสชาติมี Animation เมื่อ Scroll & Hover)")
 
-    # Filter Items
-    filtered_items = GELATO_CATALOG
-    if "Milk Series" in selected_category:
-        filtered_items = [x for x in GELATO_CATALOG if x["category"] == "Milk Series"]
-    elif "Sorbet" in selected_category:
-        filtered_items = [x for x in GELATO_CATALOG if x["category"] == "Sorbet (Vegan)"]
+    # 4. Showcase Cards Grid (Reference Image 2 Style!)
+    card_cols = st.columns(3)
 
-    st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
-
-    # PERFECTLY SYMMETRIC GRID RENDER (3 Columns Architecture)
-    grid_cols = st.columns(3)
-
-    for idx, item in enumerate(filtered_items):
-        target_col = grid_cols[idx % 3]
+    for idx, item in enumerate(GELATO_FLAVORS):
+        target_col = card_cols[idx % 3]
         with target_col:
-            tags_html = "".join(f'<span class="card-tag-pill">{t}</span>' for t in item["tags"])
+            tags_html = "".join(f'<span style="background:{item["tag_bg"]}; color:{item["accent_color"]}; padding:4px 10px; border-radius:10px; font-size:0.78rem; font-weight:600; margin-right:4px;">{t}</span>' for t in item["tags"])
             
             card_html = f"""
-            <div class="modern-card-container">
-                <div>
-                    <div class="card-top-bar">
-                        <div class="card-icon-frame">{item["icon"]}</div>
-                        <div class="card-price-container">
-                            <div class="card-price-num">{item["price"]} ฿</div>
-                            <div class="card-price-sub">/{item["size"]} ({item["calories"]})</div>
-                        </div>
-                    </div>
-                    <div class="card-title">{item["name"]}</div>
-                    <div class="card-subtitle">{item["en_name"]} &nbsp;•&nbsp; {item["rating"]}</div>
-                    <div class="card-desc">{item["desc"]}</div>
-                </div>
-                <div>
-                    <div class="card-tags-group">{tags_html}</div>
-                </div>
+            <div class="dtc-card-frame" style="background: {item['bg_color']};">
+                <div style="font-size: 4rem; margin-bottom: 10px;">{item['icon']}</div>
+                <div class="dtc-card-title">{item['name']}</div>
+                <div style="font-weight: 700; color: {item['accent_color']}; font-size: 0.95rem; margin-bottom: 10px;">{item['sub_name']}</div>
+                <div style="margin-bottom: 12px;">{tags_html}</div>
+                <div style="font-size: 0.9rem; color: #334155; line-height: 1.5; margin-bottom: 16px;">{item['desc']}</div>
+                <div style="font-size: 1.5rem; font-weight: 900; color: {item['accent_color']};">{item['price']} ฿</div>
             </div>
             """
             st.markdown(card_html, unsafe_allow_html=True)
             
-            # Action Button locked at uniform bottom baseline
-            if st.button(f"✨ ถามน้อง AI เกี่ยวกับเมนูนี้", key=f"btn_ask_grid_{item['id']}", use_container_width=True):
+            if st.button(f"✨ ถาม AI ({item['th_name']})", key=f"btn_dtc_ask_{item['id']}", use_container_width=True):
+                st.session_state.selected_flavor_idx = idx
                 open_ai_dialog(model, index, chunks, initial_query=item["query"])
 
             st.markdown("<div style='margin-bottom: 24px;'></div>", unsafe_allow_html=True)
@@ -625,18 +541,16 @@ def main():
         if "messages" not in st.session_state:
             st.session_state.messages = []
 
-        # Quick Suggestions
         st.markdown("##### 💡 คำถามพบบ่อย:")
         p_c1, p_c2 = st.columns(2)
         quick_pop_q = None
         with p_c1:
-            if st.button("⏰ เวลาเปิด-ปิดร้าน", key="p_g1", use_container_width=True):
+            if st.button("⏰ เวลาเปิด-ปิดร้าน", key="p_dtc1", use_container_width=True):
                 quick_pop_q = "ร้านเปิดกี่โมงและปิดกี่โมง"
         with p_c2:
-            if st.button("🚚 ค่าส่ง & รัศมี", key="p_g2", use_container_width=True):
+            if st.button("🚚 ค่าส่ง & รัศมี", key="p_dtc2", use_container_width=True):
                 quick_pop_q = "ค่าจัดส่งเท่าไหร่และส่งไกลแค่ไหน"
 
-        # Chat Container
         pop_chat_box = st.container(height=300)
         with pop_chat_box:
             if not st.session_state.messages:
@@ -668,10 +582,10 @@ def main():
 
     st.markdown("---")
 
-    # Studio Footer
-    st.markdown("""
-    <div style="text-align: center; color: #64748B; font-size: 0.85rem; padding: 20px 0;">
-        MilkLab° Gelato • Symmetric Grid Architecture • Powered by Streamlit & Gemini RAG 🍨
+    # High Fashion Footer
+    st.markdown(f"""
+    <div style="text-align: center; color: #475569; font-size: 0.9rem; padding: 20px 0; font-weight: 600;">
+        MILKLAB × GELATO • HIGH-FASHION DTC EXPERIENCE • POWERED BY GEMINI RAG 🍨
     </div>
     """, unsafe_allow_html=True)
 
