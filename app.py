@@ -91,29 +91,29 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
 คำถามจากลูกค้า: {query}
 """
 
-    models_to_try = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
-    last_error = None
+    try:
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt,
+        )
+        if response and response.text:
+            return response.text.strip()
+    except Exception as exc:
+        err_msg = str(exc)
+        if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
+            return "⚠️ ขณะนี้โควตาใช้งาน Gemini API ชั่วคราวเต็ม (Quota Exceeded) กรุณารอประมาณ 30-60 วินาที แล้วลองถามอีกครั้งนะครับ"
+        elif "503" in err_msg or "UNAVAILABLE" in err_msg:
+            return "⚠️ ขณะนี้เซิร์ฟเวอร์ Gemini API กำลังประมวลผลคำถามจำนวนมาก กรุณาลองถามใหม่อีกครั้งในครู่เดียวนะครับ"
+        elif "404" in err_msg or "NOT_FOUND" in err_msg:
+            try:
+                res2 = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
+                if res2 and res2.text:
+                    return res2.text.strip()
+            except Exception:
+                pass
+        return f"เกิดข้อผิดพลาดในการสร้างคำตอบ (gemini-2.5-flash): {exc}"
 
-    for m in models_to_try:
-        try:
-            response = client.models.generate_content(
-                model=m,
-                contents=prompt,
-            )
-            if response and response.text:
-                return response.text.strip()
-        except Exception as exc:
-            last_error = exc
-            time.sleep(0.5)
-            continue
-
-    err_msg = str(last_error)
-    if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
-        return "⚠️ ขณะนี้โควตาใช้งาน Gemini API ชั่วคราวเต็ม (Quota Exceeded) กรุณารอประมาณ 30-60 วินาที แล้วลองถามอีกครั้งนะครับ"
-    elif "503" in err_msg or "UNAVAILABLE" in err_msg:
-        return "⚠️ ขณะนี้เซิร์ฟเวอร์ Gemini API กำลังประมวลผลคำถามจำนวนมาก กรุณาลองถามใหม่อีกครั้งในครู่เดียวนะครับ"
-
-    return f"เกิดข้อผิดพลาดในการสร้างคำตอบ: {last_error}"
+    return "ขออภัยครับ ไม่สามารถสร้างคำตอบได้ในขณะนี้"
 
 
 # Gelato Catalog Data for Berry Burst Hero Style
