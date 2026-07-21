@@ -126,7 +126,7 @@ GELATO_POSTERS = [
         "text_color": "#D80000",        # Bold Red Typography
         "sub_text_color": "#D80000",
         "tub_bg": "#FFCC00",
-        "photo_url": "https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=800&auto=format&fit=crop",
+        "photo_url": "https://images.unsplash.com/photo-1591073113125-e46713c829ed?q=80&w=800&auto=format&fit=crop",
         "left_preview": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?q=80&w=300&auto=format&fit=crop",
         "right_preview": "https://images.unsplash.com/photo-1511381939415-e44015466834?q=80&w=300&auto=format&fit=crop",
         "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🥭 Fresh Mango"],
