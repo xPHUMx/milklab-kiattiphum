@@ -1,5 +1,5 @@
-"""MilkLab° Gelato - High-Fashion DTC Poster & Flavor Carousel Experience.
-Reference Style: HANCI Floating Pill Top Bar / Full Moon Party / Giant Header Typography
+"""MilkLab° Gelato - High-End Artisan Hero Landing Page Experience.
+Reference Style: Berry Burst / Creamy Warm Pastel / Floating Ingredients Showcase
 
 Run locally: streamlit run app.py
 Deploy: push to GitHub then deploys to Streamlit Cloud / HuggingFace
@@ -112,118 +112,89 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
         return "⚠️ ขณะนี้โควตาใช้งาน Gemini API ชั่วคราวเต็ม (Quota Exceeded) กรุณารอประมาณ 30-60 วินาที แล้วลองถามอีกครั้งนะครับ"
     elif "503" in err_msg or "UNAVAILABLE" in err_msg:
         return "⚠️ ขณะนี้เซิร์ฟเวอร์ Gemini API กำลังประมวลผลคำถามจำนวนมาก กรุณาลองถามใหม่อีกครั้งในครู่เดียวนะครับ"
-    elif "404" in err_msg or "NOT_FOUND" in err_msg:
-        return "⚠️ ไม่พบชื่อโมเดล Gemini ในระบบ กรุณาตรวจสอบชื่อโมเดลเพิ่มเติมครับ"
 
     return f"เกิดข้อผิดพลาดในการสร้างคำตอบ: {last_error}"
 
 
-# Gelato Catalog with Exact Reference Poster Aesthetics & Fresh Ripe Mango Photo
-GELATO_POSTERS = [
-    {
-        "id": "mango",
-        "top_tag": "MANGO CHAMOY",
-        "sub_header": "IF THAILAND'S FULL MOON PARTY WAS A FLAVOR",
-        "title_part1": "FULL MOON",
-        "title_part2": "PARTY",
-        "th_name": "เจลาโต้มะม่วงมหาชนกซอร์เบต์",
-        "tub_title": "MANGO × CHAMOY",
-        "footer_tag": "IT'S A PARTY FOR YOUR TASTE BUDS! 100% VEGAN FRESH SORBET",
-        "price": 80,
-        "size": "120g",
-        "bg_color": "#FFDF00",          # Vibrant Yellow
-        "text_color": "#D80000",        # Bold Red Typography
-        "sub_text_color": "#D80000",
-        "tub_bg": "#FFCC00",
-        "photo_url": "https://images.unsplash.com/photo-1546548970-71785318a17b?q=80&w=800&auto=format&fit=crop", # Fresh ripe sliced mango photo
-        "left_preview": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?q=80&w=300&auto=format&fit=crop",
-        "right_preview": "https://images.unsplash.com/photo-1511381939415-e44015466834?q=80&w=300&auto=format&fit=crop",
-        "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🥭 Fresh Mango"],
-        "query": "ขอข้อมูลเจลาโต้มะม่วงมหาชนกซอร์เบต์ ราคาและส่วนผสม"
-    },
+# Gelato Catalog Data for Berry Burst Hero Style
+GELATO_ITEMS = [
     {
         "id": "strawberry",
-        "top_tag": "VELVETY STRAWBERRY SHORTCAKE",
-        "sub_header": "JUST THE THING TO MAKE YOU SING!",
-        "title_part1": "KARAOKE",
-        "title_part2": "NIGHT",
+        "title1": "BERRY",
+        "title2": "BURST",
+        "sub_tag": "HEART SOOTHING DESSERT",
         "th_name": "เจลาโต้สตรอว์เบอร์รีซอร์เบต์",
-        "tub_title": "STRAWBERRY × SHORTCAKE",
-        "footer_tag": "BRILLIANT RED STRAWBERRY JAM • SWEET & TANGY DELIGHT",
         "price": 85,
         "size": "120g",
-        "bg_color": "#FFB7C5",          # Romantic Soft Pink
-        "text_color": "#C1121F",        # Deep Red Typography
-        "sub_text_color": "#C1121F",
-        "tub_bg": "#FFA4B6",
-        "photo_url": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?q=80&w=800&auto=format&fit=crop",
-        "left_preview": "https://images.unsplash.com/photo-1546548970-71785318a17b?q=80&w=300&auto=format&fit=crop",
-        "right_preview": "https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=300&auto=format&fit=crop",
-        "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🥜 Nut-Free"],
+        "bg_color": "#F7EFE9",          # Soft Creamy Warm Pastel
+        "text_color": "#4A154B",        # Deep Berry Plum
+        "accent_color": "#FF85C0",      # Vibrant Pink Glow
+        "photo_url": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=800&auto=format&fit=crop", # Berry ice cream scoops
+        "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🍓 Fresh Strawberries"],
+        "desc": "สตรอว์เบอร์รีสด 100% ให้รสสัมผัสเปรี้ยวหวานฉ่ำ หอมสดชื่นละมุนหัวใจ ปลอดนม ปลอดไขมันเนย",
         "query": "ขอข้อมูลเจลาโต้สตรอว์เบอร์รีซอร์เบต์ รสชาติ สารแพ้อาหาร และราคา"
     },
     {
         "id": "hokkaido",
-        "top_tag": "ORGANIC HOKKAIDO FRESH MILK",
-        "sub_header": "CREAMY RICHNESS DIRECT FROM HOKKAIDO",
-        "title_part1": "HOKKAIDO",
-        "title_part2": "DREAM",
+        "title1": "HOKKAIDO",
+        "title2": "DREAM",
+        "sub_tag": "ORGANIC PURE MILK DESSERT",
         "th_name": "เจลาโต้นมสดฮอกไกโด",
-        "tub_title": "HOKKAIDO × PURE MILK",
-        "footer_tag": "100% IMPORTED HOKKAIDO MILK • SIGNATURE #1 FLAVOR",
         "price": 80,
         "size": "120g",
-        "bg_color": "#FFEAD2",          # Creamy Milk Beige
-        "text_color": "#B45309",        # Warm Terracotta Typography
-        "sub_text_color": "#B45309",
-        "tub_bg": "#FCD34D",
-        "photo_url": "https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=800&auto=format&fit=crop",
-        "left_preview": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?q=80&w=300&auto=format&fit=crop",
-        "right_preview": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=300&auto=format&fit=crop",
+        "bg_color": "#FFF9F2",          # Milky Cream Pastel
+        "text_color": "#5D4037",        # Soft Roasted Coffee
+        "accent_color": "#F59E0B",      # Warm Honey Amber
+        "photo_url": "https://images.unsplash.com/photo-1570197788417-0e82375c9371?q=80&w=800&auto=format&fit=crop", # Vanilla Milk scoops
         "tags": ["🥛 100% Hokkaido Milk", "🥜 Nut-Free", "🌾 Gluten-Free"],
+        "desc": "นมสดฮอกไกโดแท้ 100% นำเข้าจากญี่ปุ่น รสชาตินุ่มละมุน เข้มข้น หอมกลมกล่อมเอกลักษณ์อันดับ #1",
         "query": "ขอรายละเอียดเจลาโต้นมสดฮอกไกโด สารแพ้อาหาร และราคา"
     },
     {
         "id": "chocolate",
-        "top_tag": "VALRHONA DARK COCOA 70%",
-        "sub_header": "LUSCIOUS DEEP CHOCOLATE EXPERIENCE",
-        "title_part1": "MIDNIGHT",
-        "title_part2": "COCOA",
+        "title1": "MIDNIGHT",
+        "title2": "COCOA",
+        "sub_tag": "INTENSE VALRHONA 70%",
         "th_name": "เจลาโต้ดาร์กช็อกโกแลต",
-        "tub_title": "DARK × CHOCOLATE",
-        "footer_tag": "70% PREMIUM DARK CHOCOLATE • INTENSE & BITTERSWEET",
         "price": 85,
         "size": "120g",
-        "bg_color": "#D8C4B6",          # Rich Cocoa Dust
-        "text_color": "#3E2723",        # Deep Chocolate Typography
-        "sub_text_color": "#3E2723",
-        "tub_bg": "#6D4C41",
-        "photo_url": "https://images.unsplash.com/photo-1511381939415-e44015466834?q=80&w=800&auto=format&fit=crop",
-        "left_preview": "https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=300&auto=format&fit=crop",
-        "right_preview": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=300&auto=format&fit=crop",
+        "bg_color": "#F3EFEA",          # Warm Cocoa Dust
+        "text_color": "#2C1B18",        # Midnight Cocoa
+        "accent_color": "#D97706",      # Rich Amber
+        "photo_url": "https://images.unsplash.com/photo-1580915411954-282cb1b0d780?q=80&w=800&auto=format&fit=crop", # Dark chocolate scoop
         "tags": ["🍫 Dark Cocoa 70%", "🥜 Nut-Free", "🌾 Gluten-Free"],
+        "desc": "ดาร์กช็อกโกแลตเข้มข้น 70% ให้รสสัมผัสขมนิดๆ หวานกำลังดี เข้มข้นลึกซึ้ง ไร้สารสังเคราะห์",
         "query": "ขอรายละเอียดเจลาโต้ดาร์กช็อกโกแลต มีส่วนผสมอะไรบ้าง"
     },
     {
         "id": "matcha",
-        "top_tag": "UJI CEREMONIAL MATCHA",
-        "sub_header": "TRADITIONAL UJI JAPANESE TEA CEREMONY",
-        "title_part1": "KYOTO",
-        "title_part2": "CEREMONY",
+        "title1": "KYOTO",
+        "title2": "MATCHA",
+        "sub_tag": "CEREMONIAL UJI TEA",
         "th_name": "เจลาโต้ชาเขียวมัทฉะ",
-        "tub_title": "UJI × MATCHA",
-        "footer_tag": "CEREMONIAL GRADE MATCHA FROM UJI, KYOTO • RICH UMAMI",
         "price": 90,
         "size": "120g",
-        "bg_color": "#C2E2B4",          # Japanese Green Tea
-        "text_color": "#1E4D2B",        # Forest Green Typography
-        "sub_text_color": "#1E4D2B",
-        "tub_bg": "#4D7C0F",
-        "photo_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=800&auto=format&fit=crop",
-        "left_preview": "https://images.unsplash.com/photo-1511381939415-e44015466834?q=80&w=300&auto=format&fit=crop",
-        "right_preview": "https://images.unsplash.com/photo-1546548970-71785318a17b?q=80&w=300&auto=format&fit=crop",
+        "bg_color": "#F1F8F3",          # Soft Green Tea Pastel
+        "text_color": "#1B3B2B",        # Deep Forest Green
+        "accent_color": "#10B981",      # Emerald Spark
+        "photo_url": "https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?q=80&w=800&auto=format&fit=crop", # Matcha scoop
         "tags": ["🍵 Uji Ceremonial", "🥜 Nut-Free", "👑 Premium Grade"],
         "query": "เจลาโต้ชาเขียวมัทฉะราคาเท่าไหร่ ใช้วัตถุดิบจากไหน"
+    },
+    {
+        "id": "mango",
+        "title1": "MANGO",
+        "title2": "SPLASH",
+        "sub_tag": "FULL MOON PARTY TROPICAL",
+        "th_name": "เจลาโต้มะม่วงมหาชนกซอร์เบต์",
+        "price": 80,
+        "size": "120g",
+        "bg_color": "#FEFCE8",          # Tropical Sun Pastel
+        "text_color": "#78350F",        # Deep Mango Amber
+        "accent_color": "#F59E0B",      # Golden Mango Glow
+        "photo_url": "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?q=80&w=800&auto=format&fit=crop", # Mango Sorbet scoop
+        "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🥭 Fresh Mango"],
+        "query": "ขอข้อมูลเจลาโต้มะม่วงมหาชนกซอร์เบต์ ราคาและส่วนผสม"
     }
 ]
 
@@ -296,327 +267,227 @@ def open_ai_dialog(model, index, chunks, initial_query: str = ""):
 
 def main():
     st.set_page_config(
-        page_title="MILKLAB × GELATO | High-Fashion Experience",
+        page_title="MilkLab° Gelato | Artisan Experience",
         page_icon="🍨",
         layout="wide",
         initial_sidebar_state="collapsed"
     )
 
-    if "poster_idx" not in st.session_state:
-        st.session_state.poster_idx = 0
+    if "flavor_idx" not in st.session_state:
+        st.session_state.flavor_idx = 0
 
-    curr = GELATO_POSTERS[st.session_state.poster_idx]
+    curr = GELATO_ITEMS[st.session_state.flavor_idx]
 
-    # High-Fashion Header & Minimal Liquid Glass Button CSS Architecture
+    # High-End Berry Burst & Minimal Liquid Glass Architecture (Matching Reference Image 100%)
     css_code = f"""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Kanit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800;900&family=Kanit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
     
     html, body, [class*="css"] {{
         font-family: 'Kanit', 'Plus Jakarta Sans', sans-serif;
     }}
     
-    /* Background Dynamic Color Shift */
+    /* Background Warm Creamy Pastel Shift */
     .stApp {{
         background-color: {curr["bg_color"]} !important;
-        transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }}
 
     /* 💎 MINIMAL LIQUID GLASS BUTTONS STYLING */
     div.stButton > button {{
-        background: rgba(255, 255, 255, 0.45) !important;
+        background: rgba(255, 255, 255, 0.6) !important;
         backdrop-filter: blur(20px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(20px) !important;
-        border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
-        border-radius: 30px !important;
-        color: #0F172A !important;
+        border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
+        border-radius: 40px !important;
+        color: {curr["text_color"]} !important;
         font-family: 'Kanit', sans-serif !important;
         font-weight: 700 !important;
-        font-size: 0.92rem !important;
+        font-size: 0.95rem !important;
         padding: 10px 24px !important;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04) !important;
         transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
     }}
     
     div.stButton > button:hover {{
-        transform: translateY(-4px) scale(1.03) !important;
-        background: rgba(255, 255, 255, 0.85) !important;
+        transform: translateY(-4px) scale(1.04) !important;
+        background: rgba(255, 255, 255, 0.9) !important;
         border-color: #FFFFFF !important;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12) !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
         color: #E11D48 !important;
     }}
     
     div.stButton > button[kind="primary"] {{
-        background: rgba(255, 255, 255, 0.75) !important;
-        border: 2px solid rgba(255, 255, 255, 0.95) !important;
-        color: #E11D48 !important;
+        background: {curr["accent_color"]} !important;
+        border: 2px solid #FFFFFF !important;
+        color: #FFFFFF !important;
         font-weight: 800 !important;
-        box-shadow: 0 10px 30px rgba(225, 29, 72, 0.18) !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.12) !important;
     }}
     
     div.stButton > button[kind="primary"]:hover {{
-        background: rgba(255, 255, 255, 0.95) !important;
-        box-shadow: 0 16px 40px rgba(225, 29, 72, 0.35) !important;
-        transform: translateY(-5px) scale(1.04) !important;
+        background: {curr["text_color"]} !important;
+        color: #FFFFFF !important;
+        box-shadow: 0 16px 40px rgba(0,0,0,0.25) !important;
+        transform: translateY(-5px) scale(1.05) !important;
     }}
     
-    /* 🌟 EXACT HANCI FLOATING PILL TOP NAVBAR REFERENCE ARCHITECTURE */
-    .hanci-topbar-wrapper {{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        padding: 10px 0 15px 0;
-    }}
-    
-    .hanci-topbar-pill {{
-        background: rgba(255, 255, 255, 0.75);
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px);
-        border-radius: 50px;
-        padding: 12px 36px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 95%;
-        max-width: 1100px;
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
-        border: 1.5px solid rgba(255, 255, 255, 0.9);
-    }}
-    
-    .topbar-left-menu, .topbar-right-menu {{
-        display: flex;
-        align-items: center;
-        gap: 22px;
-    }}
-    
-    .topbar-link {{
-        font-family: 'Kanit', sans-serif;
-        font-size: 0.92rem;
-        font-weight: 600;
-        color: #1E293B;
-        text-decoration: none;
-        transition: color 0.2s ease;
-    }}
-    
-    .topbar-link:hover {{
-        color: #E11D48;
-    }}
-    
-    .topbar-center-logo {{
-        font-family: 'Anton', sans-serif;
-        font-size: 2.2rem;
-        font-weight: 900;
-        letter-spacing: 2px;
-        color: #0F172A;
-    }}
-    
-    .topbar-icons {{
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        font-size: 1.1rem;
-        color: #1E293B;
-    }}
-    
-    .topbar-icon-cart {{
-        position: relative;
-        cursor: pointer;
-    }}
-    
-    .cart-count-badge {{
-        position: absolute;
-        top: -6px;
-        right: -8px;
-        background: #E11D48;
-        color: #FFFFFF;
-        font-size: 0.65rem;
-        font-weight: 800;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }}
-    
-    /* 🌟 GIANT DTC TOP HEADER (REFERENCE IMAGE 3 ARCHITECTURE) */
-    .dtc-header-container {{
-        width: 100%;
-        text-align: center;
-        padding: 15px 10px 10px 10px;
-        user-select: none;
-    }}
-    
-    .dtc-header-title {{
-        font-family: 'Anton', sans-serif;
-        font-size: 7.5rem;
-        font-weight: 900;
-        line-height: 0.85;
-        letter-spacing: 2px;
-        color: #FFFFFF;
-        text-transform: uppercase;
-        text-shadow: 0 10px 25px rgba(0,0,0,0.06);
-    }}
-    
-    .dtc-header-subrow {{
+    /* 🌟 TOP MINIMAL NAVBAR (EXACT REFERENCE MACBOOK IMAGE ARCHITECTURE) */
+    .top-nav-wrapper {{
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        max-width: 1150px;
-        margin: 10px auto 20px auto;
-        font-family: 'Anton', 'Kanit', sans-serif;
-        font-size: 1.1rem;
-        font-weight: 700;
-        letter-spacing: 2.5px;
-        color: #FFFFFF;
-        text-transform: uppercase;
-        opacity: 0.95;
+        padding: 18px 40px;
+        margin-bottom: 20px;
     }}
     
-    /* Exact Reference Poster Canvas */
-    .poster-canvas {{
-        position: relative;
-        text-align: center;
-        padding: 15px 20px 35px 20px;
-        min-height: 560px;
+    .nav-brand-logo {{
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
         align-items: center;
-        overflow: hidden;
-    }}
-    
-    .poster-top-tag {{
-        font-family: 'Anton', 'Kanit', sans-serif;
+        gap: 10px;
+        font-family: 'Fredoka', 'Kanit', sans-serif;
         font-size: 1.6rem;
-        letter-spacing: 2px;
+        font-weight: 800;
         color: {curr["text_color"]};
-        text-transform: uppercase;
-        margin-bottom: 2px;
+        letter-spacing: -0.5px;
     }}
     
-    .poster-sub-header {{
+    .nav-brand-icon {{
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: {curr["text_color"]};
+        color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+    }}
+    
+    .nav-menu-links {{
+        display: flex;
+        align-items: center;
+        gap: 36px;
+    }}
+    
+    .nav-menu-item {{
         font-family: 'Kanit', sans-serif;
-        font-size: 0.82rem;
+        font-size: 0.88rem;
         font-weight: 700;
         letter-spacing: 1.5px;
         color: {curr["text_color"]};
-        max-width: 600px;
-        margin: 0 auto 15px auto;
-        opacity: 0.9;
+        text-decoration: none;
+        text-transform: uppercase;
+        opacity: 0.85;
+        transition: opacity 0.2s ease;
     }}
     
-    /* GIANT BACKGROUND DISPLAY TYPOGRAPHY */
-    .poster-giant-text {{
-        font-family: 'Anton', sans-serif;
-        font-size: 7.8rem;
-        font-weight: 900;
-        line-height: 0.88;
-        letter-spacing: 2px;
+    .nav-menu-item:hover {{
+        opacity: 1;
+    }}
+    
+    .nav-order-btn {{
+        border: 2px solid {curr["text_color"]};
+        border-radius: 30px;
+        padding: 6px 20px;
+        font-size: 0.82rem;
+        font-weight: 800;
         color: {curr["text_color"]};
         text-transform: uppercase;
-        user-select: none;
-        z-index: 1;
+        letter-spacing: 1px;
     }}
-    
-    /* CENTRAL RECTANGULAR PHOTO FRAME WITH OVERLAPPING TUB */
-    .poster-center-box {{
+
+    /* 🍨 HERO BERRY BURST CENTERPIECE SHOWCASE */
+    .hero-burst-container {{
         position: relative;
-        width: 520px;
-        height: 220px;
-        margin: -100px auto -80px auto;
-        z-index: 2;
-    }}
-    
-    .poster-photo-rect {{
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 4px;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.18);
-    }}
-    
-    /* OVERLAPPING BRANDED ICE CREAM TUB IN EXACT CENTER */
-    .poster-tub-center {{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 170px;
-        height: 170px;
-        background: {curr["tub_bg"]};
-        border-radius: 20px 20px 45px 45px;
-        border: 4px solid #FFFFFF;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        text-align: center;
+        padding: 20px 20px 50px 20px;
+        min-height: 540px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        text-align: center;
-        padding: 12px;
-        animation: floatTub 4s ease-in-out infinite;
-        z-index: 3;
     }}
     
-    .tub-lid {{
-        position: absolute;
-        top: -12px;
-        width: 180px;
-        height: 22px;
-        background: #FFFFFF;
-        border-radius: 12px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    }}
-    
-    .tub-label-brand {{
-        font-family: 'Anton', sans-serif;
-        font-size: 1.45rem;
-        line-height: 1;
+    .giant-burst-text {{
+        font-family: 'Fredoka', 'Kanit', sans-serif;
+        font-size: 8.5rem;
+        font-weight: 900;
+        line-height: 0.82;
+        letter-spacing: -1px;
         color: {curr["text_color"]};
         text-transform: uppercase;
-        margin-top: 8px;
+        user-select: none;
+        margin: 0;
     }}
     
-    .poster-footer-text {{
+    /* OVERLAPPING GELATO SCOOP BOWL IN CENTER */
+    .center-gelato-bowl-frame {{
+        position: relative;
+        width: 320px;
+        height: 320px;
+        margin: -95px auto -75px auto;
+        z-index: 5;
+    }}
+    
+    .gelato-bowl-img {{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.18);
+        border: 6px solid #FFFFFF;
+        animation: floatBowl 5s ease-in-out infinite;
+    }}
+    
+    /* FLOATING INGREDIENT ELEMENTS (MINT LEAVES & BERRIES) */
+    .floating-leaf-1 {{
+        position: absolute;
+        left: 14%;
+        top: 25%;
+        font-size: 2.8rem;
+        animation: floatLeaf 4s ease-in-out infinite;
+        opacity: 0.9;
+    }}
+    
+    .floating-leaf-2 {{
+        position: absolute;
+        right: 15%;
+        top: 18%;
+        font-size: 2.5rem;
+        animation: floatLeaf 5s ease-in-out infinite reverse;
+        opacity: 0.9;
+    }}
+    
+    .floating-berry-1 {{
+        position: absolute;
+        left: 20%;
+        bottom: 12%;
+        font-size: 3rem;
+        animation: floatLeaf 4.5s ease-in-out infinite;
+    }}
+    
+    .sub-tagline-burst {{
         font-family: 'Kanit', sans-serif;
-        font-size: 0.85rem;
-        font-weight: 700;
+        font-size: 1rem;
+        font-weight: 800;
         letter-spacing: 2px;
         color: {curr["text_color"]};
-        margin-top: 20px;
-        z-index: 2;
-    }}
-    
-    /* SIDE CAROUSEL CUTOUT PREVIEWS */
-    .side-cutout-left {{
-        position: absolute;
-        left: -40px;
-        top: 35%;
-        width: 90px;
-        height: 180px;
-        border-radius: 0 16px 16px 0;
-        overflow: hidden;
-        box-shadow: 5px 10px 25px rgba(0,0,0,0.15);
-        opacity: 0.85;
-    }}
-    
-    .side-cutout-right {{
-        position: absolute;
-        right: -40px;
-        top: 35%;
-        width: 90px;
-        height: 180px;
-        border-radius: 16px 0 0 16px;
-        overflow: hidden;
-        box-shadow: -5px 10px 25px rgba(0,0,0,0.15);
-        opacity: 0.85;
+        text-transform: uppercase;
+        margin-top: 15px;
+        margin-bottom: 22px;
+        opacity: 0.9;
     }}
 
-    @keyframes floatTub {{
-        0%, 100% {{ transform: translate(-50%, -50%) translateY(0px); }}
-        50% {{ transform: translate(-50%, -50%) translateY(-10px); }}
+    @keyframes floatBowl {{
+        0%, 100% {{ transform: translateY(0px) rotate(0deg); }}
+        50% {{ transform: translateY(-12px) rotate(2deg); }}
+    }}
+    
+    @keyframes floatLeaf {{
+        0%, 100% {{ transform: translateY(0px) rotate(0deg); }}
+        50% {{ transform: translateY(-15px) rotate(10deg); }}
     }}
 
     /* 📌 FIXED FLOATING CIRCULAR CHATBOT POPUP (BOTTOM-RIGHT) */
@@ -631,11 +502,9 @@ def main():
         width: 72px !important;
         height: 72px !important;
         border-radius: 50% !important;
-        background: rgba(255, 255, 255, 0.85) !important;
-        backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
-        border: 3px solid #FFFFFF !important;
-        box-shadow: 0 12px 36px rgba(0,0,0,0.25) !important;
+        background: #FFFFFF !important;
+        border: 3px solid {curr["text_color"]} !important;
+        box-shadow: 0 12px 36px rgba(0,0,0,0.2) !important;
         font-size: 2.2rem !important;
         display: flex !important;
         align-items: center !important;
@@ -647,7 +516,7 @@ def main():
     
     div[data-testid="stPopover"] > button:hover {{
         transform: scale(1.15) rotate(8deg) !important;
-        box-shadow: 0 18px 45px rgba(0,0,0,0.35) !important;
+        box-shadow: 0 18px 45px rgba(0,0,0,0.3) !important;
     }}
     </style>
     """
@@ -660,107 +529,75 @@ def main():
         st.error(f"Error loading index: {exc}")
         st.stop()
 
-    # 🌟 1. EXACT HANCI FLOATING PILL TOP BAR
-    hanci_topbar_html = """<div class="hanci-topbar-wrapper">
-<div class="hanci-topbar-pill">
-<div class="topbar-left-menu">
-<a href="#shop" class="topbar-link">Shop</a>
-<a href="#about" class="topbar-link">About us</a>
-<a href="#flavours" class="topbar-link">Flavours ▾</a>
-<a href="#learn" class="topbar-link">Learn</a>
+    # 1. TOP MINIMAL NAVBAR
+    nav_html = f"""<div class="top-nav-wrapper">
+<div class="nav-brand-logo"><div class="nav-brand-icon">🍨</div> MilkLab° Gelato</div>
+<div class="nav-menu-links">
+<a href="#product" class="nav-menu-item">PRODUCT</a>
+<a href="#store" class="nav-menu-item">STORE</a>
+<a href="#dairy" class="nav-menu-item">DAIRY</a>
+<a href="#contact" class="nav-menu-item">CONTACT</a>
 </div>
-<div class="topbar-center-logo">MILKLAB</div>
-<div class="topbar-right-menu">
-<a href="#story" class="topbar-link">Our Story</a>
-<a href="#contact" class="topbar-link">Contact</a>
-<div class="topbar-icons">
-<span class="topbar-icon" title="Search">🔍</span>
-<span class="topbar-icon" title="Wishlist">♡</span>
-<span class="topbar-icon-cart" title="Cart">🛍️ <span class="cart-count-badge">0</span></span>
-</div>
-</div>
-</div>
+<div class="nav-order-btn">ORDER NOW</div>
 </div>"""
-    st.markdown(hanci_topbar_html, unsafe_allow_html=True)
+    st.markdown(nav_html, unsafe_allow_html=True)
 
-    # 🌟 2. GIANT REFERENCE HEADER (MILKLAB x GELATO)
-    header_html = """<div class="dtc-header-container">
-<div class="dtc-header-title">MILKLAB <span style="font-size: 5.8rem; vertical-align: middle; margin: 0 4px;">×</span> GELATO</div>
-<div class="dtc-header-subrow">
-<span>A MAGICAL DUO</span>
-<span>OF FRESH MILK</span>
-<span>AND ARTISAN GELATO</span>
-</div>
-</div>"""
-    st.markdown(header_html, unsafe_allow_html=True)
+    # 2. FLAVOR SELECTOR PILL BUTTONS
+    st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
+    sel_cols = st.columns(len(GELATO_ITEMS))
 
-    # 3. Interactive Flavor Switcher Navigation (Clean Pill Buttons)
-    nav_cols = st.columns(len(GELATO_POSTERS))
-
-    for idx, p in enumerate(GELATO_POSTERS):
-        with nav_cols[idx]:
-            is_active = (idx == st.session_state.poster_idx)
-            label = f"✨ {p['top_tag']}" if is_active else p['top_tag']
-            if st.button(label, key=f"nav_p_{p['id']}", use_container_width=True, type="primary" if is_active else "secondary"):
-                st.session_state.poster_idx = idx
+    for idx, item in enumerate(GELATO_ITEMS):
+        with sel_cols[idx]:
+            is_active = (idx == st.session_state.flavor_idx)
+            label = f"✨ {item['title1']} {item['title2']}" if is_active else f"{item['title1']} {item['title2']}"
+            if st.button(label, key=f"btn_flv_{item['id']}", use_container_width=True, type="primary" if is_active else "secondary"):
+                st.session_state.flavor_idx = idx
                 st.rerun()
 
-    # 4. EXACT REFERENCE POSTER CONTAINER
-    poster_html = f"""<div class="poster-canvas">
-<div class="side-cutout-left"><img src="{curr['left_preview']}" style="width:100%; height:100%; object-fit:cover;" /></div>
-<div class="side-cutout-right"><img src="{curr['right_preview']}" style="width:100%; height:100%; object-fit:cover;" /></div>
-<div>
-<div class="poster-top-tag">{curr["top_tag"]}</div>
-<div class="poster-sub-header">{curr["sub_header"]}</div>
-<div class="poster-giant-text">{curr["title_part1"]}</div>
+    # 3. HERO BERRY BURST CENTERPIECE SHOWCASE (MATCHING REFERENCE IMAGE 100%)
+    hero_html = f"""<div class="hero-burst-container">
+<div class="floating-leaf-1">🍃</div>
+<div class="floating-leaf-2">🌿</div>
+<div class="floating-berry-1">🫐</div>
+<div class="giant-burst-text">{curr["title1"]}</div>
+<div class="center-gelato-bowl-frame">
+<img src="{curr['photo_url']}" class="gelato-bowl-img" alt="Gelato Scoop Bowl" />
 </div>
-<div class="poster-center-box">
-<img src="{curr['photo_url']}" class="poster-photo-rect" alt="Fruit Photo" />
-<div class="poster-tub-center">
-<div class="tub-lid"></div>
-<div style="font-size: 0.75rem; font-weight: 800; color: #FFFFFF; letter-spacing: 1px;">MILKLAB°</div>
-<div class="tub-label-brand">{curr["tub_title"]}</div>
-<div style="font-size: 0.65rem; color: #FFFFFF; margin-top: 4px;">NET WT 120G</div>
-</div>
-</div>
-<div>
-<div class="poster-giant-text">{curr["title_part2"]}</div>
-<div class="poster-footer-text">{curr["footer_tag"]} &nbsp;•&nbsp; PRICE: {curr["price"]} THB</div>
-</div>
+<div class="giant-burst-text">{curr["title2"]}</div>
+<div class="sub-tagline-burst">{curr["sub_tag"]} &nbsp;•&nbsp; PRICE: {curr["price"]} THB ({curr["size"]})</div>
 </div>"""
+    st.markdown(hero_html, unsafe_allow_html=True)
 
-    st.markdown(poster_html, unsafe_allow_html=True)
-
-    # Action Bar for Poster
+    # Action Button under Hero
     c1, c2, c3 = st.columns([1, 2, 1])
     with c2:
-        if st.button(f"✨ สอบถามข้อมูลน้อง AI เกี่ยวกับ {curr['th_name']}", key="btn_poster_ask", type="primary", use_container_width=True):
+        if st.button(f"✨ TRY ME (ถาม AI เกี่ยวกับ {curr['th_name']})", key="btn_try_me", type="primary", use_container_width=True):
             open_ai_dialog(model, index, chunks, initial_query=curr["query"])
 
     st.markdown("---")
 
-    # Product Cards Grid (Matching Reference Image 2!)
-    st.markdown("## 🎴 ALL FLAVOR POSTER CARDS (คลิกเลือกดูโปสเตอร์ทุกรสชาติ)")
+    # 4. PRODUCT CARDS GRID
+    st.markdown("## 🎴 ALL ARTISAN GELATO FLAVORS (เลือกชมเจลาโต้ทุกรสชาติ)")
     grid_cols = st.columns(3)
 
-    for idx, item in enumerate(GELATO_POSTERS):
+    for idx, item in enumerate(GELATO_ITEMS):
         target_col = grid_cols[idx % 3]
         with target_col:
             tags_html = "".join(f'<span style="background:rgba(255,255,255,0.7); color:{item["text_color"]}; padding:4px 10px; border-radius:10px; font-size:0.78rem; font-weight:700; margin-right:4px;">{t}</span>' for t in item["tags"])
             
-            card_html = f"""<div style="background: {item['bg_color']}; border-radius: 24px; padding: 24px; text-align: center; box-shadow: 0 12px 30px rgba(0,0,0,0.08); margin-bottom: 15px; border: 2px solid rgba(255,255,255,0.8);">
-<div style="height: 120px; border-radius: 12px; overflow: hidden; margin-bottom: 14px;">
+            card_html = f"""<div style="background: {item['bg_color']}; border-radius: 24px; padding: 24px; text-align: center; box-shadow: 0 12px 30px rgba(0,0,0,0.06); margin-bottom: 15px; border: 2px solid rgba(255,255,255,0.85);">
+<div style="height: 140px; border-radius: 16px; overflow: hidden; margin-bottom: 14px;">
 <img src="{item['photo_url']}" style="width: 100%; height: 100%; object-fit: cover;" />
 </div>
-<div style="font-family: 'Anton', sans-serif; font-size: 1.8rem; color: {item['text_color']}; line-height: 1;">{item['title_part1']} {item['title_part2']}</div>
-<div style="font-weight: 700; color: {item['text_color']}; font-size: 0.9rem; margin-top: 4px; margin-bottom: 10px;">{item['th_name']}</div>
+<div style="font-family: 'Fredoka', sans-serif; font-size: 1.9rem; color: {item['text_color']}; line-height: 1; font-weight: 800;">{item['title1']} {item['title2']}</div>
+<div style="font-weight: 700; color: {item['text_color']}; font-size: 0.95rem; margin-top: 4px; margin-bottom: 10px;">{item['th_name']}</div>
 <div style="margin-bottom: 12px;">{tags_html}</div>
 <div style="font-size: 1.4rem; font-weight: 900; color: {item['text_color']};">{item['price']} THB <span style="font-size: 0.85rem; font-weight: 500;">/ {item['size']}</span></div>
 </div>"""
             st.markdown(card_html, unsafe_allow_html=True)
             
-            if st.button(f"✨ ดูโปสเตอร์รสนี้ ({item['th_name']})", key=f"btn_card_select_{item['id']}", use_container_width=True):
-                st.session_state.poster_idx = idx
+            if st.button(f"✨ ดูรายละเอียด ({item['th_name']})", key=f"btn_grid_sel_{item['id']}", use_container_width=True):
+                st.session_state.flavor_idx = idx
                 st.rerun()
 
             st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
@@ -815,7 +652,7 @@ def main():
     st.markdown("---")
 
     st.markdown("""<div style="text-align: center; color: #475569; font-size: 0.85rem; padding: 20px 0; font-weight: 700;">
-MILKLAB × GELATO • HIGH-FASHION POSTER SHOWCASE • GEMINI RAG AI 🍨
+MILKLAB° GELATO • ARTISAN HERO LANDING PAGE • POWERED BY GEMINI RAG AI 🍨
 </div>""", unsafe_allow_html=True)
 
 
