@@ -91,7 +91,7 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
 คำถามจากลูกค้า: {query}
 """
 
-    models_to_try = ["gemini-1.5-flash", "gemini-2.5-flash", "gemini-1.5-pro"]
+    models_to_try = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
     last_error = None
 
     for m in models_to_try:
@@ -100,11 +100,20 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
                 model=m,
                 contents=prompt,
             )
-            return response.text.strip()
+            if response and response.text:
+                return response.text.strip()
         except Exception as exc:
             last_error = exc
-            time.sleep(1)
+            time.sleep(0.5)
             continue
+
+    err_msg = str(last_error)
+    if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
+        return "⚠️ ขณะนี้โควตาใช้งาน Gemini API ชั่วคราวเต็ม (Quota Exceeded) กรุณารอประมาณ 30-60 วินาที แล้วลองถามอีกครั้งนะครับ"
+    elif "503" in err_msg or "UNAVAILABLE" in err_msg:
+        return "⚠️ ขณะนี้เซิร์ฟเวอร์ Gemini API กำลังประมวลผลคำถามจำนวนมาก กรุณาลองถามใหม่อีกครั้งในครู่เดียวนะครับ"
+    elif "404" in err_msg or "NOT_FOUND" in err_msg:
+        return "⚠️ ไม่พบชื่อโมเดล Gemini ในระบบ กรุณาตรวจสอบชื่อโมเดลเพิ่มเติมครับ"
 
     return f"เกิดข้อผิดพลาดในการสร้างคำตอบ: {last_error}"
 
