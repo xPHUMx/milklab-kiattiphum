@@ -109,7 +109,7 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
 
     err_msg = str(last_error)
     if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
-        return "⚠️ ขณะนี้โควตาใช้งาน Gemini API ชั่วคราวเต็ม (Quota Exceeded) กรุณารอประมาณ 30-60 วินาที แล้วลองถามอีกครั้งนะครับ"
+        return "⚠️ ขณะนี้โควตาใช้งาน Gemini API ชั่วคราวเต็ม (Quota Exceeded) กรุณารอแล้วลองถามอีกครั้งนะครับ"
     elif "503" in err_msg or "UNAVAILABLE" in err_msg:
         return "⚠️ ขณะนี้เซิร์ฟเวอร์ Gemini API กำลังประมวลผลคำถามจำนวนมาก กรุณาลองถามใหม่อีกครั้งในครู่เดียวนะครับ"
 
@@ -126,6 +126,7 @@ GELATO_ITEMS = [
         "th_name": "เจลาโต้สตรอว์เบอร์รีซอร์เบต์",
         "price": 85,
         "size": "120g",
+        "calories": "110 kcal",
         "bg_color": "#F7EFE9",          # Soft Creamy Warm Pastel
         "text_color": "#4A154B",        # Deep Berry Plum
         "accent_color": "#FF85C0",      # Vibrant Pink Glow
@@ -142,6 +143,7 @@ GELATO_ITEMS = [
         "th_name": "เจลาโต้นมสดฮอกไกโด",
         "price": 80,
         "size": "120g",
+        "calories": "160 kcal",
         "bg_color": "#FFF9F2",          # Milky Cream Pastel
         "text_color": "#5D4037",        # Soft Roasted Coffee
         "accent_color": "#F59E0B",      # Warm Honey Amber
@@ -158,6 +160,7 @@ GELATO_ITEMS = [
         "th_name": "เจลาโต้ดาร์กช็อกโกแลต",
         "price": 85,
         "size": "120g",
+        "calories": "175 kcal",
         "bg_color": "#F3EFEA",          # Warm Cocoa Dust
         "text_color": "#2C1B18",        # Midnight Cocoa
         "accent_color": "#D97706",      # Rich Amber
@@ -174,12 +177,14 @@ GELATO_ITEMS = [
         "th_name": "เจลาโต้ชาเขียวมัทฉะ",
         "price": 90,
         "size": "120g",
+        "calories": "145 kcal",
         "bg_color": "#F1F8F3",          # Soft Green Tea Pastel
         "text_color": "#1B3B2B",        # Deep Forest Green
         "accent_color": "#10B981",      # Emerald Spark
         "photo_url": "https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?q=80&w=800&auto=format&fit=crop", # Matcha scoop
         "tags": ["🍵 Uji Ceremonial", "🥜 Nut-Free", "👑 Premium Grade"],
-        "query": "เจลาโต้ชาเขียวมัทฉะราคาเท่าไหร่ ใช้วัตถุดิบจากไหน"
+        "desc": "ผงมัทฉะเกรดพิธีการจากอุจิ เกียวโต ให้กลิ่นหอมอูมามิแท้ๆ ผสานความนุ่มเนียนของนมสดเกรดพรีเมียม",
+        "query": "เจลาโต้ชาเขียวมัทฉะราคาเท่าไหร่ ใชวัตถุดิบจากไหน"
     },
     {
         "id": "mango",
@@ -189,11 +194,13 @@ GELATO_ITEMS = [
         "th_name": "เจลาโต้มะม่วงมหาชนกซอร์เบต์",
         "price": 80,
         "size": "120g",
+        "calories": "105 kcal",
         "bg_color": "#FEFCE8",          # Tropical Sun Pastel
         "text_color": "#78350F",        # Deep Mango Amber
         "accent_color": "#F59E0B",      # Golden Mango Glow
-        "photo_url": "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?q=80&w=800&auto=format&fit=crop", # Mango Sorbet scoop
+        "photo_url": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=800&auto=format&fit=crop", # Mango Sorbet scoop
         "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🥭 Fresh Mango"],
+        "desc": "เนื้อมะม่วงมหาชนกสดหวานฉ่ำ 100% หอมกลิ่นมะม่วงสุกแท้ๆ ปลอด dairy ทานแล้วสดชื่นกระปรี้กระเปร่า",
         "query": "ขอข้อมูลเจลาโต้มะม่วงมหาชนกซอร์เบต์ ราคาและส่วนผสม"
     }
 ]
@@ -472,7 +479,7 @@ def main():
         animation: floatBowl 5s ease-in-out infinite;
     }}
     
-    /* FLOATING INGREDIENT ELEMENTS (MINT LEAVES & BERRIES) */
+    /* FLOATING INGREDIENT ELEMENTS */
     .floating-leaf-1 {{
         position: absolute;
         left: 14%;
@@ -560,7 +567,7 @@ def main():
         st.error(f"Error loading index: {exc}")
         st.stop()
 
-    # 1. ULTRA-MINIMALIST TOP BAR (REMOVED MENU LINKS, DESIGNED MINIMAL LOGO)
+    # 1. ULTRA-MINIMALIST TOP BAR
     hanci_topbar_html = """<div class="hanci-topbar-wrapper">
 <div class="hanci-topbar-pill">
 <div class="minimal-brand-logo">
@@ -588,7 +595,7 @@ def main():
                 st.session_state.flavor_idx = idx
                 st.rerun()
 
-    # 3. HERO BERRY BURST CENTERPIECE SHOWCASE (MATCHING REFERENCE IMAGE 100%)
+    # 3. HERO BERRY BURST CENTERPIECE SHOWCASE
     hero_html = f"""<div class="hero-burst-container">
 <div class="floating-leaf-1">🍃</div>
 <div class="floating-leaf-2">🌿</div>
@@ -608,33 +615,88 @@ def main():
         if st.button(f"✨ TRY ME (ถาม AI เกี่ยวกับ {curr['th_name']})", key="btn_try_me", type="primary", use_container_width=True):
             open_ai_dialog(model, index, chunks, initial_query=curr["query"])
 
+    # 4. ⭐ NEW SECTION 1: SOCIAL PROOF & RATING BANNER
+    social_proof_html = f"""<div style="background: rgba(255,255,255,0.75); backdrop-filter: blur(16px); border-radius: 20px; padding: 18px 24px; text-align: center; max-width: 850px; margin: 25px auto 10px auto; border: 1.5px solid rgba(255,255,255,0.95); box-shadow: 0 10px 30px rgba(0,0,0,0.04);">
+<div style="font-size: 1.15rem; font-weight: 900; color: #F59E0B; letter-spacing: 1.5px;">★★★★★ 4.9 / 5.0 RATING</div>
+<div style="font-weight: 700; color: {curr['text_color']}; font-size: 0.98rem; margin: 5px 0 3px 0;">"เนื้อสัมผัสเจลาโต้เนียนนุ่ม รสชาติเข้มข้นสดชื่นที่สุดเท่าที่เคยทานมา! อร่อยประทับใจมาก"</div>
+<div style="font-size: 0.78rem; font-weight: 800; color: #64748B; text-transform: uppercase; letter-spacing: 1.5px;">GARNERED FROM 1,200+ GELATO LOVERS IN THAILAND</div>
+</div>"""
+    st.markdown(social_proof_html, unsafe_allow_html=True)
+
+    # 5. 🚚 NEW SECTION 2: INSTANT DELIVERY & COLD-PACK GUARANTEE CARD
+    delivery_html = f"""<div style="background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65)); backdrop-filter: blur(20px); border-radius: 24px; padding: 28px; border: 2px solid #FFFFFF; box-shadow: 0 15px 35px rgba(0,0,0,0.06); margin: 35px 0;">
+<div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 20px; text-align: center;">
+<div style="flex: 1; min-width: 200px;">
+<div style="font-size: 2.2rem; margin-bottom: 6px;">🧊</div>
+<div style="font-weight: 800; font-size: 1.05rem; color: #0F172A;">Cold-Pack Gel Guarantee</div>
+<div style="font-size: 0.85rem; color: #475569; margin-top: 4px;">แพ็คด้วยเจลเย็นคงความเย็น 45 นาที ไม่ละลายแน่นอน 100%</div>
+</div>
+<div style="flex: 1; min-width: 200px; border-left: 1px solid rgba(0,0,0,0.08); border-right: 1px solid rgba(0,0,0,0.08); padding: 0 15px;">
+<div style="font-size: 2.2rem; margin-bottom: 6px;">🚚</div>
+<div style="font-weight: 800; font-size: 1.05rem; color: #0F172A;">Speedy 5 km Delivery</div>
+<div style="font-size: 0.85rem; color: #475569; margin-top: 4px;">จัดส่งด่วนรัศมี 5 กม. ค่าจัดส่งเพียง 30 บาททั่วเขต</div>
+</div>
+<div style="flex: 1; min-width: 200px;">
+<div style="font-size: 2.2rem; margin-bottom: 6px;">🛍️</div>
+<div style="font-weight: 800; font-size: 1.05rem; color: #0F172A;">No Minimum Order</div>
+<div style="font-size: 0.85rem; color: #475569; margin-top: 4px;">ไม่มีขั้นต่ำในการสั่งซื้อ สั่ง 1 ถ้วยก็พร้อมจัดส่งทันที</div>
+</div>
+</div>
+</div>"""
+    st.markdown(delivery_html, unsafe_allow_html=True)
+
     st.markdown("---")
 
-    # 4. PRODUCT CARDS GRID
+    # 6. PRODUCT CARDS GRID (WITH ENHANCED NUTRITION & AI DIALOG BUTTONS)
     st.markdown("## 🎴 ALL ARTISAN GELATO FLAVORS (เลือกชมเจลาโต้ทุกรสชาติ)")
     grid_cols = st.columns(3)
 
     for idx, item in enumerate(GELATO_ITEMS):
         target_col = grid_cols[idx % 3]
         with target_col:
-            tags_html = "".join(f'<span style="background:rgba(255,255,255,0.7); color:{item["text_color"]}; padding:4px 10px; border-radius:10px; font-size:0.78rem; font-weight:700; margin-right:4px;">{t}</span>' for t in item["tags"])
+            tags_html = "".join(f'<span style="background:rgba(255,255,255,0.7); color:{item["text_color"]}; padding:4px 10px; border-radius:10px; font-size:0.78rem; font-weight:700; margin-right:4px; margin-bottom:4px; display:inline-block;">{t}</span>' for t in item["tags"])
             
             card_html = f"""<div style="background: {item['bg_color']}; border-radius: 24px; padding: 24px; text-align: center; box-shadow: 0 12px 30px rgba(0,0,0,0.06); margin-bottom: 15px; border: 2px solid rgba(255,255,255,0.85);">
 <div style="height: 140px; border-radius: 16px; overflow: hidden; margin-bottom: 14px;">
 <img src="{item['photo_url']}" style="width: 100%; height: 100%; object-fit: cover;" />
 </div>
 <div style="font-family: 'Fredoka', sans-serif; font-size: 1.9rem; color: {item['text_color']}; line-height: 1; font-weight: 800;">{item['title1']} {item['title2']}</div>
-<div style="font-weight: 700; color: {item['text_color']}; font-size: 0.95rem; margin-top: 4px; margin-bottom: 10px;">{item['th_name']}</div>
+<div style="font-weight: 700; color: {item['text_color']}; font-size: 0.95rem; margin-top: 4px; margin-bottom: 8px;">{item['th_name']}</div>
+<div style="font-size: 0.82rem; color: #475569; line-height: 1.4; margin-bottom: 12px; height: 38px; overflow: hidden;">{item['desc']}</div>
 <div style="margin-bottom: 12px;">{tags_html}</div>
-<div style="font-size: 1.4rem; font-weight: 900; color: {item['text_color']};">{item['price']} THB <span style="font-size: 0.85rem; font-weight: 500;">/ {item['size']}</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.6); padding: 8px 14px; border-radius: 14px; margin-bottom: 12px;">
+<span style="font-size: 0.8rem; font-weight: 700; color: #64748B;">⚡ {item['calories']}</span>
+<span style="font-size: 1.25rem; font-weight: 900; color: {item['text_color']};">{item['price']} THB <span style="font-size: 0.75rem; font-weight: 500;">/ {item['size']}</span></span>
+</div>
 </div>"""
             st.markdown(card_html, unsafe_allow_html=True)
             
-            if st.button(f"✨ ดูรายละเอียด ({item['th_name']})", key=f"btn_grid_sel_{item['id']}", use_container_width=True):
-                st.session_state.flavor_idx = idx
-                st.rerun()
+            c_a, c_b = st.columns(2)
+            with c_a:
+                if st.button(f"✨ ดูสไตล์นี้นะ", key=f"btn_grid_sel_{item['id']}", use_container_width=True):
+                    st.session_state.flavor_idx = idx
+                    st.rerun()
+            with c_b:
+                if st.button(f"💬 ถาม AI", key=f"btn_grid_ask_{item['id']}", use_container_width=True):
+                    open_ai_dialog(model, index, chunks, initial_query=item["query"])
 
             st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
+
+    # 7. 💡 NEW SECTION 3: AI QUICK PROMPTS BANNER
+    st.markdown("### 💡 มีข้อสงสัยเพิ่มเติม? ลองถาม MilkLab° AI Assistant ได้ทันที:")
+    ai_p1, ai_p2, ai_p3, ai_p4 = st.columns(4)
+    with ai_p1:
+        if st.button("⏰ ร้านเปิดกี่โมงและปิดกี่โมง", key="quick_ban_1", use_container_width=True):
+            open_ai_dialog(model, index, chunks, initial_query="ร้านเปิดกี่โมงและปิดกี่โมง")
+    with ai_p2:
+        if st.button("🚚 ค่าจัดส่งและรัศมีส่งไกลแค่ไหน", key="quick_ban_2", use_container_width=True):
+            open_ai_dialog(model, index, chunks, initial_query="ค่าจัดส่งเท่าไหร่และส่งไกลแค่ไหนมีแพ็คเจลเย็นไหม")
+    with ai_p3:
+        if st.button("🌱 มีเมนูสำหรับคนทาน Vegan ไหม", key="quick_ban_3", use_container_width=True):
+            open_ai_dialog(model, index, chunks, initial_query="มีเจลาโต้รสไหนบ้างที่คนทานมังสวิรัติหรือวีแกนกินได้")
+    with ai_p4:
+        if st.button("🥜 มีส่วนผสมของถั่วไหม แพ้ถั่วกินได้ไหม", key="quick_ban_4", use_container_width=True):
+            open_ai_dialog(model, index, chunks, initial_query="มีส่วนผสมของถั่วไหม ลูกค้าแพ้ถั่วกินได้ไหม")
 
     # 📌 FIXED FLOATING CIRCULAR CHATBOT POPUP (BOTTOM-RIGHT)
     with st.popover("💬", help="คลิกเพื่อสอบถาม MilkLab° AI Assistant"):
@@ -683,11 +745,31 @@ def main():
             st.session_state.messages.append({"role": "assistant", "content": answer})
             st.rerun()
 
-    st.markdown("---")
-
-    st.markdown("""<div style="text-align: center; color: #475569; font-size: 0.85rem; padding: 20px 0; font-weight: 700;">
-MILKLAB° GELATO • ARTISAN HERO LANDING PAGE • POWERED BY GEMINI RAG AI 🍨
-</div>""", unsafe_allow_html=True)
+    # 8. 🖤 NEW SECTION 4: HIGH-FASHION MINIMALIST FOOTER
+    footer_html = """<footer style="background: #0F172A; border-radius: 30px 30px 0 0; padding: 45px 35px 30px 35px; color: #F8FAFC; margin-top: 50px;">
+<div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; margin-bottom: 30px;">
+<div>
+<div style="font-family: 'Fredoka', sans-serif; font-size: 2rem; font-weight: 800; color: #FFFFFF;">MILKLAB<span style="color:#E11D48;">°</span> GELATO</div>
+<div style="font-size: 0.85rem; color: #94A3B8; margin-top: 8px; max-width: 320px; line-height: 1.5;">
+ไอศกรีมเจลาโต้โฮมเมดพรีเมียม วัตถุดิบธรรมชาติสดใหม่ 100% สดชื่นละมุนหัวใจในทุกๆ คำ
+</div>
+</div>
+<div>
+<div style="font-weight: 800; font-size: 0.95rem; color: #F8FAFC; text-transform: uppercase; letter-spacing: 1px;">⏰ เวลาเปิด-ปิดร้าน</div>
+<div style="font-size: 0.88rem; color: #CBD5E1; margin-top: 8px;">เปิดบริการทุกวัน (ยกเว้นวันจันทร์)</div>
+<div style="font-size: 0.88rem; color: #E11D48; font-weight: 700; margin-top: 4px;">16:00 - 23:00 น.</div>
+</div>
+<div>
+<div style="font-weight: 800; font-size: 0.95rem; color: #F8FAFC; text-transform: uppercase; letter-spacing: 1px;">📍 พิกัด & ติดต่อ</div>
+<div style="font-size: 0.88rem; color: #CBD5E1; margin-top: 8px;">ตั้งอยู่หน้ามหาวิทยาลัย</div>
+<div style="font-size: 0.88rem; color: #CBD5E1; margin-top: 4px;">สั่งซื้อล่วงหน้าผ่าน LINE OA (ก่อน 15:00 น.)</div>
+</div>
+</div>
+<div style="border-top: 1px solid #334155; padding-top: 20px; text-align: center; font-size: 0.8rem; color: #64748B;">
+© 2026 MILKLAB° GELATO. ALL RIGHTS RESERVED. POWERED BY GEMINI RAG AI 🍨
+</div>
+</footer>"""
+    st.markdown(footer_html, unsafe_allow_html=True)
 
 
 if __name__ == "__main__":
