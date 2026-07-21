@@ -1,5 +1,5 @@
-"""MilkLab° Gelato - High-Fashion DTC Animated Experience.
-Reference Style: Boba Ice Cream / Full Moon Party / Karaoke Night
+"""MilkLab° Gelato - High-Fashion DTC Poster & Flavor Carousel Experience.
+Reference Style: Full Moon Party / Karaoke Night / Mango Chamoy Poster Layout
 
 Run locally: streamlit run app.py
 Deploy: push to GitHub then deploys to Streamlit Cloud / HuggingFace
@@ -108,108 +108,123 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
     return f"เกิดข้อผิดพลาดในการสร้างคำตอบ: {last_error}"
 
 
-# Gelato Catalog with Dynamic Themes & High-Fashion DTC Aesthetics
-GELATO_FLAVORS = [
+# Gelato Catalog with Exact Reference Poster Aesthetics (Full Moon Party / Karaoke Night Style)
+GELATO_POSTERS = [
+    {
+        "id": "mango",
+        "top_tag": "MANGO CHAMOY",
+        "sub_header": "IF THAILAND'S FULL MOON PARTY WAS A FLAVOR",
+        "title_part1": "FULL MOON",
+        "title_part2": "PARTY",
+        "th_name": "เจลาโต้มะม่วงมหาชนกซอร์เบต์",
+        "tub_title": "MANGO × CHAMOY",
+        "footer_tag": "IT'S A PARTY FOR YOUR TASTE BUDS! 100% VEGAN FRESH SORBET",
+        "price": 80,
+        "size": "120g",
+        "bg_color": "#FFDF00",          # Vibrant Yellow
+        "text_color": "#D80000",        # Bold Red Typography
+        "sub_text_color": "#D80000",
+        "tub_bg": "#FFCC00",
+        "photo_url": "https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=800&auto=format&fit=crop",
+        "left_preview": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?q=80&w=300&auto=format&fit=crop",
+        "right_preview": "https://images.unsplash.com/photo-1511381939415-e44015466834?q=80&w=300&auto=format&fit=crop",
+        "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🥭 Fresh Mango"],
+        "query": "ขอข้อมูลเจลาโต้มะม่วงมหาชนกซอร์เบต์ ราคาและส่วนผสม"
+    },
     {
         "id": "strawberry",
-        "name": "KARAOKE NIGHT",
-        "sub_name": "STRAWBERRY SHORTCAKE SORBET",
+        "top_tag": "VELVETY STRAWBERRY SHORTCAKE",
+        "sub_header": "JUST THE THING TO MAKE YOU SING!",
+        "title_part1": "KARAOKE",
+        "title_part2": "NIGHT",
         "th_name": "เจลาโต้สตรอว์เบอร์รีซอร์เบต์",
+        "tub_title": "STRAWBERRY × SHORTCAKE",
+        "footer_tag": "BRILLIANT RED STRAWBERRY JAM • SWEET & TANGY DELIGHT",
         "price": 85,
         "size": "120g",
-        "bg_color": "#FFC5D3",
-        "card_bg": "#FF8DA1",
-        "accent_color": "#D81B60",
-        "text_color": "#880E4F",
-        "tag_bg": "rgba(216, 27, 96, 0.15)",
-        "icon": "🍓",
-        "calories": "110 kcal",
+        "bg_color": "#FFB7C5",          # Romantic Soft Pink
+        "text_color": "#C1121F",        # Deep Red Typography
+        "sub_text_color": "#C1121F",
+        "tub_bg": "#FFA4B6",
+        "photo_url": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?q=80&w=800&auto=format&fit=crop",
+        "left_preview": "https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=300&auto=format&fit=crop",
+        "right_preview": "https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=300&auto=format&fit=crop",
         "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🥜 Nut-Free"],
-        "desc": "สตรอว์เบอร์รีสด 100% ให้รสสัมผัสเปรี้ยวหวานฉ่ำ เติมความสดชื่นยามค่ำคืนสไตล์ Karaoke Night ปลอดนม ปลอดไขมันเนย",
         "query": "ขอข้อมูลเจลาโต้สตรอว์เบอร์รีซอร์เบต์ รสชาติ สารแพ้อาหาร และราคา"
     },
     {
         "id": "hokkaido",
-        "name": "HOKKAIDO DREAM",
-        "sub_name": "PURE HOKKAIDO FRESH MILK",
+        "top_tag": "ORGANIC HOKKAIDO FRESH MILK",
+        "sub_header": "CREAMY RICHNESS DIRECT FROM HOKKAIDO",
+        "title_part1": "HOKKAIDO",
+        "title_part2": "DREAM",
         "th_name": "เจลาโต้นมสดฮอกไกโด",
+        "tub_title": "HOKKAIDO × PURE MILK",
+        "footer_tag": "100% IMPORTED HOKKAIDO MILK • SIGNATURE #1 FLAVOR",
         "price": 80,
         "size": "120g",
-        "bg_color": "#FFEAD2",
-        "card_bg": "#F5C7A9",
-        "accent_color": "#D97706",
-        "text_color": "#78350F",
-        "tag_bg": "rgba(217, 119, 6, 0.15)",
-        "icon": "🍦",
-        "calories": "195 kcal",
+        "bg_color": "#FFEAD2",          # Creamy Milk Beige
+        "text_color": "#B45309",        # Warm Terracotta Typography
+        "sub_text_color": "#B45309",
+        "tub_bg": "#FCD34D",
+        "photo_url": "https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=800&auto=format&fit=crop",
+        "left_preview": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?q=80&w=300&auto=format&fit=crop",
+        "right_preview": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=300&auto=format&fit=crop",
         "tags": ["🥛 100% Hokkaido Milk", "🥜 Nut-Free", "🌾 Gluten-Free"],
-        "desc": "นมสดฮอกไกโดแท้ 100% นำเข้าจากญี่ปุ่น รสชาตินุ่มละมุน เข้มข้น หอมกลมกล่อมเอกลักษณ์อันดับ #1 ของ MilkLab°",
         "query": "ขอรายละเอียดเจลาโต้นมสดฮอกไกโด สารแพ้อาหาร และราคา"
     },
     {
         "id": "chocolate",
-        "name": "MIDNIGHT COCOA",
-        "sub_name": "DARK CHOCOLATE 70%",
+        "top_tag": "VALRHONA DARK COCOA 70%",
+        "sub_header": "LUSCIOUS DEEP CHOCOLATE EXPERIENCE",
+        "title_part1": "MIDNIGHT",
+        "title_part2": "COCOA",
         "th_name": "เจลาโต้ดาร์กช็อกโกแลต",
+        "tub_title": "DARK × CHOCOLATE",
+        "footer_tag": "70% PREMIUM DARK CHOCOLATE • INTENSE & BITTERSWEET",
         "price": 85,
         "size": "120g",
-        "bg_color": "#D8C4B6",
-        "card_bg": "#4F3B32",
-        "accent_color": "#B45309",
-        "text_color": "#3E2723",
-        "tag_bg": "rgba(79, 59, 50, 0.2)",
-        "icon": "🍫",
-        "calories": "210 kcal",
+        "bg_color": "#D8C4B6",          # Rich Cocoa Dust
+        "text_color": "#3E2723",        # Deep Chocolate Typography
+        "sub_text_color": "#3E2723",
+        "tub_bg": "#6D4C41",
+        "photo_url": "https://images.unsplash.com/photo-1511381939415-e44015466834?q=80&w=800&auto=format&fit=crop",
+        "left_preview": "https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=300&auto=format&fit=crop",
+        "right_preview": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=300&auto=format&fit=crop",
         "tags": ["🍫 Dark Cocoa 70%", "🥜 Nut-Free", "🌾 Gluten-Free"],
-        "desc": "ดาร์กช็อกโกแลตเข้มข้น 70% ให้รสสัมผัสขมนิดๆ หวานกำลังดี เข้มข้นลึกซึ้ง ไร้สารสังเคราะห์",
         "query": "ขอรายละเอียดเจลาโต้ดาร์กช็อกโกแลต มีส่วนผสมอะไรบ้าง"
     },
     {
         "id": "matcha",
-        "name": "KYOTO CEREMONY",
-        "sub_name": "UJI MATCHA GREEN TEA",
+        "top_tag": "UJI CEREMONIAL MATCHA",
+        "sub_header": "TRADITIONAL UJI JAPANESE TEA CEREMONY",
+        "title_part1": "KYOTO",
+        "title_part2": "CEREMONY",
         "th_name": "เจลาโต้ชาเขียวมัทฉะ",
+        "tub_title": "UJI × MATCHA",
+        "footer_tag": "CEREMONIAL GRADE MATCHA FROM UJI, KYOTO • RICH UMAMI",
         "price": 90,
         "size": "120g",
-        "bg_color": "#D1E7DD",
-        "card_bg": "#4D7C0F",
-        "accent_color": "#3F6212",
-        "text_color": "#1E3A8A",
-        "tag_bg": "rgba(63, 98, 18, 0.15)",
-        "icon": "🍵",
-        "calories": "180 kcal",
-        "tags": ["🍵 Uji Ceremonial Grade", "🥜 Nut-Free", "👑 Premium"],
-        "desc": "ผงมัทฉะเกรดพิธีการจากเมืองอุจิ เกียวโต ให้ความหอมเข้มข้น มิติรสชาติลึกซึ้งแท้สไตล์ญี่ปุ่น",
+        "bg_color": "#C2E2B4",          # Japanese Green Tea
+        "text_color": "#1E4D2B",        # Forest Green Typography
+        "sub_text_color": "#1E4D2B",
+        "tub_bg": "#4D7C0F",
+        "photo_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=800&auto=format&fit=crop",
+        "left_preview": "https://images.unsplash.com/photo-1511381939415-e44015466834?q=80&w=300&auto=format&fit=crop",
+        "right_preview": "https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=300&auto=format&fit=crop",
+        "tags": ["🍵 Uji Ceremonial", "🥜 Nut-Free", "👑 Premium Grade"],
         "query": "เจลาโต้ชาเขียวมัทฉะราคาเท่าไหร่ ใช้วัตถุดิบจากไหน"
-    },
-    {
-        "id": "mango",
-        "name": "FULL MOON PARTY",
-        "sub_name": "MAHACHANOK MANGO SORBET",
-        "th_name": "เจลาโต้มะม่วงมหาชนกซอร์เบต์",
-        "price": 80,
-        "size": "120g",
-        "bg_color": "#FFE97D",
-        "card_bg": "#F59E0B",
-        "accent_color": "#B45309",
-        "text_color": "#78350F",
-        "tag_bg": "rgba(180, 83, 9, 0.15)",
-        "icon": "🥭",
-        "calories": "125 kcal",
-        "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🥭 Fresh Mango"],
-        "desc": "เนื้อมะม่วงมหาชนกสดหวานฉ่ำ 100% ให้ความสดชื่นระเบิดรสชาติหวานอมเปรี้ยวคลายร้อนสไตล์ Full Moon Party",
-        "query": "ขอข้อมูลเจลาโต้มะม่วงมหาชนกซอร์เบต์ ราคาและส่วนผสม"
     }
 ]
 
 
 # Dialog Assistant Modal
-@st.dialog("💬 MilkLab° AI Assistant", width="large")
+@st.dialog("💬 MilkLab° AI Concierge", width="large")
 def open_ai_dialog(model, index, chunks, initial_query: str = ""):
     st.markdown("""
     <div style="background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border-radius: 16px; padding: 14px 20px; border: 1px solid rgba(255,255,255,0.9); margin-bottom: 15px;">
         <span style="font-size: 0.9rem; color: #334155;">
-            🍨 <strong>MilkLab° RAG Concierge:</strong> สอบถามข้อมูลเมนูเจลาโต้ สารแพ้อาหาร เวลาเปิด-ปิด หรือบริการจัดส่งได้ทันทีครับ
+            🍨 <strong>MilkLab° RAG Assistant:</strong> สอบถามข้อมูลเมนูเจลาโต้ สารแพ้อาหาร เวลาเปิด-ปิด หรือบริการจัดส่งได้ทันทีครับ
         </span>
     </div>
     """, unsafe_allow_html=True)
@@ -223,13 +238,13 @@ def open_ai_dialog(model, index, chunks, initial_query: str = ""):
     
     quick_selected = None
     with q_col1:
-        if st.button("⏰ เวลาเปิด-ปิดร้าน", key="dlg_f1", use_container_width=True):
+        if st.button("⏰ เวลาเปิด-ปิดร้าน", key="dlg_p1", use_container_width=True):
             quick_selected = "ร้านเปิดกี่โมงและปิดกี่โมง"
     with q_col2:
-        if st.button("🚚 ค่าจัดส่ง & รัศมี", key="dlg_f2", use_container_width=True):
+        if st.button("🚚 ค่าจัดส่ง & รัศมี", key="dlg_p2", use_container_width=True):
             quick_selected = "ค่าจัดส่งเท่าไหร่และส่งไกลแค่ไหนมีแพ็คเจลเย็นไหม"
     with q_col3:
-        if st.button("🌱 เมนูสำหรับ Vegan", key="dlg_f3", use_container_width=True):
+        if st.button("🌱 เมนูสำหรับ Vegan", key="dlg_p3", use_container_width=True):
             quick_selected = "มีเจลาโต้รสไหนบ้างที่คนทานมังสวิรัติหรือวีแกนกินได้"
 
     prompt_to_process = quick_selected or initial_query
@@ -271,19 +286,18 @@ def open_ai_dialog(model, index, chunks, initial_query: str = ""):
 
 def main():
     st.set_page_config(
-        page_title="MILKLAB × GELATO | High-Fashion Experience",
+        page_title="MILKLAB × GELATO | Poster Showcase",
         page_icon="🍨",
         layout="wide",
         initial_sidebar_state="collapsed"
     )
 
-    # Initialize Selected Flavor Session State
-    if "selected_flavor_idx" not in st.session_state:
-        st.session_state.selected_flavor_idx = 0
+    if "poster_idx" not in st.session_state:
+        st.session_state.poster_idx = 0
 
-    current_flavor = GELATO_FLAVORS[st.session_state.selected_flavor_idx]
+    curr = GELATO_POSTERS[st.session_state.poster_idx]
 
-    # Dynamic High-Fashion CSS with Theme Colors & Keyframe Animations
+    # High-Fashion Poster CSS Architecture (Exact Reference Image 1 & 2 Style!)
     st.markdown(f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Anton&family=Kanit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
@@ -292,138 +306,154 @@ def main():
         font-family: 'Kanit', 'Plus Jakarta Sans', sans-serif;
     }}
     
-    /* Dynamic Animated Background Transition */
+    /* Background Dynamic Color Shift */
     .stApp {{
-        background-color: {current_flavor["bg_color"]} !important;
-        transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        background-color: {curr["bg_color"]} !important;
+        transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }}
     
-    /* Scroll Behavior */
-    html {{
-        scroll-behavior: smooth;
-    }}
-    
-    /* High Impact Banner Header */
-    .hero-banner-container {{
-        text-align: center;
-        padding: 40px 20px 20px 20px;
+    /* Exact Reference Poster Canvas */
+    .poster-canvas {{
         position: relative;
+        text-align: center;
+        padding: 25px 20px 40px 20px;
+        min-height: 580px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        overflow: hidden;
     }}
     
-    .hero-big-title {{
+    .poster-top-tag {{
         font-family: 'Anton', 'Kanit', sans-serif;
-        font-size: 5.5rem;
-        font-weight: 900;
+        font-size: 1.6rem;
         letter-spacing: 2px;
-        color: #FFFFFF;
-        text-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        line-height: 0.95;
+        color: {curr["text_color"]};
         text-transform: uppercase;
-        animation: fadeInDown 0.8s ease-out;
+        margin-bottom: 2px;
     }}
     
-    .hero-sub-text {{
+    .poster-sub-header {{
         font-family: 'Kanit', sans-serif;
-        font-size: 1.25rem;
+        font-size: 0.82rem;
         font-weight: 700;
-        color: {current_flavor["accent_color"]};
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        margin-top: 15px;
+        letter-spacing: 1.5px;
+        color: {curr["text_color"]};
+        max-width: 600px;
+        margin: 0 auto 15px auto;
+        opacity: 0.9;
     }}
     
-    /* Floating Animated Ice Cream Tub Container */
-    .tub-display-frame {{
-        background: rgba(255, 255, 255, 0.45);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 2px solid rgba(255, 255, 255, 0.8);
-        border-radius: 36px;
-        padding: 40px;
-        text-align: center;
-        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.12);
-        animation: floatTub 4s ease-in-out infinite;
-        margin: 20px 0;
-    }}
-    
-    .tub-icon-large {{
-        font-size: 7.5rem;
-        filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));
-        transition: transform 0.5s ease;
-    }}
-    
-    .tub-icon-large:hover {{
-        transform: scale(1.15) rotate(5deg);
-    }}
-    
-    .flavor-title-display {{
-        font-family: 'Anton', 'Kanit', sans-serif;
-        font-size: 3.2rem;
+    /* GIANT BACKGROUND DISPLAY TYPOGRAPHY */
+    .poster-giant-text {{
+        font-family: 'Anton', sans-serif;
+        font-size: 7.8rem;
         font-weight: 900;
-        color: {current_flavor["accent_color"]};
-        line-height: 1.1;
-        letter-spacing: 1px;
-        margin-top: 15px;
+        line-height: 0.88;
+        letter-spacing: 2px;
+        color: {curr["text_color"]};
+        text-transform: uppercase;
+        user-select: none;
+        z-index: 1;
     }}
     
-    .flavor-desc-display {{
-        font-size: 1.1rem;
-        color: #334155;
-        max-width: 650px;
-        margin: 15px auto;
-        line-height: 1.6;
-        font-weight: 500;
+    /* CENTRAL RECTANGULAR PHOTO FRAME WITH OVERLAPPING TUB */
+    .poster-center-box {{
+        position: relative;
+        width: 520px;
+        height: 220px;
+        margin: -100px auto -80px auto;
+        z-index: 2;
     }}
     
-    .price-pill-large {{
-        display: inline-block;
-        background: #FFFFFF;
-        color: {current_flavor["accent_color"]};
-        font-size: 1.8rem;
-        font-weight: 800;
-        padding: 10px 28px;
-        border-radius: 30px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-        border: 2px solid {current_flavor["accent_color"]};
-    }}
-    
-    /* High Fashion Flavor Showcase Cards Grid */
-    .dtc-card-frame {{
-        background: #FFFFFF;
-        border-radius: 28px;
-        padding: 28px;
-        text-align: center;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.06);
-        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        border: 3px solid transparent;
+    .poster-photo-rect {{
+        width: 100%;
         height: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.18);
     }}
     
-    .dtc-card-frame:hover {{
-        transform: translateY(-10px) scale(1.02);
-        box-shadow: 0 25px 45px rgba(0,0,0,0.12);
-        border-color: {current_flavor["accent_color"]};
+    /* OVERLAPPING BRANDED ICE CREAM TUB IN EXACT CENTER */
+    .poster-tub-center {{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 170px;
+        height: 170px;
+        background: {curr["tub_bg"]};
+        border-radius: 20px 20px 45px 45px;
+        border: 4px solid #FFFFFF;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 12px;
+        animation: floatTub 4s ease-in-out infinite;
+        z-index: 3;
     }}
     
-    .dtc-card-title {{
-        font-family: 'Anton', 'Kanit', sans-serif;
-        font-size: 1.8rem;
-        font-weight: 900;
-        letter-spacing: 1px;
-        color: #0F172A;
-        margin-top: 10px;
+    .tub-lid {{
+        position: absolute;
+        top: -12px;
+        width: 180px;
+        height: 22px;
+        background: #FFFFFF;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }}
+    
+    .tub-label-brand {{
+        font-family: 'Anton', sans-serif;
+        font-size: 1.45rem;
+        line-height: 1;
+        color: {curr["text_color"]};
         text-transform: uppercase;
+        margin-top: 8px;
+    }}
+    
+    .poster-footer-text {{
+        font-family: 'Kanit', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: {curr["text_color"]};
+        margin-top: 20px;
+        z-index: 2;
+    }}
+    
+    /* SIDE CAROUSEL CUTOUT PREVIEWS (IMAGE 1 & 2 STYLE) */
+    .side-cutout-left {{
+        position: absolute;
+        left: -40px;
+        top: 35%;
+        width: 90px;
+        height: 180px;
+        border-radius: 0 16px 16px 0;
+        overflow: hidden;
+        box-shadow: 5px 10px 25px rgba(0,0,0,0.15);
+        opacity: 0.85;
+    }}
+    
+    .side-cutout-right {{
+        position: absolute;
+        right: -40px;
+        top: 35%;
+        width: 90px;
+        height: 180px;
+        border-radius: 16px 0 0 16px;
+        overflow: hidden;
+        box-shadow: -5px 10px 25px rgba(0,0,0,0.15);
+        opacity: 0.85;
     }}
 
-    /* Keyframes for Floating Animation & Scroll */
     @keyframes floatTub {{
-        0%, 100% {{ transform: translateY(0px) rotate(0deg); }}
-        50% {{ transform: translateY(-14px) rotate(2deg); }}
-    }}
-    
-    @keyframes fadeInDown {{
-        from {{ opacity: 0; transform: translateY(-30px); }}
-        to {{ opacity: 1; transform: translateY(0); }}
+        0%, 100% {{ transform: translate(-50%, -50%) translateY(0px); }}
+        50% {{ transform: translate(-50%, -50%) translateY(-10px); }}
     }}
 
     /* 📌 FIXED FLOATING CIRCULAR CHATBOT POPUP (BOTTOM-RIGHT) */
@@ -439,20 +469,20 @@ def main():
         height: 72px !important;
         border-radius: 50% !important;
         background: #FFFFFF !important;
-        border: 3px solid {current_flavor["accent_color"]} !important;
-        box-shadow: 0 12px 36px rgba(0,0,0,0.2) !important;
+        border: 3px solid {curr["text_color"]} !important;
+        box-shadow: 0 12px 36px rgba(0,0,0,0.25) !important;
         font-size: 2.2rem !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-        color: {current_flavor["accent_color"]} !important;
+        color: {curr["text_color"]} !important;
         padding: 0 !important;
     }}
     
     div[data-testid="stPopover"] > button:hover {{
-        transform: scale(1.15) rotate(10deg) !important;
-        box-shadow: 0 18px 45px rgba(0,0,0,0.3) !important;
+        transform: scale(1.15) rotate(8deg) !important;
+        box-shadow: 0 18px 45px rgba(0,0,0,0.35) !important;
     }}
     </style>
     """, unsafe_allow_html=True)
@@ -461,77 +491,89 @@ def main():
     try:
         model, index, chunks = load_index()
     except Exception as exc:
-        st.error(f"Error loading FAISS Index: {exc}")
+        st.error(f"Error loading index: {exc}")
         st.stop()
 
-    # 1. High Impact Hero Banner
-    st.markdown(f"""
-    <div class="hero-banner-container">
-        <div class="hero-big-title">MILKLAB × GELATO</div>
-        <div class="hero-sub-text">A MAGICAL DUO OF ARTISAN HOMEMADE ICE CREAM</div>
-    </div>
-    """, unsafe_allow_html=True)
+    # Interactive Flavor Switcher Navigation (DTC Style)
+    st.markdown("### 🍨 เลือกชมโปสเตอร์รสชาติไอศกรีม (Click to Change Poster Theme):")
+    nav_cols = st.columns(len(GELATO_POSTERS))
 
-    # 2. Interactive Flavor Selector Buttons (Color Theme Changing!)
-    st.markdown("### 🎨 เลือกเปลี่ยนสีธีมและรสชาติไอศกรีม (Interactive Flavor Changer):")
-    sel_cols = st.columns(len(GELATO_FLAVORS))
-
-    for idx, flavor in enumerate(GELATO_FLAVORS):
-        with sel_cols[idx]:
-            is_active = (idx == st.session_state.selected_flavor_idx)
-            btn_label = f"{flavor['icon']} {flavor['name']}"
-            if is_active:
-                btn_label = f"✨ {flavor['icon']} {flavor['name']}"
-                
-            if st.button(btn_label, key=f"flavor_sel_{flavor['id']}", use_container_width=True, type="primary" if is_active else "secondary"):
-                st.session_state.selected_flavor_idx = idx
+    for idx, p in enumerate(GELATO_POSTERS):
+        with nav_cols[idx]:
+            is_active = (idx == st.session_state.poster_idx)
+            label = f"✨ {p['top_tag']}" if is_active else p['top_tag']
+            if st.button(label, key=f"nav_p_{p['id']}", use_container_width=True, type="primary" if is_active else "secondary"):
+                st.session_state.poster_idx = idx
                 st.rerun()
 
-    # 3. Dynamic Animated Tub Spotlight Display
+    # EXACT REFERENCE POSTER CONTAINER (Matching Image 1 & Image 2!)
     st.markdown(f"""
-    <div class="tub-display-frame">
-        <div class="tub-icon-large">{current_flavor["icon"]}</div>
-        <div class="flavor-title-display">{current_flavor["name"]}</div>
-        <div style="font-size: 1.15rem; font-weight: 700; color: #475569; letter-spacing: 2px;">{current_flavor["sub_name"]}</div>
-        <div class="flavor-desc-display">{current_flavor["desc"]}</div>
-        <div class="price-pill-large">{current_flavor["price"]} THB <span style="font-size: 1.1rem; font-weight: 500;">/ {current_flavor["size"]} ({current_flavor["calories"]})</span></div>
+    <div class="poster-canvas">
+        <div class="side-cutout-left">
+            <img src="{curr['left_preview']}" style="width:100%; height:100%; object-fit:cover;" />
+        </div>
+        <div class="side-cutout-right">
+            <img src="{curr['right_preview']}" style="width:100%; height:100%; object-fit:cover;" />
+        </div>
+        
+        <div>
+            <div class="poster-top-tag">{curr["top_tag"]}</div>
+            <div class="poster-sub-header">{curr["sub_header"]}</div>
+            <div class="poster-giant-text">{curr["title_part1"]}</div>
+        </div>
+        
+        <div class="poster-center-box">
+            <img src="{curr['photo_url']}" class="poster-photo-rect" alt="Fruit Photo" />
+            <div class="poster-tub-center">
+                <div class="tub-lid"></div>
+                <div style="font-size: 0.75rem; font-weight: 800; color: #FFFFFF; letter-spacing: 1px;">MILKLAB°</div>
+                <div class="tub-label-brand">{curr["tub_title"]}</div>
+                <div style="font-size: 0.65rem; color: #FFFFFF; margin-top: 4px;">NET WT 120G</div>
+            </div>
+        </div>
+        
+        <div>
+            <div class="poster-giant-text">{curr["title_part2"]}</div>
+            <div class="poster-footer-text">{curr["footer_tag"]} &nbsp;•&nbsp; PRICE: {curr["price"]} THB</div>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
-    # Action Buttons under Spotlight
-    act_col1, act_col2, act_col3 = st.columns([1, 2, 1])
-    with act_col2:
-        if st.button(f"✨ ถามน้อง AI เกี่ยวกับ {current_flavor['th_name']}", key="btn_hero_ask", type="primary", use_container_width=True):
-            open_ai_dialog(model, index, chunks, initial_query=current_flavor["query"])
+    # Action Bar for Poster
+    c1, c2, c3 = st.columns([1, 2, 1])
+    with c2:
+        if st.button(f"✨ สอบถามข้อมูลน้อง AI เกี่ยวกับ {curr['th_name']}", key="btn_poster_ask", type="primary", use_container_width=True):
+            open_ai_dialog(model, index, chunks, initial_query=curr["query"])
 
     st.markdown("---")
-    st.markdown("## 🍨 EXPLORE ALL FLAVORS (ทุกรสชาติมี Animation เมื่อ Scroll & Hover)")
 
-    # 4. Showcase Cards Grid (Reference Image 2 Style!)
-    card_cols = st.columns(3)
+    # Product Cards Grid (Matching Reference Image 2!)
+    st.markdown("## 🎴 ALL FLAVOR POSTER CARDS (คลิกเลือกดูโปสเตอร์ทุกรสชาติ)")
+    grid_cols = st.columns(3)
 
-    for idx, item in enumerate(GELATO_FLAVORS):
-        target_col = card_cols[idx % 3]
+    for idx, item in enumerate(GELATO_POSTERS):
+        target_col = grid_cols[idx % 3]
         with target_col:
-            tags_html = "".join(f'<span style="background:{item["tag_bg"]}; color:{item["accent_color"]}; padding:4px 10px; border-radius:10px; font-size:0.78rem; font-weight:600; margin-right:4px;">{t}</span>' for t in item["tags"])
+            tags_html = "".join(f'<span style="background:rgba(255,255,255,0.7); color:{item["text_color"]}; padding:4px 10px; border-radius:10px; font-size:0.78rem; font-weight:700; margin-right:4px;">{t}</span>' for t in item["tags"])
             
             card_html = f"""
-            <div class="dtc-card-frame" style="background: {item['bg_color']};">
-                <div style="font-size: 4rem; margin-bottom: 10px;">{item['icon']}</div>
-                <div class="dtc-card-title">{item['name']}</div>
-                <div style="font-weight: 700; color: {item['accent_color']}; font-size: 0.95rem; margin-bottom: 10px;">{item['sub_name']}</div>
+            <div style="background: {item['bg_color']}; border-radius: 24px; padding: 24px; text-align: center; box-shadow: 0 12px 30px rgba(0,0,0,0.08); margin-bottom: 15px; border: 2px solid rgba(255,255,255,0.8);">
+                <div style="height: 120px; border-radius: 12px; overflow: hidden; margin-bottom: 14px;">
+                    <img src="{item['photo_url']}" style="width: 100%; height: 100%; object-fit: cover;" />
+                </div>
+                <div style="font-family: 'Anton', sans-serif; font-size: 1.8rem; color: {item['text_color']}; line-height: 1;">{item['title_part1']} {item['title_part2']}</div>
+                <div style="font-weight: 700; color: {item['text_color']}; font-size: 0.9rem; margin-top: 4px; margin-bottom: 10px;">{item['th_name']}</div>
                 <div style="margin-bottom: 12px;">{tags_html}</div>
-                <div style="font-size: 0.9rem; color: #334155; line-height: 1.5; margin-bottom: 16px;">{item['desc']}</div>
-                <div style="font-size: 1.5rem; font-weight: 900; color: {item['accent_color']};">{item['price']} ฿</div>
+                <div style="font-size: 1.4rem; font-weight: 900; color: {item['text_color']};">{item['price']} THB <span style="font-size: 0.85rem; font-weight: 500;">/ {item['size']}</span></div>
             </div>
             """
             st.markdown(card_html, unsafe_allow_html=True)
             
-            if st.button(f"✨ ถาม AI ({item['th_name']})", key=f"btn_dtc_ask_{item['id']}", use_container_width=True):
-                st.session_state.selected_flavor_idx = idx
-                open_ai_dialog(model, index, chunks, initial_query=item["query"])
+            if st.button(f"✨ ดูโปสเตอร์รสนี้ ({item['th_name']})", key=f"btn_card_select_{item['id']}", use_container_width=True):
+                st.session_state.poster_idx = idx
+                st.rerun()
 
-            st.markdown("<div style='margin-bottom: 24px;'></div>", unsafe_allow_html=True)
+            st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
 
     # 📌 FIXED FLOATING CIRCULAR CHATBOT POPUP (BOTTOM-RIGHT)
     with st.popover("💬", help="คลิกเพื่อสอบถาม MilkLab° AI Assistant"):
@@ -545,10 +587,10 @@ def main():
         p_c1, p_c2 = st.columns(2)
         quick_pop_q = None
         with p_c1:
-            if st.button("⏰ เวลาเปิด-ปิดร้าน", key="p_dtc1", use_container_width=True):
+            if st.button("⏰ เวลาเปิด-ปิดร้าน", key="p_post1", use_container_width=True):
                 quick_pop_q = "ร้านเปิดกี่โมงและปิดกี่โมง"
         with p_c2:
-            if st.button("🚚 ค่าส่ง & รัศมี", key="p_dtc2", use_container_width=True):
+            if st.button("🚚 ค่าส่ง & รัศมี", key="p_post2", use_container_width=True):
                 quick_pop_q = "ค่าจัดส่งเท่าไหร่และส่งไกลแค่ไหน"
 
         pop_chat_box = st.container(height=300)
@@ -582,10 +624,9 @@ def main():
 
     st.markdown("---")
 
-    # High Fashion Footer
-    st.markdown(f"""
-    <div style="text-align: center; color: #475569; font-size: 0.9rem; padding: 20px 0; font-weight: 600;">
-        MILKLAB × GELATO • HIGH-FASHION DTC EXPERIENCE • POWERED BY GEMINI RAG 🍨
+    st.markdown("""
+    <div style="text-align: center; color: #475569; font-size: 0.85rem; padding: 20px 0; font-weight: 700;">
+        MILKLAB × GELATO • HIGH-FASHION POSTER SHOWCASE • GEMINI RAG AI 🍨
     </div>
     """, unsafe_allow_html=True)
 
