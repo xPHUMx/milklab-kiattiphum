@@ -1,4 +1,4 @@
-"""MilkLab° Gelato - Liquid Glass (Glassmorphism) Minimal UI/UX & Floating Chatbot.
+"""MilkLab° Gelato - Modernist Glass Layout & Ultra-Minimal Cards Architecture.
 
 Run locally: streamlit run app.py
 Deploy: push to GitHub then deploys to Streamlit Cloud / HuggingFace
@@ -107,7 +107,7 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
     return f"เกิดข้อผิดพลาดในการสร้างคำตอบ: {last_error}"
 
 
-# Gelato Catalog Items
+# Gelato Catalog Data
 GELATO_CATALOG = [
     {
         "id": "hokkaido",
@@ -118,9 +118,10 @@ GELATO_CATALOG = [
         "price": 80,
         "size": "120g",
         "calories": "195 kcal",
+        "rating": "4.9 ⭐ (128)",
         "desc": "นมสดฮอกไกโดนำเข้า 100% สกัดเข้มข้น รสสัมผัสนุ่มละมุน กลิ่นหอมกลมกล่อมเอกลักษณ์เฉพาะ MilkLab°",
         "tags": ["🥛 100% Hokkaido Milk", "🥜 Nut-Free", "🌾 Gluten-Free"],
-        "is_signature": True,
+        "is_hero": True,
         "query": "ขอรายละเอียดเจลาโต้นมสดฮอกไกโด สารแพ้อาหาร และราคา"
     },
     {
@@ -132,9 +133,10 @@ GELATO_CATALOG = [
         "price": 85,
         "size": "120g",
         "calories": "210 kcal",
+        "rating": "4.95 ⭐ (94)",
         "desc": "ดาร์กช็อกโกแลตพรีเมียมเข้มข้น 70% ให้รสสัมผัสขมนิดๆ หวานกำลังดี ไร้สารสังเคราะห์",
         "tags": ["🍫 Dark Cocoa 70%", "🥜 Nut-Free", "🌾 Gluten-Free"],
-        "is_signature": True,
+        "is_hero": False,
         "query": "ขอรายละเอียดเจลาโต้ดาร์กช็อกโกแลต มีส่วนผสมอะไรบ้าง"
     },
     {
@@ -146,9 +148,10 @@ GELATO_CATALOG = [
         "price": 85,
         "size": "120g",
         "calories": "110 kcal",
+        "rating": "4.88 ⭐ (112)",
         "desc": "สตรอว์เบอร์รีสด 100% รสชาติเปรี้ยวหวานสดชื่น ปลอดส่วนผสมของนม ปลอดไขมันเนย (Dairy-Free)",
         "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🥜 Nut-Free"],
-        "is_signature": False,
+        "is_hero": False,
         "query": "คนทานมังสวิรัติหรือวีแกนกินเจลาโต้สตรอว์เบอร์รีซอร์เบต์ได้ไหม"
     },
     {
@@ -160,9 +163,10 @@ GELATO_CATALOG = [
         "price": 90,
         "size": "120g",
         "calories": "180 kcal",
+        "rating": "4.92 ⭐ (86)",
         "desc": "ผงมัทฉะเกรดพิธีการสกัดจากเมืองอุจิ เกียวโต ให้ความหอมเข้มข้น มิติรสชาติลึกซึ้งแท้สไตล์ญี่ปุ่น",
-        "tags": ["🍵 Uji Ceremonial", "🥜 Nut-Free", "👑 Premium"],
-        "is_signature": True,
+        "tags": ["🍵 Uji Ceremonial", "🥜 Nut-Free", "👑 Premium Grade"],
+        "is_hero": False,
         "query": "เจลาโต้ชาเขียวมัทฉะราคาเท่าไหร่ ใช้วัตถุดิบจากไหน"
     },
     {
@@ -174,21 +178,22 @@ GELATO_CATALOG = [
         "price": 80,
         "size": "120g",
         "calories": "125 kcal",
+        "rating": "4.85 ⭐ (74)",
         "desc": "เนื้อมะม่วงมหาชนกสดหวานฉ่ำคัดพิเศษ ปลอดนม 100% ให้ความสดชื่นคลายร้อนอย่างลงตัว",
         "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🥭 Fresh Mango"],
-        "is_signature": False,
+        "is_hero": False,
         "query": "ขอข้อมูลเจลาโต้มะม่วงมหาชนกซอร์เบต์ ราคาและส่วนผสม"
     }
 ]
 
 
-# Dialog Modal for AI Chatbot (Accessible via Floating Circle or Cards)
-@st.dialog("💬 MilkLab° AI Concierge (RAG Assistant)", width="large")
-def open_chatbot_dialog(model, index, chunks, initial_query: str = ""):
+# Dialog Assistant Modal
+@st.dialog("💬 MilkLab° AI Assistant", width="large")
+def open_ai_dialog(model, index, chunks, initial_query: str = ""):
     st.markdown("""
-    <div style="background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); border-radius: 14px; padding: 12px 18px; border: 1px solid rgba(255,255,255,0.8); margin-bottom: 12px;">
-        <span style="font-size: 0.88rem; color: #475569;">
-            🤖 <strong>AI Assistant Active:</strong> สอบถามข้อมูลเมนูเจลาโต้ สารแพ้อาหาร เวลาเปิด-ปิด หรือบริการจัดส่งได้ทันทีครับ
+    <div style="background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border-radius: 16px; padding: 14px 20px; border: 1px solid rgba(255,255,255,0.9); margin-bottom: 15px;">
+        <span style="font-size: 0.9rem; color: #334155;">
+            🍨 <strong>MilkLab° RAG Concierge:</strong> สอบถามข้อมูลเมนูเจลาโต้ สารแพ้อาหาร เวลาเปิด-ปิด หรือบริการจัดส่งได้ทันทีครับ
         </span>
     </div>
     """, unsafe_allow_html=True)
@@ -196,19 +201,19 @@ def open_chatbot_dialog(model, index, chunks, initial_query: str = ""):
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
-    # Quick Suggestion Pills
-    st.caption("💡 คำถามยอดฮิตที่พบบ่อย:")
+    # Quick Suggestion Buttons
+    st.caption("💡 คำถามพบบ่อย:")
     q_col1, q_col2, q_col3 = st.columns(3)
     
     quick_selected = None
     with q_col1:
-        if st.button("⏰ เวลาเปิด-ปิดร้าน", key="float_q1", use_container_width=True):
+        if st.button("⏰ เวลาเปิด-ปิดร้าน", key="dlg_m1", use_container_width=True):
             quick_selected = "ร้านเปิดกี่โมงและปิดกี่โมง"
     with q_col2:
-        if st.button("🚚 ค่าจัดส่ง & รัศมี", key="float_q2", use_container_width=True):
+        if st.button("🚚 ค่าจัดส่ง & รัศมี", key="dlg_m2", use_container_width=True):
             quick_selected = "ค่าจัดส่งเท่าไหร่และส่งไกลแค่ไหนมีแพ็คเจลเย็นไหม"
     with q_col3:
-        if st.button("🌱 เมนูสำหรับ Vegan", key="float_q3", use_container_width=True):
+        if st.button("🌱 เมนูสำหรับ Vegan", key="dlg_m3", use_container_width=True):
             quick_selected = "มีเจลาโต้รสไหนบ้างที่คนทานมังสวิรัติหรือวีแกนกินได้"
 
     prompt_to_process = quick_selected or initial_query
@@ -226,7 +231,7 @@ def open_chatbot_dialog(model, index, chunks, initial_query: str = ""):
             with st.chat_message(msg["role"]):
                 st.write(msg["content"])
 
-    user_text = st.chat_input("ถามอะไรเกี่ยวกับ MilkLab° Gelato...")
+    user_text = st.chat_input("สอบถามข้อมูล MilkLab° Gelato...")
     final_prompt = user_text or prompt_to_process
 
     if final_prompt:
@@ -240,7 +245,7 @@ def open_chatbot_dialog(model, index, chunks, initial_query: str = ""):
                     context = retrieve_top_k(final_prompt, model, index, chunks)
                     answer = generate_answer(final_prompt, context)
                 st.write(answer)
-                with st.expander("🔍 ตรวจสอบบริบทข้อมูลอ้างอิง (Source Chunks)"):
+                with st.expander("🔍 ข้อมูลอ้างอิง (Source Chunks)"):
                     for i, c in enumerate(context, 1):
                         st.markdown(f"**[{i}]** `{c}`")
 
@@ -249,214 +254,233 @@ def open_chatbot_dialog(model, index, chunks, initial_query: str = ""):
 
 
 def main():
-    # Streamlit Page Config
+    # Streamlit Page Setup
     st.set_page_config(
-        page_title="MilkLab° Gelato | Liquid Glass UI",
+        page_title="MilkLab° Gelato | Modern Glass Studio",
         page_icon="🍨",
         layout="wide",
         initial_sidebar_state="collapsed"
     )
 
-    # State-of-the-Art Liquid Glass (Glassmorphism) CSS Design
+    # Ultra-Modern Liquid Glass & Modernist Card CSS Architecture
     st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
     
     html, body, [class*="css"] {
-        font-family: 'Inter', 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: 'Plus Jakarta Sans', 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
     }
     
-    /* Liquid Gradient Backdrop */
+    /* Background Canvas */
     .stApp {
-        background: radial-gradient(at 0% 0%, hsla(343,91%,93%,1) 0px, transparent 50%),
-                    radial-gradient(at 100% 0%, hsla(242,100%,94%,1) 0px, transparent 50%),
-                    radial-gradient(at 100% 100%, hsla(170,100%,93%,1) 0px, transparent 50%),
-                    radial-gradient(at 0% 100%, hsla(40,100%,94%,1) 0px, transparent 50%);
-        background-color: #F8FAFC;
+        background: radial-gradient(at 0% 0%, #FFF5F7 0px, transparent 50%),
+                    radial-gradient(at 100% 0%, #F0F4FF 0px, transparent 50%),
+                    radial-gradient(at 100% 100%, #F5F3FF 0px, transparent 50%),
+                    radial-gradient(at 0% 100%, #FFFBEB 0px, transparent 50%);
+        background-color: #FAFAFD;
         background-attachment: fixed;
     }
     
-    /* Liquid Glass Navbar Container */
-    .glass-navbar {
+    /* Sleek Top Header Bar */
+    .modern-nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: rgba(255, 255, 255, 0.45);
+        background: rgba(255, 255, 255, 0.65);
         backdrop-filter: blur(20px) saturate(180%);
         -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.8);
-        padding: 16px 32px;
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        padding: 18px 36px;
         border-radius: 24px;
-        box-shadow: 0 10px 30px 0 rgba(31, 38, 135, 0.05);
-        margin-bottom: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        margin-bottom: 28px;
     }
     
-    .glass-brand {
-        font-size: 1.5rem;
+    .nav-logo {
+        font-size: 1.55rem;
+        font-weight: 800;
+        letter-spacing: -0.6px;
+        color: #0F172A;
+    }
+    
+    .nav-pill {
+        font-size: 0.75rem;
+        background: rgba(225, 29, 72, 0.08);
+        color: #E11D48;
+        padding: 5px 14px;
+        border-radius: 20px;
         font-weight: 700;
-        letter-spacing: -0.5px;
-        color: #1E293B;
+        letter-spacing: 0.5px;
+        border: 1px solid rgba(225, 29, 72, 0.15);
+    }
+    
+    .nav-status {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
+        font-size: 0.85rem;
+        color: #475569;
+        font-weight: 500;
     }
     
-    .glass-badge {
-        font-size: 0.72rem;
-        background: rgba(255, 255, 255, 0.75);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.9);
-        color: #E11D48;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-weight: 600;
-        box-shadow: 0 4px 12px rgba(225, 29, 72, 0.1);
+    .status-dot {
+        width: 9px;
+        height: 9px;
+        background-color: #10B981;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #10B981;
     }
-    
-    /* Liquid Glass Hero Header */
-    .glass-hero {
-        background: rgba(255, 255, 255, 0.38);
+
+    /* Hero Spotlight Card (Split Layout) */
+    .hero-spotlight {
+        background: linear-gradient(135deg, rgba(255,255,255,0.75) 0%, rgba(255,241,242,0.65) 100%);
         backdrop-filter: blur(24px) saturate(190%);
         -webkit-backdrop-filter: blur(24px);
-        border: 1.5px solid rgba(255, 255, 255, 0.7);
+        border: 1.5px solid rgba(255, 255, 255, 0.95);
         border-radius: 28px;
-        padding: 40px 48px;
-        box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.06);
-        margin-bottom: 30px;
-        text-align: center;
+        padding: 36px 44px;
+        box-shadow: 0 20px 40px rgba(225, 29, 72, 0.05);
+        margin-bottom: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
     
-    .glass-hero-title {
-        font-size: 2.3rem;
+    .hero-tag {
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #E11D48;
+        margin-bottom: 8px;
+    }
+    
+    .hero-title {
+        font-size: 2.2rem;
         font-weight: 800;
         color: #0F172A;
         letter-spacing: -0.8px;
-        margin-bottom: 8px;
-        background: linear-gradient(135deg, #0F172A 0%, #E11D48 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        margin-bottom: 10px;
     }
     
-    .glass-hero-sub {
-        font-size: 1.05rem;
+    .hero-desc {
+        font-size: 1rem;
         color: #475569;
-        max-width: 680px;
-        margin: 0 auto;
         line-height: 1.6;
-        font-weight: 400;
-    }
-
-    /* Glass KPI Cards */
-    .glass-kpi {
-        background: rgba(255, 255, 255, 0.42);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.75);
-        border-radius: 20px;
-        padding: 20px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
-        text-align: center;
+        max-width: 600px;
+        margin-bottom: 18px;
     }
     
-    .glass-kpi-val {
-        font-size: 1.45rem;
-        font-weight: 700;
-        color: #0F172A;
+    .hero-badge-group {
+        display: flex;
+        gap: 10px;
+        align-items: center;
     }
     
-    .glass-kpi-lbl {
-        font-size: 0.78rem;
-        color: #64748B;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-top: 4px;
+    .hero-badge {
+        background: #FFFFFF;
+        border: 1px solid #FFE4E8;
+        color: #E11D48;
+        padding: 6px 14px;
+        border-radius: 12px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.02);
     }
 
-    /* Liquid Glass Product Card */
-    .glass-card {
-        background: rgba(255, 255, 255, 0.48);
+    /* Modern Glass Cards Architecture */
+    .modern-card {
+        background: rgba(255, 255, 255, 0.62);
         backdrop-filter: blur(20px) saturate(180%);
         -webkit-backdrop-filter: blur(20px);
-        border: 1.5px solid rgba(255, 255, 255, 0.85);
+        border: 1.5px solid rgba(255, 255, 255, 0.9);
         border-radius: 24px;
-        padding: 26px;
-        box-shadow: 0 12px 32px 0 rgba(31, 38, 135, 0.05);
+        padding: 28px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
         transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        height: 100%;
+        margin-bottom: 10px;
     }
     
-    .glass-card:hover {
-        transform: translateY(-6px) scale(1.01);
-        background: rgba(255, 255, 255, 0.65);
-        border-color: rgba(255, 255, 255, 0.95);
-        box-shadow: 0 20px 40px 0 rgba(225, 29, 72, 0.12);
+    .modern-card:hover {
+        transform: translateY(-8px);
+        background: rgba(255, 255, 255, 0.82);
+        border-color: #FFE4E8;
+        box-shadow: 0 20px 45px rgba(225, 29, 72, 0.1);
     }
     
-    .glass-card-head {
+    .card-top-bar {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 14px;
+        margin-bottom: 16px;
     }
     
-    .glass-icon-box {
-        font-size: 2.6rem;
-        background: rgba(255, 255, 255, 0.6);
-        backdrop-filter: blur(10px);
-        width: 64px;
-        height: 64px;
-        border-radius: 18px;
+    .card-icon-frame {
+        width: 68px;
+        height: 68px;
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(255, 255, 255, 1);
+        border-radius: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 1px solid rgba(255, 255, 255, 0.8);
+        font-size: 2.6rem;
+        box-shadow: 0 8px 18px rgba(0,0,0,0.03);
     }
     
-    .glass-price {
-        font-size: 1.35rem;
+    .card-price-container {
+        text-align: right;
+    }
+    
+    .card-price-num {
+        font-size: 1.45rem;
         font-weight: 800;
         color: #E11D48;
     }
     
-    .glass-unit {
+    .card-price-sub {
         font-size: 0.78rem;
         color: #64748B;
-        font-weight: 400;
+        font-weight: 500;
     }
     
-    .glass-card-title {
-        font-size: 1.2rem;
+    .card-title {
+        font-size: 1.25rem;
         font-weight: 700;
         color: #0F172A;
-        margin-top: 10px;
         margin-bottom: 2px;
     }
     
-    .glass-card-en {
+    .card-subtitle {
         font-size: 0.82rem;
         color: #64748B;
-        margin-bottom: 12px;
-    }
-    
-    .glass-card-desc {
-        font-size: 0.88rem;
-        color: #334155;
-        line-height: 1.55;
-        margin-bottom: 16px;
-    }
-    
-    .glass-pill {
-        display: inline-block;
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.9);
-        color: #334155;
-        padding: 4px 10px;
-        border-radius: 8px;
-        font-size: 0.75rem;
+        margin-bottom: 14px;
         font-weight: 500;
+    }
+    
+    .card-desc {
+        font-size: 0.9rem;
+        color: #334155;
+        line-height: 1.58;
+        margin-bottom: 18px;
+    }
+    
+    .card-tags-group {
+        margin-bottom: 18px;
+    }
+    
+    .card-tag-pill {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid #F1F5F9;
+        color: #475569;
+        padding: 4px 12px;
+        border-radius: 8px;
+        font-size: 0.76rem;
+        font-weight: 600;
         margin-right: 6px;
         margin-bottom: 6px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
     }
 
     /* 📌 FIXED FLOATING CIRCULAR CHATBOT POPUP (BOTTOM-RIGHT) */
@@ -471,11 +495,11 @@ def main():
         width: 68px !important;
         height: 68px !important;
         border-radius: 50% !important;
-        background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,228,232,0.95) 100%) !important;
+        background: linear-gradient(135deg, #FFFFFF 0%, #FFE4E8 100%) !important;
         backdrop-filter: blur(16px) !important;
         -webkit-backdrop-filter: blur(16px) !important;
-        border: 2px solid rgba(255, 255, 255, 1) !important;
-        box-shadow: 0 12px 36px rgba(225, 29, 72, 0.25), 0 0 20px rgba(255, 255, 255, 0.8) !important;
+        border: 2px solid #FFFFFF !important;
+        box-shadow: 0 12px 36px rgba(225, 29, 72, 0.28), 0 0 24px rgba(255, 255, 255, 0.9) !important;
         font-size: 2rem !important;
         display: flex !important;
         align-items: center !important;
@@ -486,81 +510,54 @@ def main():
     }
     
     div[data-testid="stPopover"] > button:hover {
-        transform: scale(1.12) rotate(8deg) !important;
-        box-shadow: 0 16px 42px rgba(225, 29, 72, 0.4) !important;
-        border-color: #FFE4E8 !important;
+        transform: scale(1.14) rotate(8deg) !important;
+        box-shadow: 0 18px 45px rgba(225, 29, 72, 0.45) !important;
     }
     </style>
     """, unsafe_allow_html=True)
 
-    # Load FAISS Index & SentenceTransformer
+    # Load FAISS Index
     try:
         model, index, chunks = load_index()
     except Exception as exc:
-        st.error(f"Error loading FAISS index: {exc}")
+        st.error(f"Error loading index: {exc}")
         st.stop()
 
-    # Liquid Glass Navbar
+    # Sleek Header Bar
     st.markdown("""
-    <div class="glass-navbar">
-        <div class="glass-brand">
-            🍨 MilkLab° <span style="font-weight: 400; color: #475569;">Gelato</span>
-            <span class="glass-badge">Liquid Glass UI</span>
+    <div class="modern-nav">
+        <div class="nav-logo">
+            🍨 MilkLab° <span style="font-weight: 400; color: #64748B;">Gelato</span>
+            <span class="nav-pill">MODERN GLASS UI</span>
         </div>
-        <div style="font-size: 0.85rem; color: #475569; font-weight: 500;">
-            🟢 Open Daily (16:00 - 23:00) &nbsp;|&nbsp; 🚚 5km Express Delivery
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            <span>Store Open (16:00 - 23:00) &nbsp;|&nbsp; 🚚 Express 5km Delivery</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-    # Liquid Glass Hero Header
+    # Hero Spotlight Card (Featured Flavor)
     st.markdown("""
-    <div class="glass-hero">
-        <div class="glass-hero-title">Artisan Homemade Gelato</div>
-        <div class="glass-hero-sub">
-            สัมผัสความนุ่ม ละมุน รสชาติพรีเมียมเข้มข้นสไตล์อาร์ติซาน ปลอดสารสังเคราะห์ 100% สอบถามข้อมูลสินค้า สารแพ้อาหาร หรือบริการจัดส่งผ่านระบบ AI Vector Search ได้ทันที
+    <div class="hero-spotlight">
+        <div>
+            <div class="hero-tag">🔥 FLAVOR OF THE MONTH</div>
+            <div class="hero-title">เจลาโต้นมสดฮอกไกโด 🍦</div>
+            <div class="hero-desc">
+                สัมผัสความหอมนุ่ม ละมุนลิ้น รสชาติสไตล์อาร์ติซานด้วยนมสดฮอกไกโดนำเข้า 100% สกัดเข้มข้น ไร้สารสังเคราะห์และปลอดถั่วทุกเมนู
+            </div>
+            <div class="hero-badge-group">
+                <span class="hero-badge">⭐ 4.9 (128 รีวิว)</span>
+                <span class="hero-badge">🥛 นมสดฮอกไกโด 100%</span>
+                <span class="hero-badge">🥜 Nut-Free Guaranteed</span>
+            </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-    # Glass KPI Banner
-    k1, k2, k3, k4 = st.columns(4)
-    with k1:
-        st.markdown("""
-        <div class="glass-kpi">
-            <div class="glass-kpi-val">5 Flavors</div>
-            <div class="glass-kpi-lbl">Signature Menus</div>
-        </div>
-        """, unsafe_allow_html=True)
-    with k2:
-        st.markdown("""
-        <div class="glass-kpi">
-            <div class="glass-kpi-val">100% Nut-Free</div>
-            <div class="glass-kpi-lbl">Safe Guaranteed</div>
-        </div>
-        """, unsafe_allow_html=True)
-    with k3:
-        st.markdown("""
-        <div class="glass-kpi">
-            <div class="glass-kpi-val">5 km Radius</div>
-            <div class="glass-kpi-lbl">Cold Pack Delivery</div>
-        </div>
-        """, unsafe_allow_html=True)
-    with k4:
-        st.markdown("""
-        <div class="glass-kpi">
-            <div class="glass-kpi-val">Vegan Options</div>
-            <div class="glass-kpi-lbl">Fresh Sorbet</div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.markdown("<div style='margin-bottom: 30px;'></div>", unsafe_allow_html=True)
-
-    # Header Title & Filter Selection
-    h_col1, h_col2 = st.columns([3, 1])
-    with h_col1:
-        st.markdown("## 🍧 Gelato Menu Showcase")
-        st.caption("เลือกดูเมนูไอศกรีมเจลาโต้ หรือคลิกปุ่มป็อบอัพแชทบอททรงกลมที่มุมขวาล่างเพื่อคุยกับน้อง AI")
+    # Section Header & Category Filter
+    st.markdown("## 🍨 Menu & Product Catalog")
+    st.caption("เลือกดูรายการเจลาโต้รสชาติต่างๆ หรือคลิกปุ่มป็อบอัพแชทบอททรงกลมมุมขวาล่างเพื่อคุยกับน้อง AI")
 
     selected_category = st.radio(
         "หมวดหมู่สินค้า:",
@@ -575,61 +572,61 @@ def main():
     elif "Sorbet" in selected_category:
         filtered_items = [x for x in GELATO_CATALOG if x["category"] == "Sorbet (Vegan)"]
 
-    st.markdown("<div style='margin-bottom: 15px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
 
-    # Gelato Cards Grid (3 Columns)
+    # Render Product Cards Grid (3 Columns Architecture)
     grid_cols = st.columns(3)
 
     for idx, item in enumerate(filtered_items):
         target_col = grid_cols[idx % 3]
         with target_col:
-            tags_html = "".join(f'<span class="glass-pill">{t}</span>' for t in item["tags"])
+            tags_html = "".join(f'<span class="card-tag-pill">{t}</span>' for t in item["tags"])
             
             card_html = f"""
-            <div class="glass-card">
+            <div class="modern-card">
                 <div>
-                    <div class="glass-card-head">
-                        <div class="glass-icon-box">{item["icon"]}</div>
-                        <div style="text-align: right;">
-                            <div class="glass-price">{item["price"]} ฿</div>
-                            <div class="glass-unit">/{item["size"]} ({item["calories"]})</div>
+                    <div class="card-top-bar">
+                        <div class="card-icon-frame">{item["icon"]}</div>
+                        <div class="card-price-container">
+                            <div class="card-price-num">{item["price"]} ฿</div>
+                            <div class="card-price-sub">/{item["size"]} ({item["calories"]})</div>
                         </div>
                     </div>
-                    <div class="glass-card-title">{item["name"]}</div>
-                    <div class="glass-card-en">{item["en_name"]}</div>
-                    <div style="margin-bottom: 10px;">{tags_html}</div>
-                    <div class="glass-card-desc">{item["desc"]}</div>
+                    <div class="card-title">{item["name"]}</div>
+                    <div class="card-subtitle">{item["en_name"]} &nbsp;•&nbsp; {item["rating"]}</div>
+                    <div class="card-tags-group">{tags_html}</div>
+                    <div class="card-desc">{item["desc"]}</div>
                 </div>
             </div>
             """
             st.markdown(card_html, unsafe_allow_html=True)
             
-            # Button for card inquiry
-            if st.button(f"🔍 สอบถามเมนูนี้", key=f"btn_ask_glass_{item['id']}", use_container_width=True):
-                open_chatbot_dialog(model, index, chunks, initial_query=item["query"])
+            # Action Button
+            if st.button(f"✨ ถามน้อง AI เกี่ยวกับเมนูนี้", key=f"btn_ask_modern_{item['id']}", use_container_width=True):
+                open_ai_dialog(model, index, chunks, initial_query=item["query"])
 
             st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
 
-    # 📌 FIXED FLOATING CIRCULAR CHATBOT POPUP AT BOTTOM-RIGHT
-    with st.popover("💬", help="คลิกเพื่อสอบถาม MilkLab° AI Concierge"):
-        st.markdown("### 💬 MilkLab° AI Concierge")
+    # 📌 FIXED FLOATING CIRCULAR CHATBOT POPUP (BOTTOM-RIGHT)
+    with st.popover("💬", help="คลิกเพื่อสอบถาม MilkLab° AI Assistant"):
+        st.markdown("### 💬 MilkLab° AI Assistant")
         st.caption("สอบถามข้อมูลเมนูเจลาโต้ สารแพ้อาหาร เวลาเปิด-ปิด และการจัดส่ง")
         
         if "messages" not in st.session_state:
             st.session_state.messages = []
 
-        # Quick Suggestion Buttons
+        # Quick Suggestions
         st.markdown("##### 💡 คำถามพบบ่อย:")
         p_c1, p_c2 = st.columns(2)
         quick_pop_q = None
         with p_c1:
-            if st.button("⏰ เวลาเปิด-ปิดร้าน", key="pop_q1", use_container_width=True):
+            if st.button("⏰ เวลาเปิด-ปิดร้าน", key="p_m1", use_container_width=True):
                 quick_pop_q = "ร้านเปิดกี่โมงและปิดกี่โมง"
         with p_c2:
-            if st.button("🚚 ค่าส่ง & รัศมี", key="pop_q2", use_container_width=True):
+            if st.button("🚚 ค่าส่ง & รัศมี", key="p_m2", use_container_width=True):
                 quick_pop_q = "ค่าจัดส่งเท่าไหร่และส่งไกลแค่ไหน"
 
-        # Chat History Container
+        # Chat Container
         pop_chat_box = st.container(height=300)
         with pop_chat_box:
             if not st.session_state.messages:
@@ -638,7 +635,7 @@ def main():
                 with st.chat_message(msg["role"]):
                     st.write(msg["content"])
 
-        pop_input = st.chat_input("พิมพ์คำถามเจลาโต้ที่นี่...")
+        pop_input = st.chat_input("ถามอะไรเกี่ยวกับ MilkLab° Gelato...")
         prompt_run = pop_input or quick_pop_q
 
         if prompt_run:
@@ -661,10 +658,10 @@ def main():
 
     st.markdown("---")
 
-    # Liquid Glass Footer
+    # Modern Studio Footer
     st.markdown("""
     <div style="text-align: center; color: #64748B; font-size: 0.85rem; padding: 20px 0;">
-        MilkLab° Gelato • Minimal Liquid Glass UI/UX Design • Powered by Streamlit & Gemini RAG 🍨
+        MilkLab° Gelato • Modernist Layout & Card Design • Powered by Streamlit & Gemini RAG 🍨
     </div>
     """, unsafe_allow_html=True)
 
