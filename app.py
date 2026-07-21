@@ -1,4 +1,4 @@
-"""MilkLab° Gelato - Modernist Glass Layout & Ultra-Minimal Cards Architecture.
+"""MilkLab° Gelato - Perfectly Aligned Modern Glass Cards Architecture.
 
 Run locally: streamlit run app.py
 Deploy: push to GitHub then deploys to Streamlit Cloud / HuggingFace
@@ -262,7 +262,7 @@ def main():
         initial_sidebar_state="collapsed"
     )
 
-    # Ultra-Modern Liquid Glass & Modernist Card CSS Architecture
+    # Ultra-Modern Liquid Glass & Perfectly Aligned Card Grid CSS Architecture
     st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -388,22 +388,26 @@ def main():
         box-shadow: 0 2px 8px rgba(0,0,0,0.02);
     }
 
-    /* Modern Glass Cards Architecture */
-    .modern-card {
-        background: rgba(255, 255, 255, 0.62);
+    /* PERFECTLY EQUALIZED & ALIGNED CARD ARCHITECTURE */
+    .modern-card-container {
+        height: 380px;
+        background: rgba(255, 255, 255, 0.65);
         backdrop-filter: blur(20px) saturate(180%);
         -webkit-backdrop-filter: blur(20px);
-        border: 1.5px solid rgba(255, 255, 255, 0.9);
+        border: 1.5px solid rgba(255, 255, 255, 0.95);
         border-radius: 24px;
-        padding: 28px;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
+        padding: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
         transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-bottom: 12px;
     }
     
-    .modern-card:hover {
+    .modern-card-container:hover {
         transform: translateY(-8px);
-        background: rgba(255, 255, 255, 0.82);
+        background: rgba(255, 255, 255, 0.85);
         border-color: #FFE4E8;
         box-shadow: 0 20px 45px rgba(225, 29, 72, 0.1);
     }
@@ -412,20 +416,20 @@ def main():
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 16px;
+        margin-bottom: 14px;
     }
     
     .card-icon-frame {
-        width: 68px;
-        height: 68px;
-        background: rgba(255, 255, 255, 0.85);
+        width: 64px;
+        height: 64px;
+        background: rgba(255, 255, 255, 0.9);
         border: 1px solid rgba(255, 255, 255, 1);
         border-radius: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 2.6rem;
-        box-shadow: 0 8px 18px rgba(0,0,0,0.03);
+        font-size: 2.5rem;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.03);
     }
     
     .card-price-container {
@@ -433,53 +437,57 @@ def main():
     }
     
     .card-price-num {
-        font-size: 1.45rem;
+        font-size: 1.4rem;
         font-weight: 800;
         color: #E11D48;
     }
     
     .card-price-sub {
-        font-size: 0.78rem;
+        font-size: 0.76rem;
         color: #64748B;
         font-weight: 500;
     }
     
     .card-title {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         font-weight: 700;
         color: #0F172A;
         margin-bottom: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     
     .card-subtitle {
-        font-size: 0.82rem;
+        font-size: 0.8rem;
         color: #64748B;
-        margin-bottom: 14px;
+        margin-bottom: 10px;
         font-weight: 500;
     }
     
     .card-desc {
-        font-size: 0.9rem;
+        font-size: 0.88rem;
         color: #334155;
-        line-height: 1.58;
-        margin-bottom: 18px;
+        line-height: 1.55;
+        height: 55px;
+        overflow: hidden;
+        margin-bottom: 12px;
     }
     
     .card-tags-group {
-        margin-bottom: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
     }
     
     .card-tag-pill {
-        display: inline-block;
-        background: rgba(255, 255, 255, 0.85);
+        background: rgba(255, 255, 255, 0.9);
         border: 1px solid #F1F5F9;
         color: #475569;
-        padding: 4px 12px;
+        padding: 4px 10px;
         border-radius: 8px;
-        font-size: 0.76rem;
+        font-size: 0.74rem;
         font-weight: 600;
-        margin-right: 6px;
-        margin-bottom: 6px;
         box-shadow: 0 1px 3px rgba(0,0,0,0.02);
     }
 
@@ -528,7 +536,7 @@ def main():
     <div class="modern-nav">
         <div class="nav-logo">
             🍨 MilkLab° <span style="font-weight: 400; color: #64748B;">Gelato</span>
-            <span class="nav-pill">MODERN GLASS UI</span>
+            <span class="nav-pill">SYMMETRIC GRID UI</span>
         </div>
         <div class="nav-status">
             <span class="status-dot"></span>
@@ -537,7 +545,7 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-    # Hero Spotlight Card (Featured Flavor)
+    # Hero Spotlight Card
     st.markdown("""
     <div class="hero-spotlight">
         <div>
@@ -556,8 +564,8 @@ def main():
     """, unsafe_allow_html=True)
 
     # Section Header & Category Filter
-    st.markdown("## 🍨 Menu & Product Catalog")
-    st.caption("เลือกดูรายการเจลาโต้รสชาติต่างๆ หรือคลิกปุ่มป็อบอัพแชทบอททรงกลมมุมขวาล่างเพื่อคุยกับน้อง AI")
+    st.markdown("## 🍨 Product Catalog Grid")
+    st.caption("การ์ดเมนูจัดเรียงสวยงาม ความสูงสมดุลเท่ากันทุกช่อง คลิกปุ่มล่างการ์ดหรือคลิกปุ่มป็อบอัพทรงกลมมุมขวาล่างเพื่อคุยกับ AI")
 
     selected_category = st.radio(
         "หมวดหมู่สินค้า:",
@@ -574,7 +582,7 @@ def main():
 
     st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
 
-    # Render Product Cards Grid (3 Columns Architecture)
+    # PERFECTLY SYMMETRIC GRID RENDER (3 Columns Architecture)
     grid_cols = st.columns(3)
 
     for idx, item in enumerate(filtered_items):
@@ -583,7 +591,7 @@ def main():
             tags_html = "".join(f'<span class="card-tag-pill">{t}</span>' for t in item["tags"])
             
             card_html = f"""
-            <div class="modern-card">
+            <div class="modern-card-container">
                 <div>
                     <div class="card-top-bar">
                         <div class="card-icon-frame">{item["icon"]}</div>
@@ -594,18 +602,20 @@ def main():
                     </div>
                     <div class="card-title">{item["name"]}</div>
                     <div class="card-subtitle">{item["en_name"]} &nbsp;•&nbsp; {item["rating"]}</div>
-                    <div class="card-tags-group">{tags_html}</div>
                     <div class="card-desc">{item["desc"]}</div>
+                </div>
+                <div>
+                    <div class="card-tags-group">{tags_html}</div>
                 </div>
             </div>
             """
             st.markdown(card_html, unsafe_allow_html=True)
             
-            # Action Button
-            if st.button(f"✨ ถามน้อง AI เกี่ยวกับเมนูนี้", key=f"btn_ask_modern_{item['id']}", use_container_width=True):
+            # Action Button locked at uniform bottom baseline
+            if st.button(f"✨ ถามน้อง AI เกี่ยวกับเมนูนี้", key=f"btn_ask_grid_{item['id']}", use_container_width=True):
                 open_ai_dialog(model, index, chunks, initial_query=item["query"])
 
-            st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
+            st.markdown("<div style='margin-bottom: 24px;'></div>", unsafe_allow_html=True)
 
     # 📌 FIXED FLOATING CIRCULAR CHATBOT POPUP (BOTTOM-RIGHT)
     with st.popover("💬", help="คลิกเพื่อสอบถาม MilkLab° AI Assistant"):
@@ -620,10 +630,10 @@ def main():
         p_c1, p_c2 = st.columns(2)
         quick_pop_q = None
         with p_c1:
-            if st.button("⏰ เวลาเปิด-ปิดร้าน", key="p_m1", use_container_width=True):
+            if st.button("⏰ เวลาเปิด-ปิดร้าน", key="p_g1", use_container_width=True):
                 quick_pop_q = "ร้านเปิดกี่โมงและปิดกี่โมง"
         with p_c2:
-            if st.button("🚚 ค่าส่ง & รัศมี", key="p_m2", use_container_width=True):
+            if st.button("🚚 ค่าส่ง & รัศมี", key="p_g2", use_container_width=True):
                 quick_pop_q = "ค่าจัดส่งเท่าไหร่และส่งไกลแค่ไหน"
 
         # Chat Container
@@ -658,10 +668,10 @@ def main():
 
     st.markdown("---")
 
-    # Modern Studio Footer
+    # Studio Footer
     st.markdown("""
     <div style="text-align: center; color: #64748B; font-size: 0.85rem; padding: 20px 0;">
-        MilkLab° Gelato • Modernist Layout & Card Design • Powered by Streamlit & Gemini RAG 🍨
+        MilkLab° Gelato • Symmetric Grid Architecture • Powered by Streamlit & Gemini RAG 🍨
     </div>
     """, unsafe_allow_html=True)
 
