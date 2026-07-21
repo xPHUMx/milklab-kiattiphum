@@ -130,7 +130,7 @@ GELATO_ITEMS = [
         "bg_color": "#F7EFE9",          # Soft Creamy Warm Pastel
         "text_color": "#4A154B",        # Deep Berry Plum
         "accent_color": "#FF85C0",      # Vibrant Pink Glow
-        "photo_url": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=800&auto=format&fit=crop", # Berry ice cream scoops
+        "photo_url": "https://www.mealgarden.com/media/recipe/2018/01/f3uc5ts79akmznd1qi0r.jpeg", # Berry ice cream scoops
         "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🍓 Fresh Strawberries"],
         "desc": "สตรอว์เบอร์รีสด 100% ให้รสสัมผัสเปรี้ยวหวานฉ่ำ หอมสดชื่นละมุนหัวใจ ปลอดนม ปลอดไขมันเนย",
         "query": "ขอข้อมูลเจลาโต้สตรอว์เบอร์รีซอร์เบต์ รสชาติ สารแพ้อาหาร และราคา"
@@ -181,7 +181,7 @@ GELATO_ITEMS = [
         "bg_color": "#F1F8F3",          # Soft Green Tea Pastel
         "text_color": "#1B3B2B",        # Deep Forest Green
         "accent_color": "#10B981",      # Emerald Spark
-        "photo_url": "https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?q=80&w=800&auto=format&fit=crop", # Matcha scoop
+        "photo_url": "https://www.allrecipes.com/thmb/totJUia-TjrmF6VnYGHOM5hVjqQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/241759-matcha-green-tea-ice-cream-VAT-003-4x3-01closeup-692d327cc2174abb84b440568f61e29a.jpg", # Matcha scoop
         "tags": ["🍵 Uji Ceremonial", "🥜 Nut-Free", "👑 Premium Grade"],
         "desc": "ผงมัทฉะเกรดพิธีการจากอุจิ เกียวโต ให้กลิ่นหอมอูมามิแท้ๆ ผสานความนุ่มเนียนของนมสดเกรดพรีเมียม",
         "query": "เจลาโต้ชาเขียวมัทฉะราคาเท่าไหร่ ใชวัตถุดิบจากไหน"
@@ -198,7 +198,7 @@ GELATO_ITEMS = [
         "bg_color": "#FEFCE8",          # Tropical Sun Pastel
         "text_color": "#78350F",        # Deep Mango Amber
         "accent_color": "#F59E0B",      # Golden Mango Glow
-        "photo_url": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=800&auto=format&fit=crop", # Mango Sorbet scoop
+        "photo_url": "https://www.thedeliciouscrescent.com/wp-content/uploads/2020/10/Mango-Gelato-5.jpg", # Mango Sorbet scoop
         "tags": ["🌱 100% Vegan", "🥛 Dairy-Free", "🥭 Fresh Mango"],
         "desc": "เนื้อมะม่วงมหาชนกสดหวานฉ่ำ 100% หอมกลิ่นมะม่วงสุกแท้ๆ ปลอด dairy ทานแล้วสดชื่นกระปรี้กระเปร่า",
         "query": "ขอข้อมูลเจลาโต้มะม่วงมหาชนกซอร์เบต์ ราคาและส่วนผสม"
