@@ -332,63 +332,80 @@ def main():
         transform: translateY(-5px) scale(1.05) !important;
     }}
     
-    /* 🌟 EXACT HANCI FLOATING PILL TOP NAVBAR REFERENCE ARCHITECTURE */
+    /* 🌟 ULTRA-MINIMALIST TOPBAR & BRAND LOGO ARCHITECTURE */
     .hanci-topbar-wrapper {{
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
-        padding: 10px 0 20px 0;
+        padding: 12px 0 15px 0;
     }}
     
     .hanci-topbar-pill {{
-        background: rgba(255, 255, 255, 0.85);
+        background: rgba(255, 255, 255, 0.82);
         backdrop-filter: blur(20px) saturate(180%);
         -webkit-backdrop-filter: blur(20px);
         border-radius: 50px;
-        padding: 12px 36px;
+        padding: 10px 28px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 95%;
         max-width: 1100px;
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
-        border: 1.5px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        border: 1.5px solid rgba(255, 255, 255, 0.95);
     }}
     
-    .topbar-left-menu, .topbar-right-menu {{
+    .minimal-brand-logo {{
         display: flex;
         align-items: center;
-        gap: 24px;
+        gap: 12px;
+        font-family: 'Fredoka', 'Kanit', sans-serif;
+        user-select: none;
     }}
     
-    .topbar-link {{
-        font-family: 'Kanit', sans-serif;
-        font-size: 0.92rem;
-        font-weight: 600;
-        color: #1E293B;
-        text-decoration: none;
-        transition: color 0.2s ease;
+    .logo-mark {{
+        width: 38px;
+        height: 38px;
+        background: #FFFFFF;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        border: 1.5px solid rgba(255, 255, 255, 0.95);
     }}
     
-    .topbar-link:hover {{
+    .logo-text {{
+        font-size: 1.55rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        color: {curr["text_color"]};
+        line-height: 1;
+    }}
+    
+    .logo-degree {{
         color: #E11D48;
+        font-weight: 900;
     }}
     
-    .topbar-center-logo {{
-        font-family: 'Anton', sans-serif;
-        font-size: 2.2rem;
-        font-weight: 900;
-        letter-spacing: 2px;
-        color: #0F172A;
+    .logo-sub {{
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 2.5px;
+        color: {curr["text_color"]};
+        margin-left: 4px;
+        text-transform: uppercase;
+        opacity: 0.85;
     }}
     
     .topbar-icons {{
         display: flex;
         align-items: center;
-        gap: 16px;
-        font-size: 1.1rem;
-        color: #1E293B;
+        gap: 20px;
+        font-size: 1.15rem;
+        color: {curr["text_color"]};
     }}
     
     .topbar-icon-cart {{
@@ -543,24 +560,17 @@ def main():
         st.error(f"Error loading index: {exc}")
         st.stop()
 
-    # 1. EXACT HANCI FLOATING PILL TOP BAR (MATCHING REFERENCE IMAGE 100%)
+    # 1. ULTRA-MINIMALIST TOP BAR (REMOVED MENU LINKS, DESIGNED MINIMAL LOGO)
     hanci_topbar_html = """<div class="hanci-topbar-wrapper">
 <div class="hanci-topbar-pill">
-<div class="topbar-left-menu">
-<a href="#shop" class="topbar-link">Shop</a>
-<a href="#about" class="topbar-link">About us</a>
-<a href="#flavours" class="topbar-link">Flavours ▾</a>
-<a href="#learn" class="topbar-link">Learn</a>
+<div class="minimal-brand-logo">
+<div class="logo-mark">🍨</div>
+<div class="logo-text">MILKLAB<span class="logo-degree">°</span> <span class="logo-sub">GELATO</span></div>
 </div>
-<div class="topbar-center-logo">MILKLAB</div>
-<div class="topbar-right-menu">
-<a href="#story" class="topbar-link">Our Story</a>
-<a href="#contact" class="topbar-link">Contact</a>
 <div class="topbar-icons">
 <span class="topbar-icon" title="Search">🔍</span>
 <span class="topbar-icon" title="Wishlist">♡</span>
 <span class="topbar-icon-cart" title="Cart">🛍️ <span class="cart-count-badge">0</span></span>
-</div>
 </div>
 </div>
 </div>"""
