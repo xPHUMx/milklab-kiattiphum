@@ -1,5 +1,5 @@
 """MilkLab° Gelato - High-Fashion DTC Poster & Flavor Carousel Experience.
-Reference Style: Full Moon Party / Karaoke Night / Mango Chamoy Poster Layout
+Reference Style: Full Moon Party / Karaoke Night / Boba x Ice Cream Header Layout
 
 Run locally: streamlit run app.py
 Deploy: push to GitHub then deploys to Streamlit Cloud / HuggingFace
@@ -287,7 +287,7 @@ def open_ai_dialog(model, index, chunks, initial_query: str = ""):
 
 def main():
     st.set_page_config(
-        page_title="MILKLAB × GELATO | Poster Showcase",
+        page_title="MILKLAB × GELATO | High-Fashion Experience",
         page_icon="🍨",
         layout="wide",
         initial_sidebar_state="collapsed"
@@ -298,7 +298,7 @@ def main():
 
     curr = GELATO_POSTERS[st.session_state.poster_idx]
 
-    # High-Fashion Poster CSS Architecture
+    # High-Fashion Header & Poster CSS Architecture
     css_code = f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Anton&family=Kanit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
@@ -313,12 +313,47 @@ def main():
         transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }}
     
+    /* 🌟 GIANT DTC TOP HEADER (EXACT REFERENCE IMAGE ARCHITECTURE) */
+    .dtc-header-container {{
+        width: 100%;
+        text-align: center;
+        padding: 25px 10px 10px 10px;
+        user-select: none;
+    }}
+    
+    .dtc-header-title {{
+        font-family: 'Anton', sans-serif;
+        font-size: 7.5rem;
+        font-weight: 900;
+        line-height: 0.85;
+        letter-spacing: 2px;
+        color: #FFFFFF;
+        text-transform: uppercase;
+        text-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    }}
+    
+    .dtc-header-subrow {{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 1150px;
+        margin: 10px auto 20px auto;
+        font-family: 'Anton', 'Kanit', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        color: #FFFFFF;
+        text-transform: uppercase;
+        opacity: 0.95;
+    }}
+    
     /* Exact Reference Poster Canvas */
     .poster-canvas {{
         position: relative;
         text-align: center;
-        padding: 25px 20px 40px 20px;
-        min-height: 580px;
+        padding: 15px 20px 35px 20px;
+        min-height: 560px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -496,6 +531,17 @@ def main():
         st.error(f"Error loading index: {exc}")
         st.stop()
 
+    # 🌟 GIANT DTC TOP HEADER (EXACT REFERENCE IMAGE)
+    header_html = """<div class="dtc-header-container">
+<div class="dtc-header-title">MILKLAB <span style="font-size: 5.8rem; vertical-align: middle; margin: 0 4px;">×</span> GELATO</div>
+<div class="dtc-header-subrow">
+<span>A MAGICAL DUO</span>
+<span>OF FRESH MILK</span>
+<span>AND ARTISAN GELATO</span>
+</div>
+</div>"""
+    st.markdown(header_html, unsafe_allow_html=True)
+
     # Interactive Flavor Switcher Navigation (DTC Style)
     st.markdown("### 🍨 เลือกชมโปสเตอร์รสชาติไอศกรีม (Click to Change Poster Theme):")
     nav_cols = st.columns(len(GELATO_POSTERS))
@@ -508,7 +554,7 @@ def main():
                 st.session_state.poster_idx = idx
                 st.rerun()
 
-    # EXACT REFERENCE POSTER CONTAINER (Cleaned of leading spaces!)
+    # EXACT REFERENCE POSTER CONTAINER
     poster_html = f"""<div class="poster-canvas">
 <div class="side-cutout-left"><img src="{curr['left_preview']}" style="width:100%; height:100%; object-fit:cover;" /></div>
 <div class="side-cutout-right"><img src="{curr['right_preview']}" style="width:100%; height:100%; object-fit:cover;" /></div>
