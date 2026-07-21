@@ -1,5 +1,5 @@
 """MilkLab° Gelato - High-Fashion DTC Poster & Flavor Carousel Experience.
-Reference Style: Full Moon Party / Karaoke Night / Boba x Ice Cream Header Layout
+Reference Style: HANCI Floating Pill Top Bar / Full Moon Party / Karaoke Night
 
 Run locally: streamlit run app.py
 Deploy: push to GitHub then deploys to Streamlit Cloud / HuggingFace
@@ -298,10 +298,10 @@ def main():
 
     curr = GELATO_POSTERS[st.session_state.poster_idx]
 
-    # High-Fashion Header & Poster CSS Architecture
+    # High-Fashion Header & Poster CSS Architecture (Exact HANCI Floating Pill Navbar Reference!)
     css_code = f"""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Kanit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Kanit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
     
     html, body, [class*="css"] {{
         font-family: 'Kanit', 'Plus Jakarta Sans', sans-serif;
@@ -313,39 +313,82 @@ def main():
         transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }}
     
-    /* 🌟 GIANT DTC TOP HEADER (EXACT REFERENCE IMAGE ARCHITECTURE) */
-    .dtc-header-container {{
+    /* 🌟 EXACT HANCI FLOATING PILL TOP NAVBAR REFERENCE ARCHITECTURE */
+    .hanci-topbar-wrapper {{
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
-        text-align: center;
-        padding: 25px 10px 10px 10px;
-        user-select: none;
+        padding: 10px 0 20px 0;
     }}
     
-    .dtc-header-title {{
-        font-family: 'Anton', sans-serif;
-        font-size: 7.5rem;
-        font-weight: 900;
-        line-height: 0.85;
-        letter-spacing: 2px;
-        color: #FFFFFF;
-        text-transform: uppercase;
-        text-shadow: 0 10px 25px rgba(0,0,0,0.06);
-    }}
-    
-    .dtc-header-subrow {{
+    .hanci-topbar-pill {{
+        background: #FFFFFF;
+        border-radius: 50px;
+        padding: 12px 36px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 100%;
-        max-width: 1150px;
-        margin: 10px auto 20px auto;
-        font-family: 'Anton', 'Kanit', sans-serif;
+        width: 95%;
+        max-width: 1100px;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }}
+    
+    .topbar-left-menu, .topbar-right-menu {{
+        display: flex;
+        align-items: center;
+        gap: 22px;
+    }}
+    
+    .topbar-link {{
+        font-family: 'Kanit', sans-serif;
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: #1E293B;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }}
+    
+    .topbar-link:hover {{
+        color: #E11D48;
+    }}
+    
+    .topbar-center-logo {{
+        font-family: 'Anton', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 900;
+        letter-spacing: 2px;
+        color: #0F172A;
+    }}
+    
+    .topbar-icons {{
+        display: flex;
+        align-items: center;
+        gap: 16px;
         font-size: 1.1rem;
-        font-weight: 700;
-        letter-spacing: 2.5px;
+        color: #1E293B;
+    }}
+    
+    .topbar-icon-cart {{
+        position: relative;
+        cursor: pointer;
+    }}
+    
+    .cart-count-badge {{
+        position: absolute;
+        top: -6px;
+        right: -8px;
+        background: #E11D48;
         color: #FFFFFF;
-        text-transform: uppercase;
-        opacity: 0.95;
+        font-size: 0.65rem;
+        font-weight: 800;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }}
     
     /* Exact Reference Poster Canvas */
@@ -531,16 +574,28 @@ def main():
         st.error(f"Error loading index: {exc}")
         st.stop()
 
-    # 🌟 GIANT DTC TOP HEADER (EXACT REFERENCE IMAGE)
-    header_html = """<div class="dtc-header-container">
-<div class="dtc-header-title">MILKLAB <span style="font-size: 5.8rem; vertical-align: middle; margin: 0 4px;">×</span> GELATO</div>
-<div class="dtc-header-subrow">
-<span>A MAGICAL DUO</span>
-<span>OF FRESH MILK</span>
-<span>AND ARTISAN GELATO</span>
+    # 🌟 EXACT HANCI FLOATING PILL TOP BAR (DIRECT REFERENCE MATCH)
+    hanci_topbar_html = """<div class="hanci-topbar-wrapper">
+<div class="hanci-topbar-pill">
+<div class="topbar-left-menu">
+<a href="#shop" class="topbar-link">Shop</a>
+<a href="#about" class="topbar-link">About us</a>
+<a href="#flavours" class="topbar-link">Flavours ▾</a>
+<a href="#learn" class="topbar-link">Learn</a>
+</div>
+<div class="topbar-center-logo">MILKLAB</div>
+<div class="topbar-right-menu">
+<a href="#story" class="topbar-link">Our Story</a>
+<a href="#contact" class="topbar-link">Contact</a>
+<div class="topbar-icons">
+<span class="topbar-icon" title="Search">🔍</span>
+<span class="topbar-icon" title="Wishlist">♡</span>
+<span class="topbar-icon-cart" title="Cart">🛍️ <span class="cart-count-badge">0</span></span>
+</div>
+</div>
 </div>
 </div>"""
-    st.markdown(header_html, unsafe_allow_html=True)
+    st.markdown(hanci_topbar_html, unsafe_allow_html=True)
 
     # Interactive Flavor Switcher Navigation (DTC Style)
     st.markdown("### 🍨 เลือกชมโปสเตอร์รสชาติไอศกรีม (Click to Change Poster Theme):")
