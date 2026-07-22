@@ -87,7 +87,7 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
     client = genai.Client(api_key=api_key)
     context_str = "\n".join(f"- {c}" for c in context_chunks)
 
-    prompt = f"""คุณเป็น AI ผู้ช่วยบริการลูกค้าของแบรนด์ไอศกรีมเจลาโต้ MilkLab° Gelato (ตอบเป็นภาษาไทยอย่างสุภาพ น่ารัก กระชับ เป็นกันเอง)
+    prompt = f"""คุณคือ ultrasmoothhh AI ผู้ช่วยบริการลูกค้าของแบรนด์ไอศกรีมเจลาโต้ MilkLab° Gelato (ตอบเป็นภาษาไทยอย่างสุภาพ น่ารัก กระชับ เป็นกันเอง)
 โปรดตอบคำถามโดยอ้างอิงจากข้อมูลบริบท (Context) ที่กำหนดให้ต่อไปนี้เท่านั้น
 หากในข้อมูลบริบทไม่มีข้อมูลที่จะตอบคำถามได้ ให้ตอบว่า "ขออภัยครับ ไม่พบข้อมูลดังกล่าวในระบบ"
 
@@ -636,8 +636,8 @@ def main():
     # Action Button under Hero
     c1, c2, c3 = st.columns([1, 2, 1])
     with c2:
-        if st.button(f"✨ TRY ME (ถาม AI เกี่ยวกับ {curr['th_name']})", key="btn_try_me", type="primary", use_container_width=True):
-            open_ai_dialog(model, index, chunks, initial_query=curr["query"])
+        if st.button(f"🛍️ ORDER NOW ({curr['th_name']})", key="btn_order_now", type="primary", use_container_width=True):
+            st.toast(f"🛒 เพิ่ม {curr['th_name']} ลงในรายการสั่งซื้อเรียบร้อยแล้ว!")
 
     # 4. ⭐ NEW SECTION 1: SOCIAL PROOF & RATING BANNER
     social_proof_html = f"""<div style="background: rgba(255,255,255,0.75); backdrop-filter: blur(16px); border-radius: 20px; padding: 18px 24px; text-align: center; max-width: 850px; margin: 25px auto 10px auto; border: 1.5px solid rgba(255,255,255,0.95); box-shadow: 0 10px 30px rgba(0,0,0,0.04);">
@@ -671,7 +671,7 @@ def main():
 
     st.markdown("---")
 
-    # 6. PRODUCT CARDS GRID (WITH ENHANCED NUTRITION & AI DIALOG BUTTONS)
+    # 6. PRODUCT CARDS GRID
     st.markdown("## 🎴 ALL ARTISAN GELATO FLAVORS (เลือกชมเจลาโต้ทุกรสชาติ)")
     grid_cols = st.columns(3)
 
@@ -695,37 +695,16 @@ def main():
 </div>"""
             st.markdown(card_html, unsafe_allow_html=True)
             
-            c_a, c_b = st.columns(2)
-            with c_a:
-                if st.button(f"✨ ดูสไตล์นี้นะ", key=f"btn_grid_sel_{item['id']}", use_container_width=True):
-                    st.session_state.flavor_idx = idx
-                    st.rerun()
-            with c_b:
-                if st.button(f"💬 ถาม AI", key=f"btn_grid_ask_{item['id']}", use_container_width=True):
-                    open_ai_dialog(model, index, chunks, initial_query=item["query"])
+            if st.button(f"✨ เลือกรสชาตินี้ ({item['th_name']})", key=f"btn_grid_sel_{item['id']}", use_container_width=True):
+                st.session_state.flavor_idx = idx
+                st.rerun()
 
             st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
 
-    # 7. 💡 NEW SECTION 3: AI QUICK PROMPTS BANNER
-    st.markdown("### 💡 มีข้อสงสัยเพิ่มเติม? ลองถาม MilkLab° AI Assistant ได้ทันที:")
-    ai_p1, ai_p2, ai_p3, ai_p4 = st.columns(4)
-    with ai_p1:
-        if st.button("⏰ ร้านเปิดกี่โมงและปิดกี่โมง", key="quick_ban_1", use_container_width=True):
-            open_ai_dialog(model, index, chunks, initial_query="ร้านเปิดกี่โมงและปิดกี่โมง")
-    with ai_p2:
-        if st.button("🚚 ค่าจัดส่งและรัศมีส่งไกลแค่ไหน", key="quick_ban_2", use_container_width=True):
-            open_ai_dialog(model, index, chunks, initial_query="ค่าจัดส่งเท่าไหร่และส่งไกลแค่ไหนมีแพ็คเจลเย็นไหม")
-    with ai_p3:
-        if st.button("🌱 มีเมนูสำหรับคนทาน Vegan ไหม", key="quick_ban_3", use_container_width=True):
-            open_ai_dialog(model, index, chunks, initial_query="มีเจลาโต้รสไหนบ้างที่คนทานมังสวิรัติหรือวีแกนกินได้")
-    with ai_p4:
-        if st.button("🥜 มีส่วนผสมของถั่วไหม แพ้ถั่วกินได้ไหม", key="quick_ban_4", use_container_width=True):
-            open_ai_dialog(model, index, chunks, initial_query="มีส่วนผสมของถั่วไหม ลูกค้าแพ้ถั่วกินได้ไหม")
-
-    # 📌 FIXED FLOATING CIRCULAR CHATBOT POPUP (BOTTOM-RIGHT)
-    with st.popover("💬", help="คลิกเพื่อสอบถาม MilkLab° AI Assistant"):
-        st.markdown("### 💬 MilkLab° AI Assistant")
-        st.caption("สอบถามข้อมูลเมนูเจลาโต้ สารแพ้อาหาร เวลาเปิด-ปิด และการจัดส่ง")
+    # 📌 EXCLUSIVE FLOATING CIRCULAR CHATBOT POPUP (BOTTOM-RIGHT): ULTRASMOOTHHH AI
+    with st.popover("💬", help="คลิกเพื่อสอบถาม ultrasmoothhh AI Assistant"):
+        st.markdown("### 🍨 ultrasmoothhh AI")
+        st.caption("ผู้ช่วย AI ประจำร้าน MilkLab° Gelato สอบถามเมนู เวลาเปิด-ปิด และการจัดส่งได้เลยครับ")
         
         if "messages" not in st.session_state:
             st.session_state.messages = []
@@ -740,15 +719,15 @@ def main():
             if st.button("🚚 ค่าส่ง & รัศมี", key="p_post2", use_container_width=True):
                 quick_pop_q = "ค่าจัดส่งเท่าไหร่และส่งไกลแค่ไหน"
 
-        pop_chat_box = st.container(height=300)
+        pop_chat_box = st.container(height=320)
         with pop_chat_box:
             if not st.session_state.messages:
-                st.info("👋 สวัสดีครับ! น้อง AI ยินดีให้บริการ สอบถามข้อมูล MilkLab° Gelato ได้เลยครับ 😊")
+                st.info("👋 สวัสดีครับ! น้อง ultrasmoothhh ยินดีให้บริการ สอบถามข้อมูล MilkLab° Gelato ได้เลยครับ 😊")
             for msg in st.session_state.messages:
                 with st.chat_message(msg["role"]):
                     st.write(msg["content"])
 
-        pop_input = st.chat_input("ถามอะไรเกี่ยวกับ MilkLab° Gelato...")
+        pop_input = st.chat_input("ถามอะไรถึง ultrasmoothhh...")
         prompt_run = pop_input or quick_pop_q
 
         if prompt_run:
