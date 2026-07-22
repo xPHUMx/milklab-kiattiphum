@@ -535,45 +535,67 @@ def main():
     }}
 
     /* 📌 FIXED FLOATING CIRCULAR CHATBOT POPUP (BOTTOM-RIGHT) */
-    div[data-testid="stPopover"] {{
+    div[data-testid="stPopover"], .stPopover {{
         position: fixed !important;
-        bottom: 28px !important;
-        right: 28px !important;
-        z-index: 999999 !important;
-    }}
-    
-    div[data-testid="stPopover"] > button {{
+        bottom: 30px !important;
+        right: 30px !important;
         width: 75px !important;
         height: 75px !important;
+        z-index: 999999 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }}
+    
+    div[data-testid="stPopover"] button, .stPopover button, button[data-testid="stBaseButton-popover"] {{
+        width: 75px !important;
+        min-width: 75px !important;
+        max-width: 75px !important;
+        height: 75px !important;
+        min-height: 75px !important;
+        max-height: 75px !important;
         border-radius: 50% !important;
-        background: rgba(255, 255, 255, 0.95) !important;
-        backdrop-filter: blur(16px) !important;
-        -webkit-backdrop-filter: blur(16px) !important;
+        background: #FFFFFF !important;
         border: 3.5px solid {curr["text_color"]} !important;
-        box-shadow: 0 14px 40px rgba(0,0,0,0.22) !important;
-        font-size: 2.3rem !important;
+        box-shadow: 0 14px 40px rgba(0,0,0,0.28) !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
         color: {curr["text_color"]} !important;
         padding: 0 !important;
+        margin: 0 !important;
         animation: pulseFloating 3.5s infinite ease-in-out !important;
     }}
     
-    div[data-testid="stPopover"] > button:hover {{
+    div[data-testid="stPopover"] button:hover, .stPopover button:hover {{
         transform: scale(1.18) rotate(10deg) !important;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.35) !important;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.4) !important;
         background: #FFFFFF !important;
+    }}
+
+    div[data-testid="stPopover"] button p {{
+        font-size: 2.2rem !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 1 !important;
+    }}
+
+    /* Hide dropdown caret icon next to popover button */
+    div[data-testid="stPopover"] button svg,
+    div[data-testid="stPopover"] button [data-testid="stIcon"],
+    div[data-testid="stPopover"] button [data-testid="stBaseButton-popoverIcon"] {{
+        display: none !important;
     }}
 
     div[data-testid="stPopoverBody"] {{
         border-radius: 24px !important;
         padding: 20px !important;
         border: 2px solid rgba(255, 255, 255, 0.9) !important;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.2) !important;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.25) !important;
         background: rgba(255, 255, 255, 0.96) !important;
         backdrop-filter: blur(20px) !important;
+        width: 360px !important;
+        max-width: 90vw !important;
     }}
 
     @keyframes pulseFloating {{
