@@ -599,6 +599,39 @@ def main():
         max-width: 92vw !important;
     }}
 
+    /* 📜 INFINITE SCROLLING MARQUEE TICKER ANIMATION */
+    .marquee-wrapper {{
+        width: 100%;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.65);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        padding: 14px 0;
+        margin: 25px 0 15px 0;
+        border-top: 1.5px solid rgba(255, 255, 255, 0.95);
+        border-bottom: 1.5px solid rgba(255, 255, 255, 0.95);
+        box-shadow: 0 6px 25px rgba(0,0,0,0.03);
+    }}
+    
+    .marquee-track {{
+        display: flex;
+        align-items: center;
+        gap: 35px;
+        white-space: nowrap;
+        font-family: 'Fredoka', 'Kanit', sans-serif;
+        font-weight: 800;
+        font-size: 0.98rem;
+        letter-spacing: 2px;
+        color: {curr["text_color"]};
+        text-transform: uppercase;
+        animation: infiniteScrollMarquee 30s linear infinite;
+    }}
+
+    @keyframes infiniteScrollMarquee {{
+        0% {{ transform: translateX(0); }}
+        100% {{ transform: translateX(-50%); }}
+    }}
+
     @keyframes pulseFloating {{
         0%, 100% {{ transform: translateY(0px) scale(1); }}
         50% {{ transform: translateY(-8px) scale(1.05); }}
@@ -661,6 +694,27 @@ def main():
     with c2:
         if st.button(f"🛍️ ORDER NOW ({curr['th_name']})", key="btn_order_now", type="primary", use_container_width=True):
             st.toast(f"🛒 เพิ่ม {curr['th_name']} ลงในรายการสั่งซื้อเรียบร้อยแล้ว!")
+
+    # 📜 INFINITE SCROLLING MARQUEE TICKER BANNER
+    marquee_html = f"""<div class="marquee-wrapper">
+<div class="marquee-track">
+<span>🍨 MILKLAB° GELATO</span><span>•</span>
+<span>🥛 100% HOKKAIDO MILK</span><span>•</span>
+<span>🍫 VALRHONA 70% DARK COCOA</span><span>•</span>
+<span>🍵 CEREMONIAL UJI MATCHA</span><span>•</span>
+<span>🍓 FRESH STRAWBERRY SORBET</span><span>•</span>
+<span>🥭 100% VEGAN MANGO SORBET</span><span>•</span>
+<span>🧊 COLD-PACK GEL DELIVERY 45 MINS</span><span>•</span>
+<span>🍨 MILKLAB° GELATO</span><span>•</span>
+<span>🥛 100% HOKKAIDO MILK</span><span>•</span>
+<span>🍫 VALRHONA 70% DARK COCOA</span><span>•</span>
+<span>🍵 CEREMONIAL UJI MATCHA</span><span>•</span>
+<span>🍓 FRESH STRAWBERRY SORBET</span><span>•</span>
+<span>🥭 100% VEGAN MANGO SORBET</span><span>•</span>
+<span>🧊 COLD-PACK GEL DELIVERY 45 MINS</span><span>•</span>
+</div>
+</div>"""
+    st.markdown(marquee_html, unsafe_allow_html=True)
 
     # 4. ⭐ NEW SECTION 1: SOCIAL PROOF & RATING BANNER
     social_proof_html = f"""<div style="background: rgba(255,255,255,0.75); backdrop-filter: blur(16px); border-radius: 20px; padding: 18px 24px; text-align: center; max-width: 850px; margin: 25px auto 10px auto; border: 1.5px solid rgba(255,255,255,0.95); box-shadow: 0 10px 30px rgba(0,0,0,0.04);">
