@@ -627,6 +627,32 @@ def main():
         animation: infiniteScrollMarquee 30s linear infinite;
     }}
 
+    /* 🌟 SCROLL REVEAL MOTION ANIMATIONS */
+    html {{
+        scroll-behavior: smooth !important;
+    }}
+
+    .scroll-reveal-card {{
+        animation: cardRevealFade 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease !important;
+    }}
+
+    .scroll-reveal-card:hover {{
+        transform: translateY(-8px) scale(1.02) !important;
+        box-shadow: 0 20px 45px rgba(0,0,0,0.12) !important;
+    }}
+
+    @keyframes cardRevealFade {{
+        0% {{
+            opacity: 0;
+            transform: translateY(35px) scale(0.96);
+        }}
+        100% {{
+            opacity: 1;
+            transform: translateY(0px) scale(1);
+        }}
+    }}
+
     @keyframes infiniteScrollMarquee {{
         0% {{ transform: translateX(0); }}
         100% {{ transform: translateX(-50%); }}
@@ -717,7 +743,7 @@ def main():
     st.markdown(marquee_html, unsafe_allow_html=True)
 
     # 4. ⭐ NEW SECTION 1: SOCIAL PROOF & RATING BANNER
-    social_proof_html = f"""<div style="background: rgba(255,255,255,0.75); backdrop-filter: blur(16px); border-radius: 20px; padding: 18px 24px; text-align: center; max-width: 850px; margin: 25px auto 10px auto; border: 1.5px solid rgba(255,255,255,0.95); box-shadow: 0 10px 30px rgba(0,0,0,0.04);">
+    social_proof_html = f"""<div class="scroll-reveal-card" style="background: rgba(255,255,255,0.75); backdrop-filter: blur(16px); border-radius: 20px; padding: 18px 24px; text-align: center; max-width: 850px; margin: 25px auto 10px auto; border: 1.5px solid rgba(255,255,255,0.95); box-shadow: 0 10px 30px rgba(0,0,0,0.04);">
 <div style="font-size: 1.15rem; font-weight: 900; color: #F59E0B; letter-spacing: 1.5px;">★★★★★ 4.9 / 5.0 RATING</div>
 <div style="font-weight: 700; color: {curr['text_color']}; font-size: 0.98rem; margin: 5px 0 3px 0;">"เนื้อสัมผัสเจลาโต้เนียนนุ่ม รสชาติเข้มข้นสดชื่นที่สุดเท่าที่เคยทานมา! อร่อยประทับใจมาก"</div>
 <div style="font-size: 0.78rem; font-weight: 800; color: #64748B; text-transform: uppercase; letter-spacing: 1.5px;">GARNERED FROM 1,200+ GELATO LOVERS IN THAILAND</div>
@@ -725,7 +751,7 @@ def main():
     st.markdown(social_proof_html, unsafe_allow_html=True)
 
     # 5. 🚚 NEW SECTION 2: INSTANT DELIVERY & COLD-PACK GUARANTEE CARD
-    delivery_html = f"""<div style="background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65)); backdrop-filter: blur(20px); border-radius: 24px; padding: 28px; border: 2px solid #FFFFFF; box-shadow: 0 15px 35px rgba(0,0,0,0.06); margin: 35px 0;">
+    delivery_html = f"""<div class="scroll-reveal-card" style="background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65)); backdrop-filter: blur(20px); border-radius: 24px; padding: 28px; border: 2px solid #FFFFFF; box-shadow: 0 15px 35px rgba(0,0,0,0.06); margin: 35px 0;">
 <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 20px; text-align: center;">
 <div style="flex: 1; min-width: 200px;">
 <div style="font-size: 2.2rem; margin-bottom: 6px;">🧊</div>
@@ -757,7 +783,7 @@ def main():
         with target_col:
             tags_html = "".join(f'<span style="background:rgba(255,255,255,0.7); color:{item["text_color"]}; padding:4px 10px; border-radius:10px; font-size:0.78rem; font-weight:700; margin-right:4px; margin-bottom:4px; display:inline-block;">{t}</span>' for t in item["tags"])
             
-            card_html = f"""<div style="background: {item['bg_color']}; border-radius: 24px; padding: 24px; text-align: center; box-shadow: 0 12px 30px rgba(0,0,0,0.06); margin-bottom: 15px; border: 2px solid rgba(255,255,255,0.85);">
+            card_html = f"""<div class="scroll-reveal-card" style="background: {item['bg_color']}; border-radius: 24px; padding: 24px; text-align: center; box-shadow: 0 12px 30px rgba(0,0,0,0.06); margin-bottom: 15px; border: 2px solid rgba(255,255,255,0.85);">
 <div style="height: 140px; border-radius: 16px; overflow: hidden; margin-bottom: 14px;">
 <img src="{item['photo_url']}" style="width: 100%; height: 100%; object-fit: cover;" />
 </div>
