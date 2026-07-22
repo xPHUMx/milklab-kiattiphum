@@ -537,30 +537,48 @@ def main():
     /* 📌 FIXED FLOATING CIRCULAR CHATBOT POPUP (BOTTOM-RIGHT) */
     div[data-testid="stPopover"] {{
         position: fixed !important;
-        bottom: 30px !important;
-        right: 30px !important;
+        bottom: 28px !important;
+        right: 28px !important;
         z-index: 999999 !important;
     }}
     
     div[data-testid="stPopover"] > button {{
-        width: 72px !important;
-        height: 72px !important;
+        width: 75px !important;
+        height: 75px !important;
         border-radius: 50% !important;
-        background: #FFFFFF !important;
-        border: 3px solid {curr["text_color"]} !important;
-        box-shadow: 0 12px 36px rgba(0,0,0,0.2) !important;
-        font-size: 2.2rem !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border: 3.5px solid {curr["text_color"]} !important;
+        box-shadow: 0 14px 40px rgba(0,0,0,0.22) !important;
+        font-size: 2.3rem !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+        transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
         color: {curr["text_color"]} !important;
         padding: 0 !important;
+        animation: pulseFloating 3.5s infinite ease-in-out !important;
     }}
     
     div[data-testid="stPopover"] > button:hover {{
-        transform: scale(1.15) rotate(8deg) !important;
-        box-shadow: 0 18px 45px rgba(0,0,0,0.3) !important;
+        transform: scale(1.18) rotate(10deg) !important;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.35) !important;
+        background: #FFFFFF !important;
+    }}
+
+    div[data-testid="stPopoverBody"] {{
+        border-radius: 24px !important;
+        padding: 20px !important;
+        border: 2px solid rgba(255, 255, 255, 0.9) !important;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.2) !important;
+        background: rgba(255, 255, 255, 0.96) !important;
+        backdrop-filter: blur(20px) !important;
+    }}
+
+    @keyframes pulseFloating {{
+        0%, 100% {{ transform: translateY(0px) scale(1); }}
+        50% {{ transform: translateY(-8px) scale(1.05); }}
     }}
     </style>
     """
