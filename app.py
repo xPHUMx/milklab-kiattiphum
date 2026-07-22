@@ -75,6 +75,12 @@ def retrieve_top_k(query: str, model, index, chunks: list[str], k: int = 3) -> l
 def generate_answer(query: str, context_chunks: list[str]) -> str:
     """Send query + context to Gemini API with fallback handling."""
     api_key = os.environ.get("GOOGLE_API_KEY")
+    if not api_key and hasattr(st, "secrets"):
+        try:
+            api_key = st.secrets.get("GOOGLE_API_KEY")
+        except Exception:
+            pass
+
     if not api_key:
         return "⚠️ กรุณาตั้งค่า GOOGLE_API_KEY ในระบบก่อนใช้งาน AI Assistant ครับ"
 

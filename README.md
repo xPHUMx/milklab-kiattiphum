@@ -1,10 +1,10 @@
 ---
-title: MilkLab RAG Chatbot
-emoji: 🥛
-colorFrom: blue
-colorTo: indigo
+title: MilkLab UltraSmooth Gelato
+emoji: 🍨
+colorFrom: pink
+colorTo: yellow
 sdk: streamlit
-sdk_version: 1.35.0
+sdk_version: 1.41.0
 app_file: app.py
 pinned: false
 ---
