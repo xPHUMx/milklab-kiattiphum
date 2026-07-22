@@ -534,11 +534,12 @@ def main():
         50% {{ transform: translateY(-15px) rotate(10deg); }}
     }}
 
-    /* 📌 FIXED FLOATING CIRCULAR CHATBOT POPUP (BOTTOM-RIGHT) */
+    /* 📌 FIXED FLOATING CIRCULAR CHATBOT POPUP (BOTTOM-LEFT) */
     div[data-testid="stPopover"], .stPopover {{
         position: fixed !important;
         bottom: 30px !important;
-        right: 30px !important;
+        left: 30px !important;
+        right: auto !important;
         width: 75px !important;
         height: 75px !important;
         z-index: 999999 !important;
@@ -574,7 +575,7 @@ def main():
     }}
 
     div[data-testid="stPopover"] button p {{
-        font-size: 2.2rem !important;
+        font-size: 2.3rem !important;
         margin: 0 !important;
         padding: 0 !important;
         line-height: 1 !important;
@@ -588,14 +589,14 @@ def main():
     }}
 
     div[data-testid="stPopoverBody"] {{
-        border-radius: 24px !important;
-        padding: 20px !important;
-        border: 2px solid rgba(255, 255, 255, 0.9) !important;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.25) !important;
+        border-radius: 26px !important;
+        padding: 24px !important;
+        border: 2px solid rgba(255, 255, 255, 0.95) !important;
+        box-shadow: 0 24px 70px rgba(0,0,0,0.25) !important;
         background: rgba(255, 255, 255, 0.96) !important;
-        backdrop-filter: blur(20px) !important;
-        width: 360px !important;
-        max-width: 90vw !important;
+        backdrop-filter: blur(24px) !important;
+        width: 480px !important;
+        max-width: 92vw !important;
     }}
 
     @keyframes pulseFloating {{
@@ -723,9 +724,9 @@ def main():
 
             st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
 
-    # 📌 EXCLUSIVE FLOATING CIRCULAR CHATBOT POPUP (BOTTOM-RIGHT): ULTRASMOOTHHH AI
-    with st.popover("💬", help="คลิกเพื่อสอบถาม ultrasmoothhh AI Assistant"):
-        st.markdown("### 🍨 ultrasmoothhh AI")
+    # 📌 EXCLUSIVE FLOATING CIRCULAR CHATBOT POPUP (BOTTOM-LEFT): ULTRASMOOTHHH AI
+    with st.popover("🍨", help="คลิกเพื่อถามน้อง ultrasmoothhh ได้เลยน้าา"):
+        st.markdown("### 🍨 ถามน้อง ultrasmoothhh ได้เลยน้าา")
         st.caption("ผู้ช่วย AI ประจำร้าน MilkLab° Gelato สอบถามเมนู เวลาเปิด-ปิด และการจัดส่งได้เลยครับ")
         
         if "messages" not in st.session_state:
@@ -741,15 +742,15 @@ def main():
             if st.button("🚚 ค่าส่ง & รัศมี", key="p_post2", use_container_width=True):
                 quick_pop_q = "ค่าจัดส่งเท่าไหร่และส่งไกลแค่ไหน"
 
-        pop_chat_box = st.container(height=320)
+        pop_chat_box = st.container(height=360)
         with pop_chat_box:
             if not st.session_state.messages:
-                st.info("👋 สวัสดีครับ! น้อง ultrasmoothhh ยินดีให้บริการ สอบถามข้อมูล MilkLab° Gelato ได้เลยครับ 😊")
+                st.info("👋 สวัสดีครับ! มีอะไรสงสัยเกี่ยวกับเจลาโต้ ถามน้อง ultrasmoothhh ได้เลยน้าา 😊")
             for msg in st.session_state.messages:
                 with st.chat_message(msg["role"]):
                     st.write(msg["content"])
 
-        pop_input = st.chat_input("ถามอะไรถึง ultrasmoothhh...")
+        pop_input = st.chat_input("ถามน้อง ultrasmoothhh ได้เลยน้าา...")
         prompt_run = pop_input or quick_pop_q
 
         if prompt_run:
