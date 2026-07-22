@@ -91,7 +91,7 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
 คำถามจากลูกค้า: {query}
 """
 
-    models_to_try = ["gemini-2.0-flash", "gemini-2.5-flash"]
+    models_to_try = ["gemini-2.5-flash", "gemini-2.0-flash"]
     last_error = None
 
     for m in models_to_try:
