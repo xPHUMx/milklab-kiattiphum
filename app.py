@@ -653,6 +653,42 @@ def main():
         }}
     }}
 
+    /* 🏔️ PARALLAX SCROLLING EXPERIENCE STYLING */
+    .parallax-section {{
+        position: relative;
+        background-attachment: fixed !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+        min-height: 380px;
+        border-radius: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 40px 0;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.14);
+        border: 2px solid rgba(255,255,255,0.95);
+    }}
+    
+    .parallax-content-box {{
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 26px;
+        padding: 38px 48px;
+        text-align: center;
+        max-width: 780px;
+        border: 2px solid #FFFFFF;
+        box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease !important;
+    }}
+    
+    .parallax-content-box:hover {{
+        transform: translateY(-6px) scale(1.02) !important;
+        box-shadow: 0 24px 55px rgba(0,0,0,0.18) !important;
+    }}
+
     @keyframes infiniteScrollMarquee {{
         0% {{ transform: translateX(0); }}
         100% {{ transform: translateX(-50%); }}
@@ -768,9 +804,20 @@ def main():
 <div style="font-weight: 800; font-size: 1.05rem; color: #0F172A;">No Minimum Order</div>
 <div style="font-size: 0.85rem; color: #475569; margin-top: 4px;">ไม่มีขั้นต่ำในการสั่งซื้อ สั่ง 1 ถ้วยก็พร้อมจัดส่งทันที</div>
 </div>
-</div>
 </div>"""
     st.markdown(delivery_html, unsafe_allow_html=True)
+
+    # 5.5 🏔️ PARALLAX CRAFTSMANSHIP SHOWCASE BANNER
+    parallax_html = f"""<div class="parallax-section scroll-reveal-card" style="background-image: url('{curr['photo_url']}');">
+<div class="parallax-content-box">
+<div style="font-size: 0.85rem; font-weight: 800; letter-spacing: 3px; color: #E11D48; text-transform: uppercase; margin-bottom: 8px;">✨ ARTISAN GELATO CRAFTSMANSHIP</div>
+<div style="font-family: 'Fredoka', sans-serif; font-size: 2.3rem; font-weight: 900; color: #0F172A; line-height: 1.1; margin-bottom: 12px;">CRAFTED WITH PASSION • 100% NATURAL INGREDIENTS</div>
+<div style="font-size: 0.95rem; font-weight: 600; color: #475569; line-height: 1.6; max-width: 620px; margin: 0 auto;">
+สัมผัสความเนียนนุ่มระดับพรีเมียมจากวัตถุดิบธรรมชาติแท้ 100% สดชื่นละมุนหัวใจด้วยเทคนิคการปั่นเจลาโต้ต้นตำรับจากอิตาลี
+</div>
+</div>
+</div>"""
+    st.markdown(parallax_html, unsafe_allow_html=True)
 
     st.markdown("---")
 
