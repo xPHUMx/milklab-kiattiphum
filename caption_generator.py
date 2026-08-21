@@ -1,9 +1,9 @@
-"""MilkLab Caption Generator (S1).
+"""UltraSmoothhh Gelato Caption Generator (S1).
 
 Usage:
     python caption_generator.py
 
-Reads GOOGLE_API_KEY from env. Generates a Thai caption for a milk menu item.
+Reads GOOGLE_API_KEY from env. Generates a Thai social media caption for UltraSmoothhh Gelato Lab° menu items.
 """
 
 import os
@@ -14,13 +14,14 @@ from google import genai
 
 
 PROMPT_TEMPLATE = """\
-คุณคือ social media manager ของร้าน MilkLab° ร้านนมสดกลางคืน
+คุณคือ Social Media Manager ของแบรนด์ไอศกรีมเจลาโต้คราฟต์พรีเมียม "UltraSmoothhh Gelato Lab°"
 
-จงเขียนแคปชั่นภาษาไทย 2 ถึง 3 ประโยคโปรโมตเมนู: {menu}
+จงเขียนแคปชั่นภาษาไทยที่น่ารับประทาน ชวนหิวยามดึก สำหรับโปรโมตเมนูเจลาโต้: {menu}
 
 เงื่อนไข:
-- โทนสนุก ใช้คำง่าย ใส่ emoji ได้
-- ต้องมี call-to-action ปิดท้าย เช่น สั่งเลย หรือ ทักแชท
+- โทนสนุกสนาน อบอุ่น ชวนชิม นุ่มละมุน ใช้คำง่าย มีชีวิตชีวา และใส่ emoji 🍨✨
+- เน้นจุดเด่นวัตถุดิบธรรมชาติสดใหม่ 100% สไตล์อิตาเลียนโฮมเมด
+- ต้องมี Call-to-Action ปิดท้าย เช่น "สั่งเลขน้อง ultrasmoothhh ได้เลยน้าา 🍨" หรือ "ทักแชทสั่ง Delivery พร้อมเจลเย็น 45 นาที!"
 - ห้ามใช้ em dash
 """
 

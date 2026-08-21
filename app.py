@@ -1,4 +1,4 @@
-"""MilkLab° Gelato - High-End Artisan Hero Landing Page Experience.
+"""UltraSmooth° Gelato - High-End Artisan Hero Landing Page Experience.
 Reference Style: Berry Burst / Creamy Warm Pastel / Floating Ingredients Showcase
 
 Run locally: streamlit run app.py
@@ -87,7 +87,7 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
     client = genai.Client(api_key=api_key)
     context_str = "\n".join(f"- {c}" for c in context_chunks)
 
-    prompt = f"""คุณคือ "น้อง ultrasmoothhh" 🍨 AI Concierge ประจำร้าน MilkLab° Gelato (ตอบเป็นภาษาไทยอย่างอบอุ่น สุภาพ สดใส น่ารัก และเป็นกันเอง)
+    prompt = f"""คุณคือ "น้อง ultrasmoothhh" 🍨 AI Concierge ประจำร้าน UltraSmoothhh Gelato Lab° (ตอบเป็นภาษาไทยอย่างอบอุ่น สุภาพ สดใส น่ารัก และเป็นกันเอง)
 
 แนวทางการตอบคำถาม (Flexible yet Grounded):
 1. **ความเป็นธรรมชาติและยืดหยุ่น (Natural & Engaging)**:
@@ -95,7 +95,7 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
    - หากลูกค้าขอคำแนะนำ (เช่น แนะนำเมนูเปรี้ยวสดชื่น, หวานน้อย, เมนูสุขภาพ, เมนูขายดี) ให้แนะนำและอธิบายความพิเศษของเมนูได้อย่างยืดหยุ่น น่ารับประทาน และเข้าใจง่าย
 2. **ความถูกต้องและอยู่ในกรอบข้อเท็จจริง (Grounded in Context)**:
    - ข้อมูลร้านค้า เมนู ราคา สารก่อภูมิแพ้ เวลาทำการ (16:00 - 23:00 น. ปิดวันจันทร์) พิกัดร้าน และการจัดส่ง (5 กม. ค่าส่ง 30 บาท) ต้องอ้างอิงจากข้อมูลบริบท (Context) ด้านล่างอย่างถูกต้อง 100% ห้ามแต่งเติมข้อมูลที่ขัดแย้ง
-   - หากคำถามใดเป็นเรื่องนอกเหนือจากร้าน MilkLab° Gelato อย่างสิ้นเชิง ให้ตอบปฏิเสธอย่างสุภาพและวกกลับมาชวนชิมไอศกรีมเจลาโต้ของ MilkLab° แทน
+   - หากคำถามใดเป็นเรื่องนอกเหนือจากร้าน UltraSmooth° Gelato อย่างสิ้นเชิง ให้ตอบปฏิเสธอย่างสุภาพและวกกลับมาชวนชิมไอศกรีมเจลาโต้ของ UltraSmooth° แทน
    - ตอบกระชับ สละสลวย อ่านง่าย และตรงประเด็น
 
 บริบทข้อมูลร้าน (Context):
@@ -220,12 +220,12 @@ GELATO_ITEMS = [
 
 
 # Dialog Assistant Modal
-@st.dialog("💬 MilkLab° AI Concierge", width="large")
+@st.dialog("💬 UltraSmooth° AI Concierge", width="large")
 def open_ai_dialog(model, index, chunks, initial_query: str = ""):
     st.markdown("""
     <div style="background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border-radius: 16px; padding: 14px 20px; border: 1px solid rgba(255,255,255,0.9); margin-bottom: 15px;">
         <span style="font-size: 0.9rem; color: #334155;">
-            🍨 <strong>MilkLab° RAG Assistant:</strong> สอบถามข้อมูลเมนูเจลาโต้ สารแพ้อาหาร เวลาเปิด-ปิด หรือบริการจัดส่งได้ทันทีครับ
+            🍨 <strong>UltraSmooth° RAG Assistant:</strong> สอบถามข้อมูลเมนูเจลาโต้ สารแพ้อาหาร เวลาเปิด-ปิด หรือบริการจัดส่งได้ทันทีครับ
         </span>
     </div>
     """, unsafe_allow_html=True)
@@ -263,7 +263,7 @@ def open_ai_dialog(model, index, chunks, initial_query: str = ""):
             with st.chat_message(msg["role"]):
                 st.write(msg["content"])
 
-    user_text = st.chat_input("สอบถามข้อมูล MilkLab° Gelato...")
+    user_text = st.chat_input("สอบถามข้อมูล UltraSmooth° Gelato...")
     final_prompt = user_text or prompt_to_process
 
     if final_prompt:
@@ -287,7 +287,7 @@ def open_ai_dialog(model, index, chunks, initial_query: str = ""):
 
 def main():
     st.set_page_config(
-        page_title="MilkLab° Gelato | Artisan Experience",
+        page_title="UltraSmooth° Gelato | Artisan Experience",
         page_icon="🍨",
         layout="wide",
         initial_sidebar_state="collapsed"
@@ -721,7 +721,7 @@ def main():
 <div class="hanci-topbar-pill">
 <div class="minimal-brand-logo">
 <div class="logo-mark">🍨</div>
-<div class="logo-text">MILKLAB<span class="logo-degree">°</span> <span class="logo-sub">GELATO</span></div>
+<div class="logo-text">ULTRASMOOTH<span class="logo-degree">°</span> <span class="logo-sub">GELATO LAB</span></div>
 </div>
 <div class="topbar-icons">
 <span class="topbar-icon" title="Search">🔍</span>
@@ -767,14 +767,14 @@ def main():
     # 📜 INFINITE SCROLLING MARQUEE TICKER BANNER
     marquee_html = f"""<div class="marquee-wrapper">
 <div class="marquee-track">
-<span>🍨 MILKLAB° GELATO</span><span>•</span>
+<span>🍨 ULTRASMOOTHHH GELATO LAB°</span><span>•</span>
 <span>🥛 100% HOKKAIDO MILK</span><span>•</span>
 <span>🍫 VALRHONA 70% DARK COCOA</span><span>•</span>
 <span>🍵 CEREMONIAL UJI MATCHA</span><span>•</span>
 <span>🍓 FRESH STRAWBERRY SORBET</span><span>•</span>
 <span>🥭 100% VEGAN MANGO SORBET</span><span>•</span>
 <span>🧊 COLD-PACK GEL DELIVERY 45 MINS</span><span>•</span>
-<span>🍨 MILKLAB° GELATO</span><span>•</span>
+<span>🍨 ULTRASMOOTHHH GELATO LAB°</span><span>•</span>
 <span>🥛 100% HOKKAIDO MILK</span><span>•</span>
 <span>🍫 VALRHONA 70% DARK COCOA</span><span>•</span>
 <span>🍵 CEREMONIAL UJI MATCHA</span><span>•</span>
