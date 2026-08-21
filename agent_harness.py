@@ -79,7 +79,7 @@ def parse_command(cmd: str, api_key: str | None = None) -> dict:
     client = genai.Client(api_key=api_key)
 
     prompt = f"""
-    คุณเป็น AI Agent ของร้าน MilkLab° Gelato หน้าที่ของคุณคือวิเคราะห์คำสั่งภาษาไทยและเลือกเครื่องมือ (Tool) ที่เหมาะสมที่สุด พร้อมสกัดข้อมูล (Arguments) สำหรับเรียกใช้งานเครื่องมือดังกล่าว
+    คุณเป็น AI Agent ประจำร้าน UltraSmoothhh Gelato Lab° หน้าที่ของคุณคือวิเคราะห์คำสั่งภาษาไทยและเลือกเครื่องมือ (Tool) ที่เหมาะสมที่สุด พร้อมสกัดข้อมูล (Arguments) สำหรับเรียกใช้งานเครื่องมือดังกล่าว
 
     คำสั่งจากผู้ใช้: "{cmd}"
     เวลาปัจจุบัน: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}

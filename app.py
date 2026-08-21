@@ -87,7 +87,7 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
     client = genai.Client(api_key=api_key)
     context_str = "\n".join(f"- {c}" for c in context_chunks)
 
-    prompt = f"""คุณคือ "น้อง ultrasmoothhh" 🍨 AI Concierge ประจำร้าน MilkLab° Gelato (ตอบเป็นภาษาไทยอย่างอบอุ่น สุภาพ สดใส น่ารัก และเป็นกันเอง)
+    prompt = f"""คุณคือ "น้อง ultrasmoothhh" 🍨 AI Concierge ประจำร้าน UltraSmoothhh Gelato Lab° (ตอบเป็นภาษาไทยอย่างอบอุ่น สุภาพ สดใส น่ารัก และเป็นกันเอง)
 
 แนวทางการตอบคำถาม (Flexible yet Grounded):
 1. **ความเป็นธรรมชาติและยืดหยุ่น (Natural & Engaging)**:
@@ -721,7 +721,7 @@ def main():
 <div class="hanci-topbar-pill">
 <div class="minimal-brand-logo">
 <div class="logo-mark">🍨</div>
-<div class="logo-text">MILKLAB<span class="logo-degree">°</span> <span class="logo-sub">GELATO</span></div>
+<div class="logo-text">ULTRASMOOTH<span class="logo-degree">°</span> <span class="logo-sub">GELATO LAB</span></div>
 </div>
 <div class="topbar-icons">
 <span class="topbar-icon" title="Search">🔍</span>
@@ -767,14 +767,14 @@ def main():
     # 📜 INFINITE SCROLLING MARQUEE TICKER BANNER
     marquee_html = f"""<div class="marquee-wrapper">
 <div class="marquee-track">
-<span>🍨 MILKLAB° GELATO</span><span>•</span>
+<span>🍨 ULTRASMOOTHHH GELATO LAB°</span><span>•</span>
 <span>🥛 100% HOKKAIDO MILK</span><span>•</span>
 <span>🍫 VALRHONA 70% DARK COCOA</span><span>•</span>
 <span>🍵 CEREMONIAL UJI MATCHA</span><span>•</span>
 <span>🍓 FRESH STRAWBERRY SORBET</span><span>•</span>
 <span>🥭 100% VEGAN MANGO SORBET</span><span>•</span>
 <span>🧊 COLD-PACK GEL DELIVERY 45 MINS</span><span>•</span>
-<span>🍨 MILKLAB° GELATO</span><span>•</span>
+<span>🍨 ULTRASMOOTHHH GELATO LAB°</span><span>•</span>
 <span>🥛 100% HOKKAIDO MILK</span><span>•</span>
 <span>🍫 VALRHONA 70% DARK COCOA</span><span>•</span>
 <span>🍵 CEREMONIAL UJI MATCHA</span><span>•</span>
