@@ -1,4 +1,4 @@
-"""MilkLab° Gelato - High-End Artisan Hero Landing Page Experience.
+"""UltraSmooth° Gelato - High-End Artisan Hero Landing Page Experience.
 Reference Style: Berry Burst / Creamy Warm Pastel / Floating Ingredients Showcase
 
 Run locally: streamlit run app.py
@@ -95,7 +95,7 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
    - หากลูกค้าขอคำแนะนำ (เช่น แนะนำเมนูเปรี้ยวสดชื่น, หวานน้อย, เมนูสุขภาพ, เมนูขายดี) ให้แนะนำและอธิบายความพิเศษของเมนูได้อย่างยืดหยุ่น น่ารับประทาน และเข้าใจง่าย
 2. **ความถูกต้องและอยู่ในกรอบข้อเท็จจริง (Grounded in Context)**:
    - ข้อมูลร้านค้า เมนู ราคา สารก่อภูมิแพ้ เวลาทำการ (16:00 - 23:00 น. ปิดวันจันทร์) พิกัดร้าน และการจัดส่ง (5 กม. ค่าส่ง 30 บาท) ต้องอ้างอิงจากข้อมูลบริบท (Context) ด้านล่างอย่างถูกต้อง 100% ห้ามแต่งเติมข้อมูลที่ขัดแย้ง
-   - หากคำถามใดเป็นเรื่องนอกเหนือจากร้าน MilkLab° Gelato อย่างสิ้นเชิง ให้ตอบปฏิเสธอย่างสุภาพและวกกลับมาชวนชิมไอศกรีมเจลาโต้ของ MilkLab° แทน
+   - หากคำถามใดเป็นเรื่องนอกเหนือจากร้าน UltraSmooth° Gelato อย่างสิ้นเชิง ให้ตอบปฏิเสธอย่างสุภาพและวกกลับมาชวนชิมไอศกรีมเจลาโต้ของ UltraSmooth° แทน
    - ตอบกระชับ สละสลวย อ่านง่าย และตรงประเด็น
 
 บริบทข้อมูลร้าน (Context):
@@ -220,12 +220,12 @@ GELATO_ITEMS = [
 
 
 # Dialog Assistant Modal
-@st.dialog("💬 MilkLab° AI Concierge", width="large")
+@st.dialog("💬 UltraSmooth° AI Concierge", width="large")
 def open_ai_dialog(model, index, chunks, initial_query: str = ""):
     st.markdown("""
     <div style="background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border-radius: 16px; padding: 14px 20px; border: 1px solid rgba(255,255,255,0.9); margin-bottom: 15px;">
         <span style="font-size: 0.9rem; color: #334155;">
-            🍨 <strong>MilkLab° RAG Assistant:</strong> สอบถามข้อมูลเมนูเจลาโต้ สารแพ้อาหาร เวลาเปิด-ปิด หรือบริการจัดส่งได้ทันทีครับ
+            🍨 <strong>UltraSmooth° RAG Assistant:</strong> สอบถามข้อมูลเมนูเจลาโต้ สารแพ้อาหาร เวลาเปิด-ปิด หรือบริการจัดส่งได้ทันทีครับ
         </span>
     </div>
     """, unsafe_allow_html=True)
@@ -263,7 +263,7 @@ def open_ai_dialog(model, index, chunks, initial_query: str = ""):
             with st.chat_message(msg["role"]):
                 st.write(msg["content"])
 
-    user_text = st.chat_input("สอบถามข้อมูล MilkLab° Gelato...")
+    user_text = st.chat_input("สอบถามข้อมูล UltraSmooth° Gelato...")
     final_prompt = user_text or prompt_to_process
 
     if final_prompt:
@@ -287,7 +287,7 @@ def open_ai_dialog(model, index, chunks, initial_query: str = ""):
 
 def main():
     st.set_page_config(
-        page_title="MilkLab° Gelato | Artisan Experience",
+        page_title="UltraSmooth° Gelato | Artisan Experience",
         page_icon="🍨",
         layout="wide",
         initial_sidebar_state="collapsed"
